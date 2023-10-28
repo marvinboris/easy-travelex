@@ -1,0 +1,196 @@
+.Frontend {
+  background-color: white;
+
+  /* Mode sombre */
+  .dark {
+    --bgcolor: #040404 !important;
+
+    --text-gray: #242424;
+
+    --border-inset: inset 0px 4px 4px 0px rgba(255, 255, 255, 0.25);
+
+    --black: #f1f2ee !important;
+    --white: #040404;
+    --blue-lite: #d6f4ff;
+    --gray: #707070;
+    --green-lite: #caf5c9;
+    --red-lite: #ffcbc2;
+    --stroke: #0404044d;
+    --yellow-lite: #fef4be;
+    --index: calc(1vw + 1vh);
+    --bgcolor: #f1f2ee;
+    /* Autres propriétés CSS pour le mode sombre */
+  }
+
+  * {
+    outline: none;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+    user-select: none;
+  }
+
+  *::-moz-selection {
+    background: var(--text);
+    color: var(--fond);
+  }
+
+  *::selection {
+    background: var(--text);
+    color: var(--fond);
+  }
+
+  /*** scroollbar ***/
+  *::-webkit-scrollbar {
+    width: 0px;
+    background: rgba(0, 0, 0, 0) 0% 0% no-repeat padding-box;
+  }
+
+  *::-webkit-scrollbar-button {
+    background: rbga(0, 0, 0, 0);
+  }
+
+  *::-webkit-scrollbar-track-piece {
+    width: 0px;
+  }
+
+  *::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgb(0, 0, 0);
+    box-shadow: inset 0 0 6px rgb(0, 0, 0);
+    border: none;
+    width: 0px;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .main {
+    width: 100%;
+    height: auto;
+
+  }
+
+  .main_struct {
+    width: 95%;
+
+    @media all and (max-width: 1300px) {
+      width: 90%;
+    }
+
+    /* background-color: blue; */
+  }
+
+  .container {
+    width: 100%;
+    height: auto;
+  }
+
+  .center_container {
+    display: grid;
+    place-items: center;
+  }
+
+  .btn_cta {
+    background: var(--cta);
+    border-radius: 34px;
+    // width: 165px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: inherit;
+    font-family: inherit;
+    color: var(--theme-color_light);
+    border: none;
+    margin-left: 3rem;
+
+  }
+
+  .navlink {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    &:active {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    &:visited {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+
+  h3 {
+    font-family: var(--font2);
+    font-size: 3rem;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  h4 {
+    font-family: var(--font1);
+    font-size: 2rem;
+    font-weight: 500;
+    margin: 0;
+
+    @media all and (max-width:1000px) {
+      font-size: 1.5em;
+    }
+
+  }
+
+  h4[text="bold"] {
+    font-family: var(--font1);
+    font-size: 2.2vw;
+    font-weight: bold;
+    line-height: 1.2em;
+    margin: 0;
+  }
+
+  h1 {
+    font-size: 5vw;
+    margin: 0px;
+    font-family: var(--font1);
+    font-weight: bold;
+    line-height: 1em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    @media all and (max-width:1000px) {
+      font-size: 8vw;
+    }
+
+    @media all and (max-width:600px) {
+      font-size: 11vw;
+    }
+
+  }
+
+  p {
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+
+
+  .bar {
+    width: 3.31175rem;
+    height: 0.49988rem;
+    border-radius: 30px;
+    background: var(--cta);
+  }
+
+  .iti__flag {
+    background-image: url("./images/intl-tel-input//flags.png");
+  }
+
+  @media (-webkit-min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi) {
+    .iti__flag {
+      background-image: url("./images/intl-tel-input//flags@2x.png");
+    }
+  }
+}
