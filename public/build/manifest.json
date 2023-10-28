@@ -1,0 +1,301 @@
+{
+  "resources/js/app.css": {
+    "file": "assets/app-e6e9f0ae.css",
+    "src": "resources/js/app.css"
+  },
+  "resources/js/app.tsx": {
+    "assets": [
+      "assets/logo-e0863bbd.png",
+      "assets/profile-82bc582c.jpg",
+      "assets/arrow-right-6aaebe93.svg",
+      "assets/facebook-cce453af.svg",
+      "assets/linkedin-2abfd2cb.svg",
+      "assets/twitter-27418591.svg",
+      "assets/Grid_dots-43249fb4.svg",
+      "assets/caroussel7-d4274152.webp",
+      "assets/car-193db88c.png",
+      "assets/circleCar-10d1fe13.svg",
+      "assets/contactUs-09edeb4c.png",
+      "assets/banner-339eb996.png",
+      "assets/caroussel4-14d5bdc5.webp",
+      "assets/caroussel2-5dd52451.webp",
+      "assets/caroussel3-83b02dea.webp",
+      "assets/wallet-918cafcd.png",
+      "assets/clock-e89e56ab.png",
+      "assets/btnDesign-056365cc.svg",
+      "assets/circleachievement-bcb06784.svg",
+      "assets/user-card-67bfb33c.svg",
+      "assets/circlebooking-76ad8e37.svg",
+      "assets/relocation1-c915c609.webp",
+      "assets/relocation2-89c97a84.jpg",
+      "assets/relocation3-df3d1430.jpg",
+      "assets/bigCircleArc-6d706c06.svg",
+      "assets/documentimg-4bf7489e.svg",
+      "assets/imgico-633a8bef.svg",
+      "assets/caroussel5-9248227c.webp",
+      "assets/caroussel6-57525010.webp",
+      "assets/trou_header-f9f7d111.svg",
+      "assets/bag_after-5f1ad2d8.svg",
+      "assets/layerTexture-c9f4c716.svg",
+      "assets/document_after-4f15a110.svg",
+      "assets/image_after-4865c2b8.svg",
+      "assets/circle_arc-89d787d7.svg",
+      "assets/Arrow-down-4a7a3ccf.svg",
+      "assets/redCircle-97f39f8e.svg",
+      "assets/tourMessage-2d3373b0.svg",
+      "assets/redMap-ce1dc46c.svg",
+      "assets/circle-06ae95c6.svg",
+      "assets/profile1-0fd71ea0.png",
+      "assets/profile2-1e9fdda6.png",
+      "assets/profile3-9bdae265.png",
+      "assets/profile4-f21efdd7.png",
+      "assets/profile5-7fa61692.png",
+      "assets/profile6-d74f7976.png",
+      "assets/profile7-6952d46d.png",
+      "assets/stars-081a9c68.svg",
+      "assets/checkcircle-4bb0bcc5.svg",
+      "assets/long-right-arrow-ad3d6e24.svg",
+      "assets/circleRelocation-3980ffd4.svg",
+      "assets/Gilroy-Regular-65aaefc7.woff",
+      "assets/Gilroy-Semibold-75bd5a29.woff",
+      "assets/Gilroy-Medium-119e6666.woff",
+      "assets/Gilroy-Bold-d27594f8.woff",
+      "assets/flags-54dc5bc4.png",
+      "assets/flags@2x-9bd00899.png"
+    ],
+    "css": [
+      "assets/app-e6e9f0ae.css"
+    ],
+    "file": "assets/app-7af3162e.js",
+    "isEntry": true,
+    "src": "resources/js/app.tsx"
+  },
+  "resources/js/assets/fonts/gilroy/Gilroy-Bold.woff": {
+    "file": "assets/Gilroy-Bold-d27594f8.woff",
+    "src": "resources/js/assets/fonts/gilroy/Gilroy-Bold.woff"
+  },
+  "resources/js/assets/fonts/gilroy/Gilroy-Medium.woff": {
+    "file": "assets/Gilroy-Medium-119e6666.woff",
+    "src": "resources/js/assets/fonts/gilroy/Gilroy-Medium.woff"
+  },
+  "resources/js/assets/fonts/gilroy/Gilroy-Regular.woff": {
+    "file": "assets/Gilroy-Regular-65aaefc7.woff",
+    "src": "resources/js/assets/fonts/gilroy/Gilroy-Regular.woff"
+  },
+  "resources/js/assets/fonts/gilroy/Gilroy-Semibold.woff": {
+    "file": "assets/Gilroy-Semibold-75bd5a29.woff",
+    "src": "resources/js/assets/fonts/gilroy/Gilroy-Semibold.woff"
+  },
+  "resources/js/assets/images/banner.png": {
+    "file": "assets/banner-339eb996.png",
+    "src": "resources/js/assets/images/banner.png"
+  },
+  "resources/js/assets/images/car.png": {
+    "file": "assets/car-193db88c.png",
+    "src": "resources/js/assets/images/car.png"
+  },
+  "resources/js/assets/images/caroussels/caroussel2.webp": {
+    "file": "assets/caroussel2-5dd52451.webp",
+    "src": "resources/js/assets/images/caroussels/caroussel2.webp"
+  },
+  "resources/js/assets/images/caroussels/caroussel3.webp": {
+    "file": "assets/caroussel3-83b02dea.webp",
+    "src": "resources/js/assets/images/caroussels/caroussel3.webp"
+  },
+  "resources/js/assets/images/caroussels/caroussel4.webp": {
+    "file": "assets/caroussel4-14d5bdc5.webp",
+    "src": "resources/js/assets/images/caroussels/caroussel4.webp"
+  },
+  "resources/js/assets/images/caroussels/caroussel5.webp": {
+    "file": "assets/caroussel5-9248227c.webp",
+    "src": "resources/js/assets/images/caroussels/caroussel5.webp"
+  },
+  "resources/js/assets/images/caroussels/caroussel6.webp": {
+    "file": "assets/caroussel6-57525010.webp",
+    "src": "resources/js/assets/images/caroussels/caroussel6.webp"
+  },
+  "resources/js/assets/images/caroussels/caroussel7.webp": {
+    "file": "assets/caroussel7-d4274152.webp",
+    "src": "resources/js/assets/images/caroussels/caroussel7.webp"
+  },
+  "resources/js/assets/images/clock.png": {
+    "file": "assets/clock-e89e56ab.png",
+    "src": "resources/js/assets/images/clock.png"
+  },
+  "resources/js/assets/images/contactUs.png": {
+    "file": "assets/contactUs-09edeb4c.png",
+    "src": "resources/js/assets/images/contactUs.png"
+  },
+  "resources/js/assets/images/intl-tel-input/flags.png": {
+    "file": "assets/flags-54dc5bc4.png",
+    "src": "resources/js/assets/images/intl-tel-input/flags.png"
+  },
+  "resources/js/assets/images/intl-tel-input/flags@2x.png": {
+    "file": "assets/flags@2x-9bd00899.png",
+    "src": "resources/js/assets/images/intl-tel-input/flags@2x.png"
+  },
+  "resources/js/assets/images/logo.png": {
+    "file": "assets/logo-e0863bbd.png",
+    "src": "resources/js/assets/images/logo.png"
+  },
+  "resources/js/assets/images/profile.jpg": {
+    "file": "assets/profile-82bc582c.jpg",
+    "src": "resources/js/assets/images/profile.jpg"
+  },
+  "resources/js/assets/images/profiles/profile1.png": {
+    "file": "assets/profile1-0fd71ea0.png",
+    "src": "resources/js/assets/images/profiles/profile1.png"
+  },
+  "resources/js/assets/images/profiles/profile2.png": {
+    "file": "assets/profile2-1e9fdda6.png",
+    "src": "resources/js/assets/images/profiles/profile2.png"
+  },
+  "resources/js/assets/images/profiles/profile3.png": {
+    "file": "assets/profile3-9bdae265.png",
+    "src": "resources/js/assets/images/profiles/profile3.png"
+  },
+  "resources/js/assets/images/profiles/profile4.png": {
+    "file": "assets/profile4-f21efdd7.png",
+    "src": "resources/js/assets/images/profiles/profile4.png"
+  },
+  "resources/js/assets/images/profiles/profile5.png": {
+    "file": "assets/profile5-7fa61692.png",
+    "src": "resources/js/assets/images/profiles/profile5.png"
+  },
+  "resources/js/assets/images/profiles/profile6.png": {
+    "file": "assets/profile6-d74f7976.png",
+    "src": "resources/js/assets/images/profiles/profile6.png"
+  },
+  "resources/js/assets/images/profiles/profile7.png": {
+    "file": "assets/profile7-6952d46d.png",
+    "src": "resources/js/assets/images/profiles/profile7.png"
+  },
+  "resources/js/assets/images/relocation1.webp": {
+    "file": "assets/relocation1-c915c609.webp",
+    "src": "resources/js/assets/images/relocation1.webp"
+  },
+  "resources/js/assets/images/relocation2.jpg": {
+    "file": "assets/relocation2-89c97a84.jpg",
+    "src": "resources/js/assets/images/relocation2.jpg"
+  },
+  "resources/js/assets/images/relocation3.jpg": {
+    "file": "assets/relocation3-df3d1430.jpg",
+    "src": "resources/js/assets/images/relocation3.jpg"
+  },
+  "resources/js/assets/images/svg/Arrow-down.svg": {
+    "file": "assets/Arrow-down-4a7a3ccf.svg",
+    "src": "resources/js/assets/images/svg/Arrow-down.svg"
+  },
+  "resources/js/assets/images/svg/Grid_dots.svg": {
+    "file": "assets/Grid_dots-43249fb4.svg",
+    "src": "resources/js/assets/images/svg/Grid_dots.svg"
+  },
+  "resources/js/assets/images/svg/arrow-right.svg": {
+    "file": "assets/arrow-right-6aaebe93.svg",
+    "src": "resources/js/assets/images/svg/arrow-right.svg"
+  },
+  "resources/js/assets/images/svg/bag_after.svg": {
+    "file": "assets/bag_after-5f1ad2d8.svg",
+    "src": "resources/js/assets/images/svg/bag_after.svg"
+  },
+  "resources/js/assets/images/svg/bigCircleArc.svg": {
+    "file": "assets/bigCircleArc-6d706c06.svg",
+    "src": "resources/js/assets/images/svg/bigCircleArc.svg"
+  },
+  "resources/js/assets/images/svg/btnDesign.svg": {
+    "file": "assets/btnDesign-056365cc.svg",
+    "src": "resources/js/assets/images/svg/btnDesign.svg"
+  },
+  "resources/js/assets/images/svg/checkcircle.svg": {
+    "file": "assets/checkcircle-4bb0bcc5.svg",
+    "src": "resources/js/assets/images/svg/checkcircle.svg"
+  },
+  "resources/js/assets/images/svg/circle.svg": {
+    "file": "assets/circle-06ae95c6.svg",
+    "src": "resources/js/assets/images/svg/circle.svg"
+  },
+  "resources/js/assets/images/svg/circleCar.svg": {
+    "file": "assets/circleCar-10d1fe13.svg",
+    "src": "resources/js/assets/images/svg/circleCar.svg"
+  },
+  "resources/js/assets/images/svg/circleRelocation.svg": {
+    "file": "assets/circleRelocation-3980ffd4.svg",
+    "src": "resources/js/assets/images/svg/circleRelocation.svg"
+  },
+  "resources/js/assets/images/svg/circle_arc.svg": {
+    "file": "assets/circle_arc-89d787d7.svg",
+    "src": "resources/js/assets/images/svg/circle_arc.svg"
+  },
+  "resources/js/assets/images/svg/circleachievement.svg": {
+    "file": "assets/circleachievement-bcb06784.svg",
+    "src": "resources/js/assets/images/svg/circleachievement.svg"
+  },
+  "resources/js/assets/images/svg/circlebooking.svg": {
+    "file": "assets/circlebooking-76ad8e37.svg",
+    "src": "resources/js/assets/images/svg/circlebooking.svg"
+  },
+  "resources/js/assets/images/svg/document_after.svg": {
+    "file": "assets/document_after-4f15a110.svg",
+    "src": "resources/js/assets/images/svg/document_after.svg"
+  },
+  "resources/js/assets/images/svg/documentimg.svg": {
+    "file": "assets/documentimg-4bf7489e.svg",
+    "src": "resources/js/assets/images/svg/documentimg.svg"
+  },
+  "resources/js/assets/images/svg/facebook.svg": {
+    "file": "assets/facebook-cce453af.svg",
+    "src": "resources/js/assets/images/svg/facebook.svg"
+  },
+  "resources/js/assets/images/svg/image_after.svg": {
+    "file": "assets/image_after-4865c2b8.svg",
+    "src": "resources/js/assets/images/svg/image_after.svg"
+  },
+  "resources/js/assets/images/svg/imgico.svg": {
+    "file": "assets/imgico-633a8bef.svg",
+    "src": "resources/js/assets/images/svg/imgico.svg"
+  },
+  "resources/js/assets/images/svg/layerTexture.svg": {
+    "file": "assets/layerTexture-c9f4c716.svg",
+    "src": "resources/js/assets/images/svg/layerTexture.svg"
+  },
+  "resources/js/assets/images/svg/linkedin.svg": {
+    "file": "assets/linkedin-2abfd2cb.svg",
+    "src": "resources/js/assets/images/svg/linkedin.svg"
+  },
+  "resources/js/assets/images/svg/long-right-arrow.svg": {
+    "file": "assets/long-right-arrow-ad3d6e24.svg",
+    "src": "resources/js/assets/images/svg/long-right-arrow.svg"
+  },
+  "resources/js/assets/images/svg/redCircle.svg": {
+    "file": "assets/redCircle-97f39f8e.svg",
+    "src": "resources/js/assets/images/svg/redCircle.svg"
+  },
+  "resources/js/assets/images/svg/redMap.svg": {
+    "file": "assets/redMap-ce1dc46c.svg",
+    "src": "resources/js/assets/images/svg/redMap.svg"
+  },
+  "resources/js/assets/images/svg/stars.svg": {
+    "file": "assets/stars-081a9c68.svg",
+    "src": "resources/js/assets/images/svg/stars.svg"
+  },
+  "resources/js/assets/images/svg/tourMessage.svg": {
+    "file": "assets/tourMessage-2d3373b0.svg",
+    "src": "resources/js/assets/images/svg/tourMessage.svg"
+  },
+  "resources/js/assets/images/svg/trou_header.svg": {
+    "file": "assets/trou_header-f9f7d111.svg",
+    "src": "resources/js/assets/images/svg/trou_header.svg"
+  },
+  "resources/js/assets/images/svg/twitter.svg": {
+    "file": "assets/twitter-27418591.svg",
+    "src": "resources/js/assets/images/svg/twitter.svg"
+  },
+  "resources/js/assets/images/svg/user-card.svg": {
+    "file": "assets/user-card-67bfb33c.svg",
+    "src": "resources/js/assets/images/svg/user-card.svg"
+  },
+  "resources/js/assets/images/wallet.png": {
+    "file": "assets/wallet-918cafcd.png",
+    "src": "resources/js/assets/images/wallet.png"
+  }
+}

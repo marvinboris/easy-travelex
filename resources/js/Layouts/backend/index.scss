@@ -185,13 +185,13 @@
   }
 
   .iti__flag {
-    background-image: url("./images/intl-tel-input//flags.png");
+    background-image: url("../../assets/images/intl-tel-input/flags.png");
   }
 
   @media (-webkit-min-device-pixel-ratio: 2),
   (min-resolution: 192dpi) {
     .iti__flag {
-      background-image: url("./images/intl-tel-input//flags@2x.png");
+      background-image: url("../../assets/images/intl-tel-input/flags@2x.png");
     }
   }
 }
