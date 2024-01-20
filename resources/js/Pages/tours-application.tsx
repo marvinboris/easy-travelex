@@ -1,20 +1,117 @@
-import { useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import axios from "axios";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 
 import imgUserCard from "../assets/images/svg/user-card.svg";
 
+import { ModelTour } from "@/types/models/tour";
+
+const CheckSquare = () => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={20}
+        height={20}
+        viewBox="0 0 20 20"
+        fill="none"
+    >
+        <path
+            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
+            fill="#089C20"
+        />
+    </svg>
+);
+
+const RequireSign = () => (
+    <div className="require_sign">
+        <svg
+            width={8}
+            height={8}
+            viewBox="0 0 8 8"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
+                fill="#FF0000"
+            />
+        </svg>
+    </div>
+);
+
 const ToursApplication = () => {
-    let passportIMG_contain_pic_input = useRef<HTMLInputElement>(null);
-    let passportIMG_previewImage = useRef<HTMLImageElement>(null);
-    let passport_btn = useRef<HTMLButtonElement>(null);
-    // let document_btn = useRef();
-    // let profile_btn = useRef();
+    const location = useLocation();
+    const state = location.state as ModelTour | null;
 
-    const { titleApplication } = useParams();
+    const [form, setForm] = useState({
+        customer_type: "",
+        name: "",
+        persons: "1",
+        country: "",
+        phone: "",
+        date: "",
+        places: JSON.parse(state?.places || "[]") as string[],
+        passportImg: null,
+        profileImg: null,
+        doc: null,
+    });
 
-    const handleClickPassport_btn = () => {
-        passportIMG_contain_pic_input.current?.click();
-        console.log(passportIMG_contain_pic_input.current);
+    const selectPlace = (e: ChangeEvent<HTMLSelectElement>) => {
+        const { value } = e.target;
+        setForm((f) => ({
+            ...f,
+            places: [...f.places, value],
+        }));
+    };
+
+    const handleClickPassport_btn = () =>
+        document.getElementById("passportImg")?.click();
+
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
+        const { name, value } = e.target;
+        setForm((f) => ({
+            ...f,
+            [name]:
+                "files" in e.target && e.target.files
+                    ? e.target.files[0]
+                    : value,
+        }));
+    };
+
+    const handleChangeInputFileImage = (
+        e: ChangeEvent<HTMLInputElement>,
+        selectorEl: string
+    ) => {
+        e.stopPropagation();
+        let picImg = document.querySelector(selectorEl) as HTMLImageElement;
+        if (picImg) {
+            let file = (
+                e.target as
+                    | (EventTarget & { files: FileList | null })
+                    | undefined
+            )?.files?.[0];
+            if (file) {
+                let src = URL.createObjectURL(file);
+                picImg.src = src;
+                picImg.classList.add("active");
+            }
+            handleChange(e);
+        }
+    };
+
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        axios
+            .post("/api/tour-applications", e.target)
+            .then((res) => {
+                console.log("res.data", res.data);
+                alert("Application submitted successfully");
+            })
+            .catch((error) => {
+                console.log("error", error);
+                alert("Application submission failed");
+            });
     };
 
     useEffect(() => {
@@ -23,66 +120,58 @@ const ToursApplication = () => {
             "#nationality"
         ) as HTMLInputElement;
 
-        const handleCountryChange = () => {
-            nationality.value = itiNationality.getSelectedCountryData().name;
+        const handlePhoneCountryChange = () => {
+            setForm((f) => ({
+                ...f,
+                phone: itiPhone.getSelectedCountryData().dialCode,
+            }));
         };
 
-        const handleChangeInputFileImage = (e: Event) => {
-            e.stopPropagation();
-            let picImg = document.querySelector(
-                ".passportIMG_previewImage"
-            ) as HTMLImageElement;
-            if (picImg) {
-                let file = (
-                    e.target as
-                        | (EventTarget & { files: FileList | null })
-                        | undefined
-                )?.files?.[0];
-                if (file) {
-                    let src = URL.createObjectURL(file);
-                    picImg.src = src;
-                    picImg.classList.add("active");
-                }
-            }
+        const handleNationalityCountryChange = () => {
+            setForm((f) => ({
+                ...f,
+                country: itiNationality.getSelectedCountryData().name,
+            }));
         };
 
-        window.intlTelInput(phone, {
+        const itiPhone = window.intlTelInput(phone, {
             initialCountry: "ae",
-            separateDialCode: true,
-            utilsScript:
-                "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
-        });
-
-        const itiNationality = window.intlTelInput(nationality, {
-            initialCountry: "fr",
             separateDialCode: false,
             utilsScript:
                 "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
         });
 
-        nationality.value = itiNationality.getSelectedCountryData().name;
-        nationality.addEventListener(
+        handlePhoneCountryChange();
+        phone.addEventListener(
             "countrychange",
-            handleCountryChange,
+            handlePhoneCountryChange,
             false
         );
 
-        let passportIMG_input = passportIMG_contain_pic_input.current;
-        passportIMG_input?.addEventListener(
-            "change",
-            handleChangeInputFileImage,
+        const itiNationality = window.intlTelInput(nationality, {
+            initialCountry: "cm",
+            separateDialCode: false,
+            utilsScript:
+                "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+        });
+
+        handleNationalityCountryChange();
+        nationality.addEventListener(
+            "countrychange",
+            handleNationalityCountryChange,
             false
         );
 
         return () => {
-            nationality.removeEventListener(
+            phone.removeEventListener(
                 "countrychange",
-                handleCountryChange,
+                handlePhoneCountryChange,
                 true
             );
-            passportIMG_input?.removeEventListener(
-                "change",
-                handleChangeInputFileImage,
+
+            nationality.removeEventListener(
+                "countrychange",
+                handleNationalityCountryChange,
                 true
             );
         };
@@ -108,79 +197,36 @@ const ToursApplication = () => {
                             </svg>
                             <div className="text">Selected package</div>
                         </div>
-                        <h1>{titleApplication} tour package</h1>
+                        <h1>{state?.title} tour package</h1>
                         <div className="check_form_list">
                             <ul>
                                 <li>
-                                    {" "}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={20}
-                                        height={20}
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
-                                            fill="#089C20"
-                                        />
-                                    </svg>
+                                    <CheckSquare />
                                     <div className="text">
-                                        Five days city tour.
+                                        {state?.duration} days city tour.
                                     </div>
                                 </li>
                                 <li>
-                                    {" "}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={20}
-                                        height={20}
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
-                                            fill="#089C20"
-                                        />
-                                    </svg>
+                                    <CheckSquare />
                                     <div className="text">
-                                        Available for 3 persons
+                                        Available for {state?.persons} persons
                                     </div>
                                 </li>
                                 <li>
-                                    {" "}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={20}
-                                        height={20}
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
-                                            fill="#089C20"
-                                        />
-                                    </svg>
+                                    <CheckSquare />
                                     <div className="text">
-                                        Visit 10 attractions in UAE
+                                        Visit{" "}
+                                        {
+                                            JSON.parse(state?.places || "[]")
+                                                .length
+                                        }{" "}
+                                        attractions in UAE
                                     </div>
                                 </li>
                                 <li>
-                                    {" "}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={20}
-                                        height={20}
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
-                                            fill="#089C20"
-                                        />
-                                    </svg>
+                                    <CheckSquare />
                                     <div className="text">
-                                        Upload a clear photo of yourself.
+                                        Upload a clear photo of your passport.
                                     </div>
                                 </li>
                             </ul>
@@ -189,7 +235,17 @@ const ToursApplication = () => {
 
                     <div className="right">
                         <div className="form_container">
-                            <form action="" className="form">
+                            <form
+                                onSubmit={handleSubmit}
+                                className="form"
+                                encType="multipart/form-data"
+                            >
+                                <input
+                                    type="hidden"
+                                    name="tour_id"
+                                    value={state?.id}
+                                />
+
                                 <div className="form__struct">
                                     <div className="form__struct__title">
                                         <svg
@@ -220,28 +276,18 @@ const ToursApplication = () => {
                                                                 <span></span>
                                                                 Name
                                                             </div>
-                                                            <div className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </div>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
                                                     <input
-                                                        type="text"
                                                         placeholder="Your full name"
                                                         className="input"
+                                                        name="name"
+                                                        id="name"
                                                         required
+                                                        value={form.name}
+                                                        onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
@@ -254,20 +300,7 @@ const ToursApplication = () => {
                                                                 <span></span>
                                                                 type
                                                             </span>
-                                                            <span className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </span>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
@@ -299,8 +332,12 @@ const ToursApplication = () => {
                                                         placeholder="Select"
                                                         className="input"
                                                         required
-                                                        name="customerType"
+                                                        name="customer_type"
                                                         id="customerType"
+                                                        value={
+                                                            form.customer_type
+                                                        }
+                                                        onChange={handleChange}
                                                     >
                                                         <option value="Inside customer">
                                                             Inside customer
@@ -321,29 +358,18 @@ const ToursApplication = () => {
                                                                 Nationality
                                                                 <span></span>
                                                             </div>
-                                                            <div className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </div>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
                                                     <input
                                                         type="text"
                                                         id="nationality"
+                                                        name="country"
                                                         placeholder="Select country"
                                                         className="input"
                                                         required
+                                                        value={form.country}
                                                     />
                                                 </div>
                                             </div>
@@ -356,27 +382,17 @@ const ToursApplication = () => {
                                                                 <span></span>
                                                                 No.
                                                             </span>
-                                                            <span className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </span>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
                                                     <input
                                                         id="phone"
+                                                        name="phone"
                                                         type="text"
                                                         className="input"
+                                                        value={form.phone}
+                                                        onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
@@ -393,20 +409,7 @@ const ToursApplication = () => {
                                                                 <span></span>
                                                                 person
                                                             </span>
-                                                            <span className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </span>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
@@ -434,26 +437,17 @@ const ToursApplication = () => {
                                                         </svg>
                                                     </label>
 
-                                                    <select
-                                                        placeholder="Select"
+                                                    <input
+                                                        type="number"
+                                                        min={1}
+                                                        max={state?.persons}
                                                         className="input"
                                                         required
-                                                        name="customerType"
-                                                        id="customerType"
-                                                    >
-                                                        <option value="1">
-                                                            01
-                                                        </option>
-                                                        <option value="2">
-                                                            02
-                                                        </option>
-                                                        <option value="3">
-                                                            03
-                                                        </option>
-                                                        <option value="4">
-                                                            04
-                                                        </option>
-                                                    </select>
+                                                        name="persons"
+                                                        id="persons"
+                                                        value={form.persons}
+                                                        onChange={handleChange}
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="input_container">
@@ -467,20 +461,7 @@ const ToursApplication = () => {
                                                                 <span></span>
                                                                 date
                                                             </span>
-                                                            <span className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </span>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
@@ -489,18 +470,162 @@ const ToursApplication = () => {
                                                         type="date"
                                                         name="date"
                                                         id="date"
+                                                        value={form.date}
+                                                        onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div className="input_group input_group_element">
+                                            <div className="space-y-2 w-[48%]">
+                                                <div className="input_container !w-full">
+                                                    <div className="input_container__struct">
+                                                        <div className="after">
+                                                            <div className="after__struct">
+                                                                <span className="text">
+                                                                    Select
+                                                                    <span></span>
+                                                                    multiple
+                                                                    <span></span>
+                                                                    places
+                                                                </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <label
+                                                            htmlFor="select-place"
+                                                            className="dropdown_ico"
+                                                        >
+                                                            <svg
+                                                                width={12}
+                                                                height={10}
+                                                                viewBox="0 0 12 10"
+                                                                fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                            >
+                                                                <path
+                                                                    d="M5.99992 0.5H8.00242C10.4849 0.5 11.5049 2.2625 10.2599 4.415L9.25492 6.1475L8.24992 7.88C7.00492 10.0325 4.97242 10.0325 3.72742 7.88L2.72242 6.1475L1.71742 4.415C0.494916 2.2625 1.50742 0.5 3.99742 0.5H5.99992Z"
+                                                                    stroke="#525252"
+                                                                    strokeWidth="0.875"
+                                                                    strokeMiterlimit={
+                                                                        10
+                                                                    }
+                                                                    strokeLinecap="round"
+                                                                    strokeLinejoin="round"
+                                                                />
+                                                            </svg>
+                                                        </label>
+
+                                                        <select
+                                                            placeholder="Select"
+                                                            className="input"
+                                                            id="select-place"
+                                                            onChange={
+                                                                selectPlace
+                                                            }
+                                                        >
+                                                            <option value="">Select a place</option>
+                                                            {(
+                                                                JSON.parse(
+                                                                    state?.places ||
+                                                                        "[]"
+                                                                ) as string[]
+                                                            )
+                                                                .filter(
+                                                                    (place) =>
+                                                                        !form.places.includes(
+                                                                            place
+                                                                        )
+                                                                )
+                                                                .map(
+                                                                    (place) => (
+                                                                        <option
+                                                                            key={
+                                                                                "option-place-" +
+                                                                                place
+                                                                            }
+                                                                            value={
+                                                                                place
+                                                                            }
+                                                                        >
+                                                                            {
+                                                                                place
+                                                                            }
+                                                                        </option>
+                                                                    )
+                                                                )}
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div className="space-x-2 whitespace-nowrap overflow-auto no-scrollbar w-full h-14 gap-2">
+                                                    {form.places.map(
+                                                        (place, index) => (
+                                                            <div
+                                                                key={
+                                                                    "selected-place-" +
+                                                                    place +
+                                                                    "-" +
+                                                                    index
+                                                                }
+                                                                className="inline-flex items-center px-3 rounded-lg bg-neutral-100 h-full text-base group"
+                                                            >
+                                                                <input type="hidden" name="places[]" value={place} />
+                                                                <div>
+                                                                    {place}
+                                                                </div>
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={() => {
+                                                                        setForm(
+                                                                            (
+                                                                                f
+                                                                            ) => ({
+                                                                                ...f,
+                                                                                places: form.places.filter(
+                                                                                    (
+                                                                                        _,
+                                                                                        i
+                                                                                    ) =>
+                                                                                        i !==
+                                                                                        index
+                                                                                ),
+                                                                            })
+                                                                        );
+                                                                    }}
+                                                                    className="border-0 outline-none bg-transparent transition-all duration-100 opacity-0 group-hover:opacity-100 w-0 group-hover:w-auto ml-0 group-hover:ml-3"
+                                                                >
+                                                                    <svg
+                                                                        width="21"
+                                                                        height="21"
+                                                                        viewBox="0 0 21 21"
+                                                                        fill="none"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                    >
+                                                                        <circle
+                                                                            cx="10.5"
+                                                                            cy="10.5"
+                                                                            r="10"
+                                                                            fill="#EC0000"
+                                                                        />
+                                                                        <path
+                                                                            d="M13.9958 8.8666C14.1923 8.8831 14.3386 9.0596 14.3225 9.26109C14.3201 9.29459 14.0553 12.657 13.9026 14.0675C13.809 14.9375 13.2477 15.466 12.4021 15.4815C11.7593 15.4935 11.6037 15.5 10.9605 15.5C10.8386 15.5 10.7172 15.5 10.5952 15.4995C10.3982 15.4985 10.2388 15.3345 10.2397 15.132C10.2402 14.9305 10.3997 14.768 10.5967 14.768L10.7779 14.7684C11.0062 14.7688 11.1895 14.7681 11.3637 14.7666L11.6228 14.7636C11.8406 14.7605 12.0725 14.7561 12.3889 14.7505C12.8761 14.741 13.1389 14.4915 13.1931 13.9875C13.3447 12.587 13.6091 9.23559 13.6115 9.20209C13.6271 9.0006 13.8017 8.8561 13.9958 8.8666ZM7.00412 8.86645C7.20065 8.85745 7.3728 9.00095 7.3884 9.20244C7.39084 9.23594 7.65321 12.5784 7.80634 13.9899C7.8595 14.4834 8.11894 14.7384 8.57735 14.7484C8.77437 14.7524 8.93091 14.9199 8.92701 15.1219C8.92262 15.3214 8.76364 15.4799 8.57004 15.4799H8.56272C7.75026 15.4624 7.18895 14.9229 7.09678 14.0714C6.94267 12.6484 6.67982 9.29444 6.67738 9.26044C6.66128 9.05945 6.80759 8.88295 7.00412 8.86645ZM11.5341 5.5C11.9779 5.5 12.368 5.807 12.4831 6.24699C12.5343 6.44249 12.4212 6.64298 12.231 6.69548C12.0413 6.74798 11.8452 6.63198 11.794 6.43649C11.7623 6.31599 11.6555 6.23199 11.5341 6.23199H9.46589C9.34446 6.23199 9.23766 6.31599 9.20596 6.43649L9.09233 7.02298C9.07673 7.10198 9.05234 7.17597 9.02308 7.24847H14.643C14.84 7.24847 15 7.41197 15 7.61397C15 7.81647 14.84 7.97996 14.643 7.97996H6.35649C6.15947 7.97996 6 7.81647 6 7.61397C6 7.41197 6.15947 7.24847 6.35649 7.24847H7.95362C8.16624 7.24847 8.35107 7.09298 8.39252 6.87998L8.51151 6.26999C8.63197 5.807 9.02211 5.5 9.46589 5.5H11.5341Z"
+                                                                            fill="white"
+                                                                        />
+                                                                    </svg>
+                                                                </button>
+                                                            </div>
+                                                        )
+                                                    )}
+                                                </div>
+                                            </div>
+
                                             <button
                                                 type="button"
-                                                ref={passport_btn}
-                                                className="document_face"
-                                                onClick={() =>
-                                                    handleClickPassport_btn()
+                                                className="document_face !w-[48%]"
+                                                onClick={
+                                                    handleClickPassport_btn
                                                 }
                                             >
                                                 <div className="document_face__struct">
@@ -516,65 +641,23 @@ const ToursApplication = () => {
                                                     </div>
 
                                                     <img
-                                                        ref={
-                                                            passportIMG_previewImage
-                                                        }
                                                         className="passportIMG_previewImage previewImage"
                                                         src=""
                                                         alt=""
                                                     />
                                                 </div>
                                             </button>
-                                            {/* <button
-                          type="button"
-                          ref={profile_btn}
-                          className="document_face"
-                          onClick={(e)=>handleClickPassport_btn(e)}
-                        >
-                          <div className="document_face__struct">
-                            <img src={imgIco} alt={imgIco} />
-
-                            <div className="document_face_bar"></div>
-                            <div className="title">
-                            Upload <br /> clear pic
-                            </div>
-
-                            <img
-                              ref={passportIMG_previewImage}
-                              className="passportIMG_previewImage previewImage"
-                              src=""
-                              alt=""
-                            />
-                          </div>
-                        </button> */}
-                                            {/* <button
-                          type="button"
-                          ref={document_btn}
-                          className="document_face"
-                          onClick={(e)=>handleClickPassport_btn(e)}
-                        >
-                          <div className="document_face__struct">
-                            <img src={imgDocument} alt={imgDocument} />
-
-                            <div className="document_face_bar"></div>
-                            <div className="title">
-                            Birth <br/>certificate
-                            </div>
-
-                            <img
-                              ref={passportIMG_previewImage}
-                              className="passportIMG_previewImage previewImage"
-                              src=""
-                              alt=""
-                            />
-                          </div>
-                        </button> */}
 
                                             <input
                                                 type="file"
                                                 className="contain_pic_input"
-                                                ref={
-                                                    passportIMG_contain_pic_input
+                                                id="passportImg"
+                                                name="passportImg"
+                                                onChange={(e) =>
+                                                    handleChangeInputFileImage(
+                                                        e,
+                                                        ".passportIMG_previewImage"
+                                                    )
                                                 }
                                             />
                                         </div>

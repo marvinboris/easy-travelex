@@ -1,10 +1,12 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 import imgGriddot from "../../assets/images/svg/Grid_dots.svg";
 import imgbigCircle from "../../assets/images/svg/bigCircleArc.svg";
-import caroussel4 from "../../assets/images/caroussels/caroussel4.webp";
-import caroussel2 from "../../assets/images/caroussels/caroussel2.webp";
-import caroussel3 from "../../assets/images/caroussels/caroussel3.webp";
 
 import VisaCard from "./visa-card";
+
+import { ModelVisa } from "@/types/models/visa";
 
 function SectionHeader(props: {
     title: string;
@@ -29,6 +31,12 @@ function ApplyVisa(props: {
     bigTitle: string;
     isSectionHeader: boolean;
 }) {
+    const [visas, setVisas] = useState<ModelVisa[]>([]);
+
+    useEffect(() => {
+        axios.get<ModelVisa[]>("/api/visas").then((res) => setVisas(res.data));
+    }, []);
+
     return (
         <section
             id="section1"
@@ -55,34 +63,13 @@ function ApplyVisa(props: {
                     ></SectionHeader>
                 )}
 
-                <div className="visa_type_contain ">
-                    <VisaCard
-                        img={caroussel4}
-                        goTo="/visasapplication/14 Days  visa + insurance to Dubai - UAE "
-                        visaDays={14}
-                        title="14 Days  visa + insurance to Dubai - UAE "
-                        description="This visa gives you 14 days access in the whole UAE. It comes with insurance. Enjoy your stay and leave before your visa expires."
-                        price="$ 130 USD"
-                        period="4 - 5 Days"
-                    ></VisaCard>
-                    <VisaCard
-                        goTo="/visasapplication/30 Days  visa + insurance to Dubai - UAE"
-                        img={caroussel2}
-                        visaDays={30}
-                        title="30 Days  visa + insurance to Dubai - UAE "
-                        description="This visa gives you 30 days access in the whole UAE. It comes with insurance. Enjoy your stay and leave before your visa expires."
-                        price="$ 240 USD"
-                        period="4 - 7 Days"
-                    ></VisaCard>
-                    <VisaCard
-                        goTo="/visasapplication/90 Days  visa + insurance to Dubai - UAE "
-                        img={caroussel3}
-                        visaDays={90}
-                        title="90 Days  visa + insurance to Dubai - UAE "
-                        description="This visa gives you 90 days access in the whole UAE. It comes with insurance. Enjoy your stay and leave before your visa expires."
-                        price="$ 520 USD"
-                        period="6 - 10 Days"
-                    ></VisaCard>
+                <div className="visa_type_contain">
+                    {visas.map((visa, index) => (
+                        <VisaCard
+                            key={"visa-card-" + visa.id + "-" + index}
+                            {...visa}
+                        />
+                    ))}
                 </div>
             </div>
         </section>

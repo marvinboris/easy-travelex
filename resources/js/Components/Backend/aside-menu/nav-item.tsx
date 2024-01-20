@@ -11,7 +11,7 @@ export default function NavItem({
   children: React.ReactNode;
 }) {
   return (
-    <NavLink to={`/user${to}`} className="menu_item">
+    <NavLink to={`/admin${to}`} className="menu_item">
       <div className="menu_item__struct">
         <div className="text">{children}</div>
         {svg}

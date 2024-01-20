@@ -21,42 +21,38 @@ import Welcome from "./Pages/welcome";
 export default function AppRoutes() {
     return (
         <Routes>
-            <Route path="/user" element={<BackendLayout />}>
-                <Route path="/user/visas" element={<UserVisas />} />
-                <Route path="/user/tours" element={<UserTours />} />
-                <Route path="/user/settings" element={<UserSettings />} />
+            <Route path="/admin" element={<BackendLayout />}>
+                <Route path="/admin/visas" element={<UserVisas />} />
+                <Route path="/admin/tours" element={<UserTours />} />
+                <Route path="/admin/settings" element={<UserSettings />} />
                 <Route
-                    path="/user/web-settings"
+                    path="/admin/web-settings"
                     element={<UserWebSettings />}
                 />
-                <Route path="/user/customer-file" element={<UserFiles />} />
-                {/* <Route path="/user/tours/toursapplication/:titleApplication" element={<ToursApplication />} />
-      <Route path="/user/toursapplication/:titleApplication" element={<ToursApplication />} />
-    <Route path="/user/visasapplication/:titleApplication" element={<VisasApplication />} /> */}
+                <Route path="/admin/customer-file" element={<UserFiles />} />
+                {/* <Route path="/admin/tours/toursapplication/:titleApplication" element={<ToursApplication />} />
+      <Route path="/admin/toursapplication/:titleApplication" element={<ToursApplication />} />
+    <Route path="/admin/visasapplication/:titleApplication" element={<VisasApplication />} /> */}
                 {/* <Route
       
-        path="/user/tourscustombooking"
+        path="/admin/tourscustombooking"
         element={<ToursCustomBooking />}
       /> */}
-                {/* <Route path="/user/contacts" element={<ContactUs />} /> */}
-                <Route path="/user/car-rentals" element={<UserCars />} />
-                {/* <Route path="/user/composetour" element={<ToursCustomBooking />} /> */}
-                <Route index path="/user" element={<UserDashboard />} />
+                {/* <Route path="/admin/contacts" element={<ContactUs />} /> */}
+                <Route path="/admin/car-rentals" element={<UserCars />} />
+                {/* <Route path="/admin/composetour" element={<ToursCustomBooking />} /> */}
+                <Route index path="/admin" element={<UserDashboard />} />
             </Route>
 
             <Route path="/" element={<FrontendLayout />}>
                 <Route path="/visas" element={<Visas />} />
                 <Route path="/tours" element={<Tours />} />
                 <Route
-                    path="/tours/toursapplication/:titleApplication"
+                    path="/tour-applications/:slug"
                     element={<ToursApplication />}
                 />
                 <Route
-                    path="/toursapplication/:titleApplication"
-                    element={<ToursApplication />}
-                />
-                <Route
-                    path="/visasapplication/:titleApplication"
+                    path="/visa-applications/:slug"
                     element={<VisasApplication />}
                 />
                 <Route

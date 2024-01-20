@@ -4,21 +4,18 @@ import React from "react";
 import imgWallet from "../../assets/images/wallet.png";
 import imgClock from "../../assets/images/clock.png";
 
-function TourCard(props: {
-    img: string;
-    persons: string;
-    title: string;
-    subTitle: string;
-    description: string;
-    price: string;
-    period: string;
-    goTo: string;
-}) {
+import { ModelTour } from "@/types";
+
+function TourCard(props: ModelTour) {
     return (
-        <Link to={props.goTo} className="visa_type_contain__visa_card">
+        <Link
+            to={props.link}
+            state={props}
+            className="visa_type_contain__visa_card"
+        >
             <div className="header_visa_card">
                 <div className="img">
-                    <img src={props.img} alt={props.img} />
+                    <img src={props.photo} alt={props.title} />
                 </div>
 
                 <div className="contain">
@@ -54,8 +51,8 @@ function TourCard(props: {
 
                         <div className="visa_card_title">
                             <span className="litle_text">
-                                {" "}
-                                {props.subTitle}
+                                Visit {JSON.parse(props.places).length} places
+                                in {props.duration} days
                             </span>
                             {props.title}
                         </div>
@@ -73,7 +70,7 @@ function TourCard(props: {
                                 <img src={imgWallet} alt={imgWallet} />
                             </div>
                             <div className="text">
-                                <span className="t1">{props.price}</span>
+                                <span className="t1">{props.amount} AED</span>
                                 <span className="t2">Starting from</span>
                             </div>
                         </div>
@@ -85,7 +82,11 @@ function TourCard(props: {
                                 <img src={imgClock} alt={imgClock} />
                             </div>
                             <div className="text">
-                                <span className="t1"> {props.period}</span>
+                                <span className="t1">
+                                    {" "}
+                                    {props.processing_period_start} -{" "}
+                                    {props.processing_period_end} Days
+                                </span>
                                 <span className="t2">Processing period</span>
                             </div>
                         </div>

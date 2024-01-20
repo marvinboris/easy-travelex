@@ -57,7 +57,7 @@ export default function UserDashboard() {
 
     return (
         <>
-            <h1 className="welcome">
+            <h1 className="welcome !block">
                 Welcome to <span>Easy Travelex LLC</span>{" "}
                 <svg
                     width={40}
@@ -66,6 +66,7 @@ export default function UserDashboard() {
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     xmlnsXlink="http://www.w3.org/1999/xlink"
+                    className="inline-block"
                 >
                     <rect width={40} height={40} fill="url(#pattern0)" />
                     <defs>
@@ -93,8 +94,8 @@ export default function UserDashboard() {
             <GeneralStats />
 
             <div className="flex_container">
-                <div className="generalReport">
-                    <div className="generalReport__struct">
+                <div className="generalReport !w-full md:!w-[65%]">
+                    <div className="generalReport__struct !flex flex-col">
                         <div className="head_report">
                             <div className="title_report">
                                 <div className="ico">
@@ -173,7 +174,7 @@ export default function UserDashboard() {
                             </div>
                         </div>
 
-                        <div className=" flex_container_chart ">
+                        <div className="flex_container_chart flex-1 flex-col md:flex-row !items-stretch md:!items-center">
                             <div className="chart_resume">
                                 <div className="title">
                                     Total Completed visas
@@ -186,7 +187,7 @@ export default function UserDashboard() {
                                 </div>
                             </div>
 
-                            <div className="chart">
+                            <div className="chart flex-1 !w-full md:!w-3/5">
                                 <Bar options={options} data={data} />
                             </div>
                         </div>

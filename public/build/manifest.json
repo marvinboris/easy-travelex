@@ -1,6 +1,6 @@
 {
   "resources/js/app.css": {
-    "file": "assets/app-e6e9f0ae.css",
+    "file": "assets/app-dd95f19e.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.tsx": {
@@ -17,9 +17,6 @@
       "assets/circleCar-10d1fe13.svg",
       "assets/contactUs-09edeb4c.png",
       "assets/banner-339eb996.png",
-      "assets/caroussel4-14d5bdc5.webp",
-      "assets/caroussel2-5dd52451.webp",
-      "assets/caroussel3-83b02dea.webp",
       "assets/wallet-918cafcd.png",
       "assets/clock-e89e56ab.png",
       "assets/btnDesign-056365cc.svg",
@@ -32,6 +29,9 @@
       "assets/bigCircleArc-6d706c06.svg",
       "assets/documentimg-4bf7489e.svg",
       "assets/imgico-633a8bef.svg",
+      "assets/caroussel2-5dd52451.webp",
+      "assets/caroussel3-83b02dea.webp",
+      "assets/caroussel4-14d5bdc5.webp",
       "assets/caroussel5-9248227c.webp",
       "assets/caroussel6-57525010.webp",
       "assets/trou_header-f9f7d111.svg",
@@ -64,9 +64,9 @@
       "assets/flags@2x-9bd00899.png"
     ],
     "css": [
-      "assets/app-e6e9f0ae.css"
+      "assets/app-dd95f19e.css"
     ],
-    "file": "assets/app-7af3162e.js",
+    "file": "assets/app-aafeb776.js",
     "isEntry": true,
     "src": "resources/js/app.tsx"
   },

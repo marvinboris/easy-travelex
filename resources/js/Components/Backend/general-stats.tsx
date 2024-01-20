@@ -1,6 +1,6 @@
 export default function GeneralStats() {
   return (
-    <div className="containerStats">
+    <div className="containerStats !grid grid-cols-1 gap-4 md:grid-cols-4">
       <div className="stat_item">
         <div className="stat_item__struct">
           <div className="title">Total visa requests</div>

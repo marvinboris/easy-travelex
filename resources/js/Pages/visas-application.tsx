@@ -1,50 +1,145 @@
-import React, { useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
+import axios from "axios";
+import React, {
+    ChangeEvent,
+    FormEvent,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
+import { useLocation } from "react-router-dom";
 
 import imgUserCard from "../assets/images/svg/user-card.svg";
 import imgDocument from "../assets/images/svg/documentimg.svg";
 import imgIco from "../assets/images/svg/imgico.svg";
 
+import { ModelVisa } from "@/types/models/visa";
+
+const CheckSquare = () => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={20}
+        height={20}
+        viewBox="0 0 20 20"
+        fill="none"
+    >
+        <path
+            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
+            fill="#089C20"
+        />
+    </svg>
+);
+
+const RequireSign = () => (
+    <div className="require_sign">
+        <svg
+            width={8}
+            height={8}
+            viewBox="0 0 8 8"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
+                fill="#FF0000"
+            />
+        </svg>
+    </div>
+);
+
 const VisasApplication = () => {
-    let passportIMG_contain_pic_input = useRef<HTMLInputElement>(null);
-    let profileIMG_contain_pic_input = useRef<HTMLInputElement>(null);
-    let doc_contain_input = useRef<HTMLInputElement>(null);
+    const location = useLocation();
+    const state = location.state as ModelVisa | null;
 
-    let passportIMG_previewImage = useRef<HTMLImageElement>(null);
-    let profileIMG_previewImage = useRef<HTMLImageElement>(null);
-    let doc_Namepreview = useRef<HTMLDivElement>(null);
+    const [form, setForm] = useState({
+        customer_type: "",
+        name: "",
+        email: "",
+        country: "",
+        phone: "",
+        expiry_date: "",
+        passportImg: null,
+        profileImg: null,
+        doc: null,
+    });
 
-    let passport_btn = useRef<HTMLButtonElement>(null);
-    let document_btn = useRef<HTMLButtonElement>(null);
-    let profile_btn = useRef<HTMLButtonElement>(null);
+    const handleClickPassport_btn = () =>
+        document.getElementById("passportImg")?.click();
 
-    const { titleApplication } = useParams();
+    const handleClickProfile_btn = () =>
+        document.getElementById("profileImg")?.click();
 
-    console.log("titleApplication : ", titleApplication);
+    const handleClickDoc_btn = () => document.getElementById("doc")?.click();
 
-    // function clearParam(texte) {
-    //   const indexDuEgal = texte.indexOf('=');
-    //   if (indexDuEgal !== -1) {
-    //     return texte.substring(indexDuEgal + 1); // +1 pour inclure le caractère "=" lui-même
-    //   } else {
-    //     // Si le signe "=" n'est pas trouvé, renvoyer le texte original
-    //     return texte;
-    //   }
-    // }
-
-    const handleClickPassport_btn = () => {
-        passportIMG_contain_pic_input.current?.click();
-        console.log(passportIMG_contain_pic_input.current);
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
+        const { name, value } = e.target;
+        setForm((f) => ({
+            ...f,
+            [name]:
+                "files" in e.target && e.target.files
+                    ? e.target.files[0]
+                    : value,
+        }));
     };
 
-    const handleClickProfile_btn = () => {
-        profileIMG_contain_pic_input.current?.click();
-        console.log(profileIMG_contain_pic_input.current);
+    const handleChangeInputFileImage = (
+        e: ChangeEvent<HTMLInputElement>,
+        selectorEl: string
+    ) => {
+        e.stopPropagation();
+        let picImg = document.querySelector(selectorEl) as HTMLImageElement;
+        if (picImg) {
+            let file = (
+                e.target as
+                    | (EventTarget & { files: FileList | null })
+                    | undefined
+            )?.files?.[0];
+            if (file) {
+                let src = URL.createObjectURL(file);
+                picImg.src = src;
+                picImg.classList.add("active");
+            }
+            handleChange(e);
+        }
     };
 
-    const handleClickDoc_btn = () => {
-        doc_contain_input.current?.click();
-        console.log(doc_contain_input.current);
+    const handleChangeInputFileDoc = (
+        e: ChangeEvent<HTMLInputElement>,
+        selectorEl: string
+    ) => {
+        console.log("e,selectorEl", e, selectorEl);
+        e.stopPropagation();
+        const element = document.querySelector(selectorEl);
+        console.log("element----", element);
+        if (element) {
+            const file = (
+                e.target as
+                    | (EventTarget & { files: FileList | null })
+                    | undefined
+            )?.files?.[0];
+            if (file) {
+                const TempName = file.name;
+                console.log("TempName", TempName);
+                element.textContent = TempName;
+                element.classList.add("active");
+            }
+            handleChange(e);
+        }
+    };
+
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        axios
+            .post("/api/visa-applications", e.target)
+            .then((res) => {
+                console.log("res.data", res.data);
+                alert("Application submitted successfully");
+            })
+            .catch((error) => {
+                console.log("error", error);
+                alert("Application submission failed");
+            });
     };
 
     useEffect(() => {
@@ -53,107 +148,58 @@ const VisasApplication = () => {
             "#nationality"
         ) as HTMLInputElement;
 
-        const handleCountryChange = () => {
-            nationality.value = itiNationality.getSelectedCountryData().name;
+        const handlePhoneCountryChange = () => {
+            setForm((f) => ({
+                ...f,
+                phone: itiPhone.getSelectedCountryData().dialCode,
+            }));
         };
 
-        const handleChangeInputFileImage = (e: Event, selectorEl: string) => {
-            e.stopPropagation();
-            let picImg = document.querySelector(selectorEl) as HTMLImageElement;
-            if (picImg) {
-                let file = (
-                    e.target as
-                        | (EventTarget & { files: FileList | null })
-                        | undefined
-                )?.files?.[0];
-                if (file) {
-                    let src = URL.createObjectURL(file);
-                    picImg.src = src;
-                    picImg.classList.add("active");
-                }
-            }
+        const handleNationalityCountryChange = () => {
+            setForm((f) => ({
+                ...f,
+                country: itiNationality.getSelectedCountryData().name,
+            }));
         };
 
-        const handleChangeInputFileDoc = (e: Event, selectorEl: string) => {
-            console.log("e,selectorEl", e, selectorEl);
-            e.stopPropagation();
-            const element = document.querySelector(selectorEl);
-            console.log("element----", element);
-            if (element) {
-                const file = (
-                    e.target as
-                        | (EventTarget & { files: FileList | null })
-                        | undefined
-                )?.files?.[0];
-                if (file) {
-                    const TempName = file.name;
-                    console.log("TempName", TempName);
-                    element.textContent = TempName;
-                    element.classList.add("active");
-                }
-            }
-        };
-
-        window.intlTelInput(phone, {
+        const itiPhone = window.intlTelInput(phone, {
             initialCountry: "ae",
-            separateDialCode: true,
-            utilsScript:
-                "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
-        });
-
-        const itiNationality = window.intlTelInput(nationality, {
-            initialCountry: "fr",
             separateDialCode: false,
             utilsScript:
                 "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
         });
 
-        nationality.value = itiNationality.getSelectedCountryData().name;
+        handlePhoneCountryChange();
+        phone.addEventListener(
+            "countrychange",
+            handlePhoneCountryChange,
+            false
+        );
+
+        const itiNationality = window.intlTelInput(nationality, {
+            initialCountry: "cm",
+            separateDialCode: false,
+            utilsScript:
+                "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+        });
+
+        handleNationalityCountryChange();
         nationality.addEventListener(
             "countrychange",
-            handleCountryChange,
-            false
-        );
-
-        let passportIMG_input = passportIMG_contain_pic_input.current;
-        const passportIMGSelector = ".passportIMG_previewImage";
-        passportIMG_input?.addEventListener(
-            "change",
-            (e) => {
-                handleChangeInputFileImage(e, passportIMGSelector);
-            },
-            false
-        );
-
-        let profileIMG_input = profileIMG_contain_pic_input.current;
-        const profileIMGSelector = ".profileIMG_previewImage";
-        profileIMG_input?.addEventListener(
-            "change",
-            (e) => {
-                handleChangeInputFileImage(e, profileIMGSelector);
-            },
-            false
-        );
-
-        let docContain_input = doc_contain_input.current;
-        const docContainNameSelector = ".docContainName";
-        docContain_input?.addEventListener(
-            "change",
-            (e) => {
-                handleChangeInputFileDoc(e, docContainNameSelector);
-            },
+            handleNationalityCountryChange,
             false
         );
 
         return () => {
-            nationality.removeEventListener(
+            phone.removeEventListener(
                 "countrychange",
-                handleCountryChange,
+                handlePhoneCountryChange,
                 true
             );
-            passportIMG_input?.removeEventListener(
-                "change",
-                (e) => handleChangeInputFileImage(e, passportIMGSelector),
+
+            nationality.removeEventListener(
+                "countrychange",
+                handleNationalityCountryChange,
                 true
             );
         };
@@ -164,79 +210,31 @@ const VisasApplication = () => {
             <div className="struct ">
                 <div className="formApplication_contain">
                     <div className="left">
-                        <h1>{titleApplication}</h1>
+                        <h1>{state?.title}</h1>
                         <div className="check_form_list">
                             <ul>
                                 <li>
-                                    {" "}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={20}
-                                        height={20}
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
-                                            fill="#089C20"
-                                        />
-                                    </svg>
+                                    <CheckSquare />
                                     <div className="text">
                                         Make sure your passport is at least 6
                                         months valid
                                     </div>
                                 </li>
                                 <li>
-                                    {" "}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={20}
-                                        height={20}
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
-                                            fill="#089C20"
-                                        />
-                                    </svg>
+                                    <CheckSquare />
                                     <div className="text">
                                         Provide a valid phone number / WhatsApp
                                         number
                                     </div>
                                 </li>
                                 <li>
-                                    {" "}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={20}
-                                        height={20}
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
-                                            fill="#089C20"
-                                        />
-                                    </svg>
+                                    <CheckSquare />
                                     <div className="text">
                                         Upload a clear passport copy
                                     </div>
                                 </li>
                                 <li>
-                                    {" "}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={20}
-                                        height={20}
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
-                                            fill="#089C20"
-                                        />
-                                    </svg>
+                                    <CheckSquare />
                                     <div className="text">
                                         Upload a clear photo of yourself.
                                     </div>
@@ -247,7 +245,17 @@ const VisasApplication = () => {
 
                     <div className="right">
                         <div className="form_container">
-                            <form action="" className="form">
+                            <form
+                                onSubmit={handleSubmit}
+                                className="form"
+                                encType="multipart/form-data"
+                            >
+                                <input
+                                    type="hidden"
+                                    name="visa_id"
+                                    value={state?.id}
+                                />
+
                                 <div className="form__struct">
                                     <div className="form__struct__title">
                                         <svg
@@ -278,28 +286,18 @@ const VisasApplication = () => {
                                                                 <span></span>
                                                                 Name
                                                             </div>
-                                                            <div className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </div>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
                                                     <input
-                                                        type="text"
                                                         placeholder="Your full name"
                                                         className="input"
+                                                        name="name"
+                                                        id="name"
                                                         required
+                                                        value={form.name}
+                                                        onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
@@ -313,25 +311,12 @@ const VisasApplication = () => {
                                                                 <span></span>
                                                                 option
                                                             </span>
-                                                            <span className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </span>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
                                                     <label
-                                                        htmlFor="customerType"
+                                                        htmlFor="customer_type"
                                                         className="dropdown_ico"
                                                     >
                                                         <svg
@@ -358,9 +343,14 @@ const VisasApplication = () => {
                                                         placeholder="Select"
                                                         className="input"
                                                         required
-                                                        name="customerType"
-                                                        id="customerType"
+                                                        name="customer_type"
+                                                        id="customer_type"
+                                                        value={
+                                                            form.customer_type
+                                                        }
+                                                        onChange={handleChange}
                                                     >
+                                                        <option value=""></option>
                                                         <option value="Inside customer">
                                                             I am 18+ years
                                                         </option>
@@ -380,29 +370,17 @@ const VisasApplication = () => {
                                                                 Nationality
                                                                 <span></span>
                                                             </div>
-                                                            <div className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </div>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
                                                     <input
-                                                        type="text"
                                                         id="nationality"
                                                         placeholder="Select country"
                                                         className="input"
+                                                        name="country"
                                                         required
+                                                        value={form.country}
                                                     />
                                                 </div>
                                             </div>
@@ -415,25 +393,12 @@ const VisasApplication = () => {
                                                                 <span></span>
                                                                 address
                                                             </span>
-                                                            <span className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </span>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
                                                     <label
-                                                        htmlFor="customerType"
+                                                        htmlFor="customer_type"
                                                         className="dropdown_ico"
                                                     >
                                                         <svg
@@ -461,8 +426,10 @@ const VisasApplication = () => {
                                                         placeholder="johndoe@gmail.com"
                                                         className="input"
                                                         required
-                                                        name="customerType"
-                                                        id="customerType"
+                                                        name="email"
+                                                        id="email"
+                                                        value={form.email}
+                                                        onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
@@ -476,27 +443,16 @@ const VisasApplication = () => {
                                                                 Mobile
                                                                 <span></span>No.
                                                             </span>
-                                                            <span className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </span>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
                                                     <input
                                                         id="phone"
-                                                        type="text"
                                                         className="input"
+                                                        name="phone"
+                                                        value={form.phone}
+                                                        onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
@@ -511,28 +467,17 @@ const VisasApplication = () => {
                                                                 <span></span>
                                                                 date
                                                             </span>
-                                                            <span className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </span>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
                                                     <input
                                                         className="input"
                                                         type="date"
-                                                        name="date"
+                                                        name="expiry_date"
                                                         id="date"
+                                                        value={form.expiry_date}
+                                                        onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
@@ -541,7 +486,6 @@ const VisasApplication = () => {
                                         <div className="input_group input_group_element">
                                             <button
                                                 type="button"
-                                                ref={passport_btn}
                                                 className="document_face"
                                                 onClick={
                                                     handleClickPassport_btn
@@ -560,9 +504,6 @@ const VisasApplication = () => {
                                                     </div>
 
                                                     <img
-                                                        ref={
-                                                            passportIMG_previewImage
-                                                        }
                                                         className="passportIMG_previewImage previewImage"
                                                         src=""
                                                         alt=""
@@ -571,7 +512,6 @@ const VisasApplication = () => {
                                             </button>
                                             <button
                                                 type="button"
-                                                ref={profile_btn}
                                                 className="document_face"
                                                 onClick={handleClickProfile_btn}
                                             >
@@ -587,9 +527,6 @@ const VisasApplication = () => {
                                                     </div>
 
                                                     <img
-                                                        ref={
-                                                            profileIMG_previewImage
-                                                        }
                                                         className="profileIMG_previewImage previewImage"
                                                         src=""
                                                         alt=""
@@ -598,7 +535,6 @@ const VisasApplication = () => {
                                             </button>
                                             <button
                                                 type="button"
-                                                ref={document_btn}
                                                 className="document_face"
                                                 onClick={handleClickDoc_btn}
                                             >
@@ -614,10 +550,7 @@ const VisasApplication = () => {
                                                         certificate
                                                     </div>
 
-                                                    <div
-                                                        ref={doc_Namepreview}
-                                                        className="doc_contain docContainName"
-                                                    >
+                                                    <div className="doc_contain docContainName">
                                                         Pljl
                                                     </div>
                                                 </div>
@@ -626,22 +559,39 @@ const VisasApplication = () => {
                                             <input
                                                 type="file"
                                                 className="contain_pic_input"
-                                                ref={
-                                                    passportIMG_contain_pic_input
+                                                id="passportImg"
+                                                name="passportImg"
+                                                onChange={(e) =>
+                                                    handleChangeInputFileImage(
+                                                        e,
+                                                        ".passportIMG_previewImage"
+                                                    )
                                                 }
                                             />
                                             <input
                                                 type="file"
                                                 className="contain_pic_input"
-                                                ref={
-                                                    profileIMG_contain_pic_input
+                                                id="profileImg"
+                                                name="profileImg"
+                                                onChange={(e) =>
+                                                    handleChangeInputFileImage(
+                                                        e,
+                                                        ".profileIMG_previewImage"
+                                                    )
                                                 }
                                             />
                                             <input
                                                 type="file"
                                                 accept="pdf"
                                                 className="contain_pic_input"
-                                                ref={doc_contain_input}
+                                                id="doc"
+                                                name="doc"
+                                                onChange={(e) =>
+                                                    handleChangeInputFileDoc(
+                                                        e,
+                                                        ".doc_contain"
+                                                    )
+                                                }
                                             />
                                         </div>
                                     </div>
