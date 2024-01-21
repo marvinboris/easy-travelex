@@ -34,6 +34,21 @@ export default function UserVisas() {
                     sl: index + 1,
                     date: moment(visa.created_at).format("lll"),
                     destination: visa.visa?.title,
+                    passport: (
+                        <a download href={visa.passport}>
+                            Download
+                        </a>
+                    ),
+                    profile: (
+                        <a download href={visa.profile}>
+                            Download
+                        </a>
+                    ),
+                    doc: (
+                        <a download href={visa.doc}>
+                            Download
+                        </a>
+                    ),
                     status: ["Pending", "Failed", "Completed"][visa.status],
                 }))}
                 fields={[
@@ -43,6 +58,9 @@ export default function UserVisas() {
                     { key: "country", label: "Nationality" },
                     { key: "destination", label: "Destination" },
                     { key: "phone", label: "Phone No." },
+                    { key: "passport", label: "Passport" },
+                    { key: "profile", label: "Profile" },
+                    { key: "doc", label: "Doc" },
                     { key: "status", label: "Status" },
                     { key: "action", label: "Action" },
                 ]}

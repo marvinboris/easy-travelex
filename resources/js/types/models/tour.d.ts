@@ -4,7 +4,7 @@ export type ModelTour = {
     description: string;
     persons: number;
     photo: string;
-    places: string;
+    places: number;
     duration: number;
     amount: number;
     processing_period_start: string;

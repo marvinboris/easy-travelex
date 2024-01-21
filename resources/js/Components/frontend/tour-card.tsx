@@ -51,7 +51,7 @@ function TourCard(props: ModelTour) {
 
                         <div className="visa_card_title">
                             <span className="litle_text">
-                                Visit {JSON.parse(props.places).length} places
+                                Visit {props.places} places
                                 in {props.duration} days
                             </span>
                             {props.title}

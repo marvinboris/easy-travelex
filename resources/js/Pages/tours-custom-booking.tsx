@@ -1,5 +1,8 @@
+import axios, { AxiosError } from "axios";
 import gsap from "gsap";
-import React, { useEffect, useRef, useState } from "react";
+import moment from "moment";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 import imgCircleBooking from "../assets/images/svg/circlebooking.svg";
 import imgRelocation1 from "../assets/images/relocation1.webp";
@@ -7,14 +10,66 @@ import imgRelocation2 from "../assets/images/relocation2.jpg";
 import imgRelocation3 from "../assets/images/relocation3.jpg";
 import UaTown from "../Components/frontend/ua-town";
 
+const CheckSquare = () => (
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={20}
+        height={20}
+        viewBox="0 0 20 20"
+        fill="none"
+    >
+        <path
+            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
+            fill="#089C20"
+        />
+    </svg>
+);
+
+const RequireSign = () => (
+    <div className="require_sign">
+        <svg
+            width={8}
+            height={8}
+            viewBox="0 0 8 8"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
+                fill="#FF0000"
+            />
+        </svg>
+    </div>
+);
+
 const ToursCustomBooking = () => {
-    let passport_btn = useRef(null);
-    let hidden_file_input = useRef<HTMLInputElement>(null);
+    const [form, setForm] = useState({
+        customer_type: "",
+        name: "",
+        persons: "1",
+        country: "",
+        phone: "",
+        date: "",
+        passportImg: null as File | null,
+    });
 
     const [townSelected, setTownSelected] = useState<string[]>([]);
 
-    const handleClickBtnPassport = () => {
-        hidden_file_input.current?.click();
+    const handleClickBtnPassport = () =>
+        document.getElementById("passportImg")?.click();
+
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
+        const { name, value } = e.target;
+        if (name === "phone" && !value.match(/^[0-9]*$/)) return;
+        setForm((f) => ({
+            ...f,
+            [name]:
+                "files" in e.target && e.target.files
+                    ? e.target.files[0]
+                    : value,
+        }));
     };
 
     function removeElementByIndex<T extends unknown[]>(arr: T, index: number) {
@@ -37,7 +92,7 @@ const ToursCustomBooking = () => {
             let file = e.target.files?.[0];
             if (file) {
                 let src = file.name;
-                console.log("file contain", file);
+                setForm((f) => ({ ...f, passportImg: file || null }));
                 passportInputTarget.value = src;
             }
         }
@@ -59,7 +114,7 @@ const ToursCustomBooking = () => {
                 <input
                     type="checkbox"
                     onChange={() => {}}
-                    name="selected_town"
+                    name="places[]"
                     checked
                     value={town}
                 />
@@ -129,148 +184,93 @@ const ToursCustomBooking = () => {
         });
     }, [townSelected]);
 
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        if (Object.values(form).every((v) => v))
+            axios
+                .post("/api/tour-applications", e.target)
+                .then((res) => {
+                    Swal.fire({
+                        title: "Good job!",
+                        text: "Application submitted successfully",
+                        icon: "success",
+                    });
+                })
+                .catch((error) => {
+                    Swal.fire({
+                        title: "Oops!",
+                        text: (error as AxiosError).message,
+                        icon: "error",
+                    });
+                });
+        else
+            Swal.fire({
+                title: "Oops!",
+                text: "Please fill all required fields",
+                icon: "error",
+            });
+    };
+
     useEffect(() => {
         const phone = document.querySelector("#phone") as HTMLInputElement;
         const nationality = document.querySelector(
             "#nationality"
         ) as HTMLInputElement;
-        const handleCountryChange = () => {
-            nationality.value = itiNationality.getSelectedCountryData().name;
+
+        const handlePhoneCountryChange = () => {
+            setForm((f) => ({
+                ...f,
+                phone: itiPhone.getSelectedCountryData().dialCode,
+            }));
         };
 
-        // const handleChangeInputFile = (evt) => {
-        //   evt.stopPropagation();
-        //   let picImg = document.querySelector(".passportIMG_previewImage");
-        //   if (picImg) {
-        //     let file = evt.target.files[0];
-        //     if (file) {
-        //       let src = URL.createObjectURL(file);
-        //       picImg.src = src;
-        //       picImg.classList.add("active");
-        //     }
-        //   }
-        // };
+        const handleNationalityCountryChange = () => {
+            setForm((f) => ({
+                ...f,
+                country: itiNationality.getSelectedCountryData().name,
+            }));
+        };
 
-        window.intlTelInput(phone, {
+        const itiPhone = window.intlTelInput(phone, {
             initialCountry: "ae",
-            separateDialCode: true,
-            utilsScript:
-                "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
-        });
-
-        const itiNationality = window.intlTelInput(nationality, {
-            initialCountry: "fr",
             separateDialCode: false,
             utilsScript:
                 "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
         });
 
-        nationality.value = itiNationality.getSelectedCountryData().name;
+        handlePhoneCountryChange();
+        phone.addEventListener(
+            "countrychange",
+            handlePhoneCountryChange,
+            false
+        );
+
+        const itiNationality = window.intlTelInput(nationality, {
+            initialCountry: "cm",
+            separateDialCode: false,
+            utilsScript:
+                "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js",
+        });
+
+        handleNationalityCountryChange();
         nationality.addEventListener(
             "countrychange",
-            handleCountryChange,
+            handleNationalityCountryChange,
             false
         );
-
-        // let temp_passport_btn = passport_btn.current;
-        // temp_passport_btn.addEventListener(
-        //   "click",
-        //   handleClickBtnPassport,
-        //   false
-        // );
-        // let temp_hidden_file_input= hidden_file_input.current;
-        // temp_hidden_file_input.addEventListener(
-        //   "change",
-        //   handleChangeHiddenFileInput,
-        //   false
-        // );
-
-        const handleWheelGalerieCard = (
-            e: WheelEvent | React.WheelEvent<HTMLDivElement>
-        ) => {
-            e.preventDefault();
-
-            const propElement = (
-                carouselContainer?.querySelector(
-                    ".card_galerie"
-                ) as HTMLDivElement
-            ).getBoundingClientRect();
-            console.log(
-                (
-                    carouselContainer?.querySelector(
-                        ".card_galerie"
-                    ) as HTMLDivElement
-                ).getBoundingClientRect()
-            );
-            const containerScrollAmount = propElement.width;
-
-            const delta = e.deltaY || e.deltaX;
-
-            if (delta > 0) {
-                carouselContainer.scrollLeft += containerScrollAmount; // Adjust the scroll amount as needed
-            } else {
-                carouselContainer.scrollLeft -= containerScrollAmount; // Adjust the scroll amount as needed
-            }
-        };
-
-        const carouselContainer = document.querySelector(
-            ".card_galerie_container"
-        ) as HTMLDivElement;
-
-        carouselContainer.addEventListener(
-            "wheel",
-            handleWheelGalerieCard,
-            false
-        );
-
-        function scrollLeft() {
-            const propElement = (
-                carouselContainer.querySelector(
-                    ".card_galerie"
-                ) as HTMLDivElement
-            ).getBoundingClientRect();
-            const containerScrollAmount = propElement.width;
-            carouselContainer.scrollLeft -= containerScrollAmount;
-        }
-
-        function scrollRight() {
-            const propElement = (
-                carouselContainer.querySelector(
-                    ".card_galerie"
-                ) as HTMLDivElement
-            ).getBoundingClientRect();
-            const containerScrollAmount = propElement.width;
-            carouselContainer.scrollLeft += containerScrollAmount;
-        }
-
-        const leftButton = document.getElementById(
-            "left-button"
-        ) as HTMLButtonElement;
-        const rightButton = document.getElementById(
-            "right-button"
-        ) as HTMLButtonElement;
-
-        leftButton.addEventListener("click", scrollLeft, false);
-        rightButton.addEventListener("click", scrollRight, false);
 
         return () => {
+            phone.removeEventListener(
+                "countrychange",
+                handlePhoneCountryChange,
+                true
+            );
+
             nationality.removeEventListener(
                 "countrychange",
-                handleCountryChange,
+                handleNationalityCountryChange,
                 true
             );
-            // temp_passport_btn.removeEventListener(
-            //   "click",
-            //   handleClickBtnPassport,
-            //   true
-            // );
-            carouselContainer.removeEventListener(
-                "wheel",
-                handleWheelGalerieCard,
-                true
-            );
-            leftButton.addEventListener("click", scrollLeft, true);
-            rightButton.addEventListener("click", scrollRight, true);
         };
     }, []);
 
@@ -402,75 +402,27 @@ const ToursCustomBooking = () => {
                         <div className="check_form_list">
                             <ul>
                                 <li>
-                                    {" "}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={20}
-                                        height={20}
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
-                                            fill="#089C20"
-                                        />
-                                    </svg>
+                                    <CheckSquare />
                                     <div className="text">
-                                        Five days city tour.
+                                        Days on demand city tour.
                                     </div>
                                 </li>
                                 <li>
-                                    {" "}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={20}
-                                        height={20}
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
-                                            fill="#089C20"
-                                        />
-                                    </svg>
+                                    <CheckSquare />
                                     <div className="text">
-                                        Available for 3 persons
+                                        Available for many persons
                                     </div>
                                 </li>
                                 <li>
-                                    {" "}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={20}
-                                        height={20}
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
-                                            fill="#089C20"
-                                        />
-                                    </svg>
+                                    <CheckSquare />
                                     <div className="text">
-                                        Visit 10 attractions in UAE
+                                        Visit attractions in UAE
                                     </div>
                                 </li>
                                 <li>
-                                    {" "}
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width={20}
-                                        height={20}
-                                        viewBox="0 0 20 20"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M13.753 -9.15527e-05C17.59 -9.15527e-05 20 2.39191 20 6.25291V8.82191C20 9.23891 19.661 9.57791 19.244 9.57791H19.235V9.55991C18.813 9.55991 18.471 9.21891 18.47 8.79691V6.25291C18.47 3.19991 16.8 1.52991 13.756 1.52991H6.256C3.21 1.52991 1.53 3.20991 1.53 6.25291V13.7529C1.53 16.7869 3.21 18.4669 6.253 18.4669H13.753C16.796 18.4669 18.467 16.7869 18.467 13.7529C18.467 13.3309 18.809 12.9879 19.232 12.9879C19.655 12.9879 19.997 13.3309 19.997 13.7529C20 17.6079 17.608 19.9999 13.756 19.9999H6.253C2.392 19.9999 0 17.6079 0 13.7559V6.25591C0 2.39191 2.392 -9.15527e-05 6.253 -9.15527e-05H13.753ZM13.0296 7.09641C13.3226 6.80341 13.7976 6.80341 14.0906 7.09641C14.3836 7.38941 14.3836 7.86441 14.0906 8.15741L9.3436 12.9044C9.2026 13.0444 9.0116 13.1234 8.8136 13.1234C8.6136 13.1234 8.4236 13.0444 8.2826 12.9044L5.9096 10.5304C5.6166 10.2374 5.6166 9.76241 5.9096 9.46941C6.2026 9.17641 6.6776 9.17641 6.9706 9.46941L8.8136 11.3134L13.0296 7.09641Z"
-                                            fill="#089C20"
-                                        />
-                                    </svg>
+                                    <CheckSquare />
                                     <div className="text">
-                                        Upload a clear photo of yourself.
+                                        Upload a clear photo of your passport.
                                     </div>
                                 </li>
                             </ul>
@@ -481,7 +433,11 @@ const ToursCustomBooking = () => {
 
                     <div className="right">
                         <div className="form_container">
-                            <form action="" className="form">
+                            <form
+                                onSubmit={handleSubmit}
+                                className="form"
+                                encType="multipart/form-data"
+                            >
                                 <div className="form__struct">
                                     <div className="form__struct__title">
                                         <div className="icon">
@@ -519,28 +475,18 @@ const ToursCustomBooking = () => {
                                                                 <span></span>
                                                                 Name
                                                             </div>
-                                                            <div className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </div>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
                                                     <input
-                                                        type="text"
                                                         placeholder="Your full name"
                                                         className="input"
+                                                        name="name"
+                                                        id="name"
                                                         required
+                                                        value={form.name}
+                                                        onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
@@ -553,20 +499,7 @@ const ToursCustomBooking = () => {
                                                                 <span></span>
                                                                 type
                                                             </span>
-                                                            <span className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </span>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
@@ -597,10 +530,16 @@ const ToursCustomBooking = () => {
                                                     <select
                                                         placeholder="Select"
                                                         className="input"
-                                                        required
-                                                        name="customerType"
+                                                        name="customer_type"
                                                         id="customerType"
+                                                        value={
+                                                            form.customer_type
+                                                        }
+                                                        onChange={handleChange}
                                                     >
+                                                        <option value="">
+                                                            Select customer type
+                                                        </option>
                                                         <option value="Inside customer">
                                                             Inside customer
                                                         </option>
@@ -620,29 +559,17 @@ const ToursCustomBooking = () => {
                                                                 Nationality
                                                                 <span></span>
                                                             </div>
-                                                            <div className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </div>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
                                                     <input
                                                         type="text"
                                                         id="nationality"
+                                                        name="country"
                                                         placeholder="Select country"
                                                         className="input"
-                                                        required
+                                                        value={form.country}
                                                     />
                                                 </div>
                                             </div>
@@ -655,27 +582,17 @@ const ToursCustomBooking = () => {
                                                                 <span></span>
                                                                 No.
                                                             </span>
-                                                            <span className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </span>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
                                                     <input
                                                         id="phone"
+                                                        name="phone"
                                                         type="text"
                                                         className="input"
+                                                        value={form.phone}
+                                                        onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
@@ -692,20 +609,7 @@ const ToursCustomBooking = () => {
                                                                 <span></span>
                                                                 person
                                                             </span>
-                                                            <span className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </span>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
@@ -733,26 +637,15 @@ const ToursCustomBooking = () => {
                                                         </svg>
                                                     </label>
 
-                                                    <select
-                                                        placeholder="Select"
+                                                    <input
+                                                        type="number"
+                                                        min={1}
                                                         className="input"
-                                                        required
-                                                        name="customerType"
-                                                        id="customerType"
-                                                    >
-                                                        <option value="1">
-                                                            01
-                                                        </option>
-                                                        <option value="2">
-                                                            02
-                                                        </option>
-                                                        <option value="3">
-                                                            03
-                                                        </option>
-                                                        <option value="4">
-                                                            04
-                                                        </option>
-                                                    </select>
+                                                        name="persons"
+                                                        id="persons"
+                                                        value={form.persons}
+                                                        onChange={handleChange}
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="input_container">
@@ -766,20 +659,7 @@ const ToursCustomBooking = () => {
                                                                 <span></span>
                                                                 date
                                                             </span>
-                                                            <span className="require_sign">
-                                                                <svg
-                                                                    width={8}
-                                                                    height={8}
-                                                                    viewBox="0 0 8 8"
-                                                                    fill="none"
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                >
-                                                                    <path
-                                                                        d="M7.088 3.36V4.896L4.904 4.8L6.176 6.552L4.808 7.368L3.728 5.4L2.648 7.368L1.304 6.552L2.552 4.8L0.392 4.896V3.36L2.552 3.48L1.304 1.704L2.648 0.887999L3.728 2.856L4.808 0.887999L6.176 1.704L4.904 3.48L7.088 3.36Z"
-                                                                        fill="#FF0000"
-                                                                    />
-                                                                </svg>
-                                                            </span>
+                                                            <RequireSign />
                                                         </div>
                                                     </div>
 
@@ -788,6 +668,13 @@ const ToursCustomBooking = () => {
                                                         type="date"
                                                         name="date"
                                                         id="date"
+                                                        min={moment()
+                                                            .add(6, "months")
+                                                            .format(
+                                                                "YYYY-MM-DD"
+                                                            )}
+                                                        value={form.date}
+                                                        onChange={handleChange}
                                                     />
                                                 </div>
                                             </div>
@@ -849,12 +736,14 @@ const ToursCustomBooking = () => {
                                                         onchange={
                                                             handleChangeInputTown
                                                         }
+                                                        townSelected={
+                                                            townSelected
+                                                        }
                                                     ></UaTown>
                                                 </div>
                                             </div>
                                             <div
                                                 onClick={handleClickBtnPassport}
-                                                ref={passport_btn}
                                                 className="input_container btn_file_select"
                                             >
                                                 <div className="input_container__struct">
@@ -928,9 +817,7 @@ const ToursCustomBooking = () => {
                                                         type="text"
                                                         placeholder="Select file"
                                                         className="input"
-                                                        required
                                                         readOnly
-                                                        name="customerType"
                                                         id="passportInputTarget"
                                                     />
                                                 </div>
@@ -942,7 +829,8 @@ const ToursCustomBooking = () => {
                                                 onChange={
                                                     handleChangeHiddenFileInput
                                                 }
-                                                ref={hidden_file_input}
+                                                id="passportImg"
+                                                name="passportImg"
                                                 type="file"
                                                 accept="image/*,application/pdf"
                                             />

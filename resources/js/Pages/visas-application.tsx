@@ -1,12 +1,8 @@
 import axios from "axios";
-import React, {
-    ChangeEvent,
-    FormEvent,
-    useEffect,
-    useRef,
-    useState,
-} from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import moment from "moment";
 import { useLocation } from "react-router-dom";
+import Swal from "sweetalert2";
 
 import imgUserCard from "../assets/images/svg/user-card.svg";
 import imgDocument from "../assets/images/svg/documentimg.svg";
@@ -74,6 +70,7 @@ const VisasApplication = () => {
         e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
+        if (name === "phone" && !value.match(/^[0-9]*$/)) return;
         setForm((f) => ({
             ...f,
             [name]:
@@ -130,15 +127,28 @@ const VisasApplication = () => {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        axios
-            .post("/api/visa-applications", e.target)
-            .then((res) => {
-                console.log("res.data", res.data);
-                alert("Application submitted successfully");
-            })
-            .catch((error) => {
-                console.log("error", error);
-                alert("Application submission failed");
+        if (Object.values(form).every((v) => v))
+            axios
+                .post("/api/visa-applications", e.target)
+                .then((res) => {
+                    Swal.fire({
+                        title: "Good job!",
+                        text: "Application submitted successfully",
+                        icon: "success",
+                    });
+                })
+                .catch((error) => {
+                    Swal.fire({
+                        title: "Oops!",
+                        text: "Please fill all required fields",
+                        icon: "error",
+                    });
+                });
+        else
+            Swal.fire({
+                title: "Oops!",
+                text: "Please fill all required fields",
+                icon: "error",
             });
     };
 
@@ -476,6 +486,11 @@ const VisasApplication = () => {
                                                         type="date"
                                                         name="expiry_date"
                                                         id="date"
+                                                        min={moment()
+                                                            .add(6, "months")
+                                                            .format(
+                                                                "YYYY-MM-DD"
+                                                            )}
                                                         value={form.expiry_date}
                                                         onChange={handleChange}
                                                     />

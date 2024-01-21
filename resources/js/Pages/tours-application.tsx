@@ -1,6 +1,7 @@
-import axios from "axios";
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import axios, { AxiosError } from "axios";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 import imgUserCard from "../assets/images/svg/user-card.svg";
 
@@ -42,26 +43,17 @@ const ToursApplication = () => {
     const location = useLocation();
     const state = location.state as ModelTour | null;
 
+    const navigate = useNavigate();
+
     const [form, setForm] = useState({
         customer_type: "",
         name: "",
-        persons: "1",
+        persons: state?.persons || "1",
         country: "",
         phone: "",
         date: "",
-        places: JSON.parse(state?.places || "[]") as string[],
         passportImg: null,
-        profileImg: null,
-        doc: null,
     });
-
-    const selectPlace = (e: ChangeEvent<HTMLSelectElement>) => {
-        const { value } = e.target;
-        setForm((f) => ({
-            ...f,
-            places: [...f.places, value],
-        }));
-    };
 
     const handleClickPassport_btn = () =>
         document.getElementById("passportImg")?.click();
@@ -70,6 +62,7 @@ const ToursApplication = () => {
         e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => {
         const { name, value } = e.target;
+        if (name === "phone" && !value.match(/^[0-9]*$/)) return;
         setForm((f) => ({
             ...f,
             [name]:
@@ -102,19 +95,34 @@ const ToursApplication = () => {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        axios
-            .post("/api/tour-applications", e.target)
-            .then((res) => {
-                console.log("res.data", res.data);
-                alert("Application submitted successfully");
-            })
-            .catch((error) => {
-                console.log("error", error);
-                alert("Application submission failed");
+        if (Object.values(form).every((v) => v))
+            axios
+                .post("/api/tour-applications", e.target)
+                .then((res) => {
+                    Swal.fire({
+                        title: "Good job!",
+                        text: "Application submitted successfully",
+                        icon: "success",
+                    });
+                })
+                .catch((error) => {
+                    Swal.fire({
+                        title: "Oops!",
+                        text: (error as AxiosError).message,
+                        icon: "error",
+                    });
+                });
+        else
+            Swal.fire({
+                title: "Oops!",
+                text: "Please fill all required fields",
+                icon: "error",
             });
     };
 
     useEffect(() => {
+        if (!state) navigate("/tours");
+
         const phone = document.querySelector("#phone") as HTMLInputElement;
         const nationality = document.querySelector(
             "#nationality"
@@ -215,12 +223,7 @@ const ToursApplication = () => {
                                 <li>
                                     <CheckSquare />
                                     <div className="text">
-                                        Visit{" "}
-                                        {
-                                            JSON.parse(state?.places || "[]")
-                                                .length
-                                        }{" "}
-                                        attractions in UAE
+                                        Visit {state?.places} attractions in UAE
                                     </div>
                                 </li>
                                 <li>
@@ -339,6 +342,9 @@ const ToursApplication = () => {
                                                         }
                                                         onChange={handleChange}
                                                     >
+                                                        <option value="">
+                                                            Select customer type
+                                                        </option>
                                                         <option value="Inside customer">
                                                             Inside customer
                                                         </option>
@@ -478,152 +484,9 @@ const ToursApplication = () => {
                                         </div>
 
                                         <div className="input_group input_group_element">
-                                            <div className="space-y-2 w-[48%]">
-                                                <div className="input_container !w-full">
-                                                    <div className="input_container__struct">
-                                                        <div className="after">
-                                                            <div className="after__struct">
-                                                                <span className="text">
-                                                                    Select
-                                                                    <span></span>
-                                                                    multiple
-                                                                    <span></span>
-                                                                    places
-                                                                </span>
-                                                            </div>
-                                                        </div>
-
-                                                        <label
-                                                            htmlFor="select-place"
-                                                            className="dropdown_ico"
-                                                        >
-                                                            <svg
-                                                                width={12}
-                                                                height={10}
-                                                                viewBox="0 0 12 10"
-                                                                fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                            >
-                                                                <path
-                                                                    d="M5.99992 0.5H8.00242C10.4849 0.5 11.5049 2.2625 10.2599 4.415L9.25492 6.1475L8.24992 7.88C7.00492 10.0325 4.97242 10.0325 3.72742 7.88L2.72242 6.1475L1.71742 4.415C0.494916 2.2625 1.50742 0.5 3.99742 0.5H5.99992Z"
-                                                                    stroke="#525252"
-                                                                    strokeWidth="0.875"
-                                                                    strokeMiterlimit={
-                                                                        10
-                                                                    }
-                                                                    strokeLinecap="round"
-                                                                    strokeLinejoin="round"
-                                                                />
-                                                            </svg>
-                                                        </label>
-
-                                                        <select
-                                                            placeholder="Select"
-                                                            className="input"
-                                                            id="select-place"
-                                                            onChange={
-                                                                selectPlace
-                                                            }
-                                                        >
-                                                            <option value="">Select a place</option>
-                                                            {(
-                                                                JSON.parse(
-                                                                    state?.places ||
-                                                                        "[]"
-                                                                ) as string[]
-                                                            )
-                                                                .filter(
-                                                                    (place) =>
-                                                                        !form.places.includes(
-                                                                            place
-                                                                        )
-                                                                )
-                                                                .map(
-                                                                    (place) => (
-                                                                        <option
-                                                                            key={
-                                                                                "option-place-" +
-                                                                                place
-                                                                            }
-                                                                            value={
-                                                                                place
-                                                                            }
-                                                                        >
-                                                                            {
-                                                                                place
-                                                                            }
-                                                                        </option>
-                                                                    )
-                                                                )}
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div className="space-x-2 whitespace-nowrap overflow-auto no-scrollbar w-full h-14 gap-2">
-                                                    {form.places.map(
-                                                        (place, index) => (
-                                                            <div
-                                                                key={
-                                                                    "selected-place-" +
-                                                                    place +
-                                                                    "-" +
-                                                                    index
-                                                                }
-                                                                className="inline-flex items-center px-3 rounded-lg bg-neutral-100 h-full text-base group"
-                                                            >
-                                                                <input type="hidden" name="places[]" value={place} />
-                                                                <div>
-                                                                    {place}
-                                                                </div>
-                                                                <button
-                                                                    type="button"
-                                                                    onClick={() => {
-                                                                        setForm(
-                                                                            (
-                                                                                f
-                                                                            ) => ({
-                                                                                ...f,
-                                                                                places: form.places.filter(
-                                                                                    (
-                                                                                        _,
-                                                                                        i
-                                                                                    ) =>
-                                                                                        i !==
-                                                                                        index
-                                                                                ),
-                                                                            })
-                                                                        );
-                                                                    }}
-                                                                    className="border-0 outline-none bg-transparent transition-all duration-100 opacity-0 group-hover:opacity-100 w-0 group-hover:w-auto ml-0 group-hover:ml-3"
-                                                                >
-                                                                    <svg
-                                                                        width="21"
-                                                                        height="21"
-                                                                        viewBox="0 0 21 21"
-                                                                        fill="none"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                    >
-                                                                        <circle
-                                                                            cx="10.5"
-                                                                            cy="10.5"
-                                                                            r="10"
-                                                                            fill="#EC0000"
-                                                                        />
-                                                                        <path
-                                                                            d="M13.9958 8.8666C14.1923 8.8831 14.3386 9.0596 14.3225 9.26109C14.3201 9.29459 14.0553 12.657 13.9026 14.0675C13.809 14.9375 13.2477 15.466 12.4021 15.4815C11.7593 15.4935 11.6037 15.5 10.9605 15.5C10.8386 15.5 10.7172 15.5 10.5952 15.4995C10.3982 15.4985 10.2388 15.3345 10.2397 15.132C10.2402 14.9305 10.3997 14.768 10.5967 14.768L10.7779 14.7684C11.0062 14.7688 11.1895 14.7681 11.3637 14.7666L11.6228 14.7636C11.8406 14.7605 12.0725 14.7561 12.3889 14.7505C12.8761 14.741 13.1389 14.4915 13.1931 13.9875C13.3447 12.587 13.6091 9.23559 13.6115 9.20209C13.6271 9.0006 13.8017 8.8561 13.9958 8.8666ZM7.00412 8.86645C7.20065 8.85745 7.3728 9.00095 7.3884 9.20244C7.39084 9.23594 7.65321 12.5784 7.80634 13.9899C7.8595 14.4834 8.11894 14.7384 8.57735 14.7484C8.77437 14.7524 8.93091 14.9199 8.92701 15.1219C8.92262 15.3214 8.76364 15.4799 8.57004 15.4799H8.56272C7.75026 15.4624 7.18895 14.9229 7.09678 14.0714C6.94267 12.6484 6.67982 9.29444 6.67738 9.26044C6.66128 9.05945 6.80759 8.88295 7.00412 8.86645ZM11.5341 5.5C11.9779 5.5 12.368 5.807 12.4831 6.24699C12.5343 6.44249 12.4212 6.64298 12.231 6.69548C12.0413 6.74798 11.8452 6.63198 11.794 6.43649C11.7623 6.31599 11.6555 6.23199 11.5341 6.23199H9.46589C9.34446 6.23199 9.23766 6.31599 9.20596 6.43649L9.09233 7.02298C9.07673 7.10198 9.05234 7.17597 9.02308 7.24847H14.643C14.84 7.24847 15 7.41197 15 7.61397C15 7.81647 14.84 7.97996 14.643 7.97996H6.35649C6.15947 7.97996 6 7.81647 6 7.61397C6 7.41197 6.15947 7.24847 6.35649 7.24847H7.95362C8.16624 7.24847 8.35107 7.09298 8.39252 6.87998L8.51151 6.26999C8.63197 5.807 9.02211 5.5 9.46589 5.5H11.5341Z"
-                                                                            fill="white"
-                                                                        />
-                                                                    </svg>
-                                                                </button>
-                                                            </div>
-                                                        )
-                                                    )}
-                                                </div>
-                                            </div>
-
                                             <button
                                                 type="button"
-                                                className="document_face !w-[48%]"
+                                                className="document_face"
                                                 onClick={
                                                     handleClickPassport_btn
                                                 }

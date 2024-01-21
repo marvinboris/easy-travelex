@@ -16,7 +16,7 @@ function SectionHeader(props: {
     return (
         <div className="section_header">
             <div className="titre_section ">
-                <h2 className="titre ">{props.title}</h2>
+                <h2 className="titre font-bold">{props.title}</h2>
                 <p className="p">{props.description}</p>
             </div>
 

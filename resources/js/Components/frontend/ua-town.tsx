@@ -2,6 +2,7 @@ import React from "react";
 
 const UaTown = (props: {
     onchange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    townSelected: string[];
 }) => {
     let villesEmirats = [
         "Abou Dhabi",
@@ -45,11 +46,13 @@ const UaTown = (props: {
             onChange={props.onchange}
         >
             <option value="">Sélectionnez une ville</option>
-            {villesEmirats.map((ville, index) => (
-                <option key={index} value={ville}>
-                    {ville}
-                </option>
-            ))}
+            {villesEmirats
+                .filter((ville) => !props.townSelected.includes(ville))
+                .map((ville, index) => (
+                    <option key={index} value={ville}>
+                        {ville}
+                    </option>
+                ))}
         </select>
     );
 };

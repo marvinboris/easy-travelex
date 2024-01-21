@@ -40,7 +40,7 @@ export default function AppRoutes() {
       /> */}
                 {/* <Route path="/admin/contacts" element={<ContactUs />} /> */}
                 <Route path="/admin/car-rentals" element={<UserCars />} />
-                {/* <Route path="/admin/composetour" element={<ToursCustomBooking />} /> */}
+                {/* <Route path="/admin/compose-tour" element={<ToursCustomBooking />} /> */}
                 <Route index path="/admin" element={<UserDashboard />} />
             </Route>
 
@@ -55,13 +55,9 @@ export default function AppRoutes() {
                     path="/visa-applications/:slug"
                     element={<VisasApplication />}
                 />
-                <Route
-                    path="/tourscustombooking"
-                    element={<ToursCustomBooking />}
-                />
                 <Route path="/contacts" element={<ContactUs />} />
                 <Route path="/cars" element={<Cars />} />
-                <Route path="/composetour" element={<ToursCustomBooking />} />
+                <Route path="/compose-tour" element={<ToursCustomBooking />} />
                 <Route path="/" element={<Welcome />} />
             </Route>
 

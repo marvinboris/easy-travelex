@@ -18,7 +18,7 @@ function TourPackages() {
             <div className="struct">
                 <div className="section_header">
                     <div className="titre_section">
-                        <h2 className="titre">Our tours packages</h2>
+                        <h2 className="titre font-bold">Our tours packages</h2>
                         <p className="p">
                             EasyTravelex Agency offers the best and affordable
                             Visas to International Tourists.

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('photo')->nullable();
-            $table->text('places');
+            $table->integer('places');
             $table->integer('duration');
             $table->integer('persons');
             $table->float('amount');

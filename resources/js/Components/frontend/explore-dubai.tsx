@@ -41,7 +41,7 @@ function ExploreDubai() {
                             </p>
                         </div>
 
-                        <Link className="btn_mordern" to={"/composetour"}>
+                        <Link className="btn_mordern" to={"/compose-tour"}>
                             <div className="left_bar"></div>
                             <div className="text">View more</div>
                             <svg

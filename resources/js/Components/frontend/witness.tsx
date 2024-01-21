@@ -36,7 +36,7 @@ function Witness() {
                 {/* <div className="space_witness"></div> */}
                 <div className="section_header">
                     <div className="titre_section fromTop">
-                        <h2 className="titre">What customers are saying</h2>
+                        <h2 className="titre font-bold">What customers are saying</h2>
                         <p className="p">
                             Experience today and give comment tomorrow
                         </p>

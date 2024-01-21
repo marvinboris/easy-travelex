@@ -2925,9 +2925,8 @@
     }
 
     .container_achievement_card {
-      display: flex;
+      @apply flex flex-col md:flex-row md:items-center;
       justify-content: center;
-      align-items: center;
       gap: 2em;
       position: relative;
 
@@ -2946,10 +2945,7 @@
         justify-content: center;
         flex-direction: column;
         gap: 2em;
-
-        @media all and (max-width: 1000px) {
-          width: 48%;
-        }
+        @apply w-full md:w-[48%];
 
         @media all and (max-width: 650px) {
           gap: 1em;
@@ -2957,9 +2953,7 @@
       }
 
       .one_container {
-        @media all and (max-width: 1000px) {
-          width: 48%;
-        }
+        @apply w-full md:w-[48%];
       }
 
       .imgCircleRental {

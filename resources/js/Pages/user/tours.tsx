@@ -34,7 +34,19 @@ export default function UserTours() {
                     sl: index + 1,
                     created_at: moment(tour.created_at).format("lll"),
                     date: moment(tour.date).format("lll"),
-                    package: tour.tour?.title,
+                    package: tour.tour
+                        ? tour.tour.title
+                        : "Custom" +
+                          (JSON.parse(tour.places || "[]")
+                              ? " (" +
+                                JSON.parse(tour.places || "[]").join(", ") +
+                                ")"
+                              : ""),
+                    passport: (
+                        <a download href={tour.passport}>
+                            Download
+                        </a>
+                    ),
                     status: ["Pending", "Failed", "Completed"][tour.status],
                 }))}
                 fields={[
@@ -45,6 +57,7 @@ export default function UserTours() {
                     { key: "date", label: "Tour date" },
                     { key: "phone", label: "Phone No." },
                     { key: "package", label: "Package" },
+                    { key: "passport", label: "Passport" },
                     { key: "status", label: "Status" },
                     { key: "action", label: "Action" },
                 ]}

@@ -17,9 +17,7 @@ class TourSeeder extends Seeder
             [
                 'duration' => 3,
                 'persons' => 3,
-                'places' => json_encode([
-                    'Burj Khalifa', 'Dubai Aquarium', 'Dubai Mall', 'Dubai Museum', 'Dubai National Mall',
-                ]),
+                'places' => 5,
                 'photo' => 'caroussel4.webp',
                 'title' => 'Easy Travelex Basic',
                 'description' => 'If you are looking for a way to spend your time in the best of ways with a limited budget, this plan gives you access to what you need.',
@@ -30,9 +28,7 @@ class TourSeeder extends Seeder
             [
                 'duration' => 5,
                 'persons' => 5,
-                'places' => json_encode([
-                    'Burj Khalifa', 'Dubai Aquarium', 'Dubai Mall', 'Dubai Museum', 'Dubai National Mall', 'Dubai Palace', 'Dubai Zoo', 'Dubai Zoo', 'Dubai Zoo', 'Dubai Zoo',
-                ]),
+                'places' => 10,
                 'photo' => 'caroussel2.webp',
                 'title' => 'Easy Travelex Plus',
                 'description' => 'If you are looking for a way to spend your time in the best of ways with a limited budget, this plan gives you access to what you need.',
@@ -43,9 +39,7 @@ class TourSeeder extends Seeder
             [
                 'duration' => 7,
                 'persons' => 7,
-                'places' => json_encode([
-                    'Burj Khalifa', 'Dubai Aquarium', 'Dubai Mall', 'Dubai Museum', 'Dubai National Mall', 'Dubai Palace', 'Dubai Zoo', 'Dubai Zoo', 'Dubai Zoo', 'Dubai Zoo', 'Dubai Zoo', 'Dubai Zoo', 'Dubai Zoo', 'Dubai Zoo', 'Dubai Zoo',
-                ]),
+                'places' => 15,
                 'photo' => 'caroussel3.webp',
                 'title' => 'Easy Travelex Pro',
                 'description' => 'If you are looking for a way to spend your time in the best of ways with a limited budget, this plan gives you access to what you need.',
