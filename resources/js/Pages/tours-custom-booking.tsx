@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import gsap from "gsap";
 import moment from "moment";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import imgCircleBooking from "../assets/images/svg/circlebooking.svg";
@@ -43,6 +44,8 @@ const RequireSign = () => (
 );
 
 const ToursCustomBooking = () => {
+    const navigate = useNavigate();
+
     const [form, setForm] = useState({
         customer_type: "",
         name: "",
@@ -190,16 +193,16 @@ const ToursCustomBooking = () => {
             axios
                 .post("/api/tour-applications", e.target)
                 .then((res) => {
-                    Swal.fire({
-                        title: "Good job!",
-                        text: "Application submitted successfully",
-                        icon: "success",
+                    navigate("/", {
+                        state: {
+                            from: { pathname: location.pathname },
+                        },
                     });
                 })
                 .catch((error) => {
                     Swal.fire({
                         title: "Oops!",
-                        text: (error as AxiosError).message,
+                        text: "Error when submitting application",
                         icon: "error",
                     });
                 });

@@ -45,7 +45,7 @@ function ApplyVisa(props: {
         >
             <div className="aside_deco anime1">
                 <img className="imgGriddot" src={imgGriddot} alt={imgGriddot} />
-                <div className="lineartext">APPLY FOR YOUR VISA TODAY !</div>
+                {/* <div className="lineartext">APPLY FOR YOUR VISA TODAY !</div> */}
             </div>
 
             <img

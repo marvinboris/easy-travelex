@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import moment from "moment";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import imgUserCard from "../assets/images/svg/user-card.svg";
@@ -44,6 +44,7 @@ const RequireSign = () => (
 
 const VisasApplication = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const state = location.state as ModelVisa | null;
 
     const [form, setForm] = useState({
@@ -131,16 +132,17 @@ const VisasApplication = () => {
             axios
                 .post("/api/visa-applications", e.target)
                 .then((res) => {
-                    Swal.fire({
-                        title: "Good job!",
-                        text: "Application submitted successfully",
-                        icon: "success",
+                    navigate("/", {
+                        state: {
+                            from: { pathname: location.pathname },
+                            data: state,
+                        },
                     });
                 })
                 .catch((error) => {
                     Swal.fire({
                         title: "Oops!",
-                        text: "Please fill all required fields",
+                        text: "Error when submitting application",
                         icon: "error",
                     });
                 });
@@ -153,6 +155,8 @@ const VisasApplication = () => {
     };
 
     useEffect(() => {
+        if (!state) navigate("/visas");
+
         const phone = document.querySelector("#phone") as HTMLInputElement;
         const nationality = document.querySelector(
             "#nationality"

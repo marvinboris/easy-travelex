@@ -1,7 +1,9 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import SplitType from "split-type";
+import Swal from "sweetalert2";
 
 import Carousel from "../Components/frontend/carousel";
 import ApplyVisa from "../Components/frontend/apply-visa";
@@ -13,9 +15,17 @@ import RelocationSection from "../Components/frontend/relocation-section";
 import Achievements from "../Components/frontend/achievements";
 import ContactSection from "../Components/frontend/contact-section";
 
+import { ModelTour, ModelVisa } from "@/types";
+
 gsap.registerPlugin(ScrollTrigger);
 
 const Welcome = () => {
+    const location = useLocation();
+    const state = location.state as {
+        from: { pathname: string };
+        data?: ModelVisa | ModelTour;
+    } | null;
+
     useEffect(() => {
         let revelElms = gsap.utils.toArray(".revelElm");
         console.log({ revelElms });
@@ -180,6 +190,34 @@ const Welcome = () => {
             box?.removeEventListener("mouseleave", () => {});
         };
     }, []);
+
+    useEffect(() => {
+        if (state) {
+            const { from, data } = state;
+            if (from.pathname.startsWith("/visa-applications/"))
+                Swal.fire({
+                    title: "Good job!",
+                    text:
+                        "Visa application submitted successfully - " +
+                        data?.title,
+                    icon: "success",
+                });
+            else if (from.pathname.startsWith("/tour-applications/"))
+                Swal.fire({
+                    title: "Good job!",
+                    text:
+                        "Tour application submitted successfully - " +
+                        data?.title,
+                    icon: "success",
+                });
+            else if (from.pathname === "/compose-tour")
+                Swal.fire({
+                    title: "Good job!",
+                    text: "Composed tour application submitted successfully",
+                    icon: "success",
+                });
+        }
+    }, [state]);
 
     return (
         <>

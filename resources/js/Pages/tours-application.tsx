@@ -41,9 +41,8 @@ const RequireSign = () => (
 
 const ToursApplication = () => {
     const location = useLocation();
-    const state = location.state as ModelTour | null;
-
     const navigate = useNavigate();
+    const state = location.state as ModelTour | null;
 
     const [form, setForm] = useState({
         customer_type: "",
@@ -99,16 +98,17 @@ const ToursApplication = () => {
             axios
                 .post("/api/tour-applications", e.target)
                 .then((res) => {
-                    Swal.fire({
-                        title: "Good job!",
-                        text: "Application submitted successfully",
-                        icon: "success",
+                    navigate("/", {
+                        state: {
+                            from: { pathname: location.pathname },
+                            data: state,
+                        },
                     });
                 })
                 .catch((error) => {
                     Swal.fire({
                         title: "Oops!",
-                        text: (error as AxiosError).message,
+                        text: "Error when submitting application",
                         icon: "error",
                     });
                 });

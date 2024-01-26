@@ -95,7 +95,7 @@ export function Table({
                 </div>
             </header>
 
-            <div className="w-full overflow-auto no-scrollbar">
+            <div className="w-full">
                 <table className="w-full text-sm">
                     <thead className="relative z-0">
                         <div className="absolute bg-gray-100 rounded-lg -z-10 inset-0" />
@@ -136,7 +136,7 @@ export function Table({
                                                 : {}
                                         }
                                     >
-                                        <div className="line-clamp-2">
+                                        <div className="">
                                             {
                                                 (
                                                     item as {
