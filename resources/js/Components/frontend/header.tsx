@@ -16,17 +16,17 @@ const navItems = [
 ];
 
 const Header = () => {
-    const [menuIsActive, setmenuIsActive] = useState(false);
+    const [menuIsActive, setMenuIsActive] = useState(false);
 
     const handleMenu = () => {
-        setmenuIsActive(!menuIsActive);
+        setMenuIsActive(!menuIsActive);
     };
 
     const window_Width = window.innerWidth;
 
     window.onresize = () => {
         if (window.innerWidth > 1000) {
-            setmenuIsActive(false);
+            setMenuIsActive(false);
         }
     };
 
@@ -67,10 +67,7 @@ const Header = () => {
     return (
         <header className="header">
             {window_Width <= 1000 && (
-                <MobileNav
-                    navItems={navItems}
-                    menuIsActive={menuIsActive}
-                ></MobileNav>
+                <MobileNav navItems={navItems} menuIsActive={menuIsActive} setMenuIsActive={setMenuIsActive} />
             )}
 
             <div className="struct_header">
@@ -85,11 +82,11 @@ const Header = () => {
                     <NavLink
                         to={"/visasapplication"}
                         className={"GoTo-visasapplication"}
-                    ></NavLink>
+                    />
                     <NavLink
                         to={"/toursapplication"}
                         className={"GoTo-toursapplication"}
-                    ></NavLink>
+                    />
                 </div>
 
                 <div className="other">
@@ -107,7 +104,7 @@ const Header = () => {
                                                     {item.label}
                                                 </span>
                                                 <span className="design">
-                                                    <div className="carret"></div>
+                                                    <div className="carret" />
                                                 </span>
                                             </NavLink>
                                         </li>
@@ -123,7 +120,7 @@ const Header = () => {
                                                     {item.label}
                                                 </span>
                                                 <span className="design">
-                                                    <div className="carret"></div>
+                                                    <div className="carret" />
                                                 </span>
                                             </NavLink>
                                         </li>
@@ -134,7 +131,7 @@ const Header = () => {
                     </nav>
 
                     <NavLink to={"/visas"} className="btn_marg">
-                        <Boutons text="Apply visa" isIcon></Boutons>
+                        <Boutons text="Apply visa" isIcon />
                     </NavLink>
 
                     <div
@@ -142,10 +139,10 @@ const Header = () => {
                         onClick={handleMenu}
                         className="btn_menu"
                     >
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                        <span />
+                        <span />
+                        <span />
+                        <span />
                     </div>
                 </div>
             </div>

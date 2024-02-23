@@ -23,48 +23,48 @@ Route::prefix('auth')->name('auth.')->group(function () {
 });
 
 Route::namespace('User')->prefix('user')->name('user.')->group(function () {
-    //     Route::middleware('auth:api')->group(function () {
-    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::middleware('auth:api')->group(function () {
+        Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 
-    // Route::middleware('permission')->group(function () {
-    Route::prefix('features')->name('features.')->group(function () {
-        Route::get('{feature}', 'FeatureController@show')->name('show');
+        Route::middleware('permission')->group(function () {
+            Route::prefix('features')->name('features.')->group(function () {
+                Route::get('{feature}', 'FeatureController@show')->name('show');
+            });
+
+            Route::prefix('languages')->name('languages.')->group(function () {
+                Route::get('{language}', 'LanguageController@show')->name('show');
+            });
+
+            Route::prefix('roles')->name('roles.')->group(function () {
+                Route::get('info', 'RoleController@info')->name('info');
+                Route::get('{role}', 'RoleController@show')->name('show');
+            });
+
+            Route::prefix('users')->name('users.')->group(function () {
+                Route::get('info', 'UserController@info')->name('info');
+                Route::get('{user}', 'UserController@show')->name('show');
+            });
+
+            Route::prefix('visa-applications')->name('visa-applications.')->group(function () {
+                Route::get('info', 'VisaApplicationController@info')->name('info');
+                Route::get('{visaApplication}', 'VisaApplicationController@show')->name('show');
+            });
+
+            Route::prefix('tour-applications')->name('tour-applications.')->group(function () {
+                Route::get('info', 'TourApplicationController@info')->name('info');
+                Route::get('{tourApplication}', 'TourApplicationController@show')->name('show');
+            });
+
+            Route::apiResources([
+                'users' => 'UserController',
+                'roles' => 'RoleController',
+                'features' => 'FeatureController',
+                'languages' => 'LanguageController',
+                'visa-applications' => 'VisaApplicationController',
+                'tour-applications' => 'TourApplicationController',
+            ]);
+        });
     });
-
-    Route::prefix('languages')->name('languages.')->group(function () {
-        Route::get('{language}', 'LanguageController@show')->name('show');
-    });
-
-    Route::prefix('roles')->name('roles.')->group(function () {
-        Route::get('info', 'RoleController@info')->name('info');
-        Route::get('{role}', 'RoleController@show')->name('show');
-    });
-
-    Route::prefix('users')->name('users.')->group(function () {
-        Route::get('info', 'UserController@info')->name('info');
-        Route::get('{user}', 'UserController@show')->name('show');
-    });
-
-    Route::prefix('visa-applications')->name('visa-applications.')->group(function () {
-        Route::get('info', 'VisaApplicationController@info')->name('info');
-        Route::get('{visaApplication}', 'VisaApplicationController@show')->name('show');
-    });
-
-    Route::prefix('tour-applications')->name('tour-applications.')->group(function () {
-        Route::get('info', 'TourApplicationController@info')->name('info');
-        Route::get('{tourApplication}', 'TourApplicationController@show')->name('show');
-    });
-
-    Route::apiResources([
-        'users' => 'UserController',
-        'roles' => 'RoleController',
-        'features' => 'FeatureController',
-        'languages' => 'LanguageController',
-        'visa-applications' => 'VisaApplicationController',
-        'tour-applications' => 'TourApplicationController',
-    ]);
-    // });
-    //     });
 });
 
 Route::middleware('auth:admin,api')->group(function () {

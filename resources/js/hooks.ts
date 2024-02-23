@@ -1,4 +1,7 @@
 import { useLayoutEffect, useState } from "react";
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+
+import type { AppDispatch, AppState } from './store'
 
 export const useWindowSize = () => {
     const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
@@ -20,3 +23,9 @@ export const useWindowSize = () => {
 
     return windowSize;
 };
+
+
+// Use throughout your app instead of plain `useDispatch` and `useSelector`
+export const useAppDispatch = () => useDispatch<AppDispatch>()
+
+export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector

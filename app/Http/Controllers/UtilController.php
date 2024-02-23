@@ -130,9 +130,9 @@ class UtilController extends Controller
         $value = json_decode($value, true);
 
         foreach (Language::all() as $language) {
-            if (!array_key_exists($language->abbr, $value)) 
-            $value[$language->abbr] = 
-            $value[env('VITE_DEFAULT_LANG', 'fr')];
+            if (!array_key_exists($language->abbr, $value))
+                $value[$language->abbr] =
+                    $value[env('VITE_DEFAULT_LANG', 'fr')];
         }
 
         return $value;
@@ -158,7 +158,7 @@ class UtilController extends Controller
 
         $data = array_merge($account->toArray(), [
             'notifications' => $account->notifications()->latest()->limit(5)->get(),
-            'language' => $account->language->abbr
+            // 'language' => $account->language->abbr
         ]);
 
         if ($type === User::type()) {
@@ -213,7 +213,7 @@ class UtilController extends Controller
 
         $data = array_merge($account->toArray(), [
             'notifications' => $account->notifications()->latest()->limit(5)->get(),
-            'language' => $account->language->abbr
+            // 'language' => $account->language->abbr
         ]);
         if ($type === User::type()) {
             $role = $account->role;

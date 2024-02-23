@@ -102,4 +102,12 @@ body {
             monospace;
     }
 
+    select {
+        /* for Firefox */
+        -moz-appearance: none;
+        /* for Chrome */
+        -webkit-appearance: none;
+        appearance: none;
+        background-image: none;
+    }
 }

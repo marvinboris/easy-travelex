@@ -36,7 +36,7 @@ function Carousel() {
 
         function showNextImage() {
             images.forEach((image, index) => {
-                console.log("image", image);
+                // console.log("image", image);
                 image.classList.remove("active");
             });
             currentIndex = (currentIndex + 1) % images.length; // Passage à l'image suivante (en boucle)

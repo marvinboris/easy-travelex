@@ -50,7 +50,7 @@ class AuthController extends Controller
 
         $data = array_merge($user->toArray(), [
             'notifications' => $user->notifications()->latest()->limit(5)->get(),
-            'language' => $user->language->abbr
+            // 'language' => $user->language->abbr
         ]);
 
         $role = $user->role;

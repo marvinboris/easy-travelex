@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            RoleSeeder::class,
+            FeatureSeeder::class,
+            UserSeeder::class,
             VisaSeeder::class,
             TourSeeder::class,
         ]);

@@ -7,7 +7,8 @@ import twitter from "../../assets/images/svg/twitter.svg";
 
 const MobileNav = (props: {
     navItems: { path: string; label: string }[];
-    menuIsActive?: boolean;
+    menuIsActive: boolean;
+    setMenuIsActive: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
     return (
         <nav
@@ -18,7 +19,11 @@ const MobileNav = (props: {
             <ul>
                 {props.navItems.map((item, index) => (
                     <li key={index}>
-                        <Link to={item.path} className={`link`}>
+                        <Link
+                            to={item.path}
+                            onClick={() => props.setMenuIsActive(false)}
+                            className={`link`}
+                        >
                             <span className="value">
                                 {item.label === "Tours Packages"
                                     ? "Tours"

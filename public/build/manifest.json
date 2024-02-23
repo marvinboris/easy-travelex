@@ -1,12 +1,11 @@
 {
   "resources/js/app.css": {
-    "file": "assets/app-c6a3e695.css",
+    "file": "assets/app-30e6a945.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.tsx": {
     "assets": [
       "assets/logo-e0863bbd.png",
-      "assets/profile-82bc582c.jpg",
       "assets/arrow-right-6aaebe93.svg",
       "assets/facebook-cce453af.svg",
       "assets/linkedin-2abfd2cb.svg",
@@ -64,9 +63,9 @@
       "assets/flags@2x-9bd00899.png"
     ],
     "css": [
-      "assets/app-c6a3e695.css"
+      "assets/app-30e6a945.css"
     ],
-    "file": "assets/app-7c6a2fbe.js",
+    "file": "assets/app-7e4686e3.js",
     "isEntry": true,
     "src": "resources/js/app.tsx"
   },
@@ -137,10 +136,6 @@
   "resources/js/assets/images/logo.png": {
     "file": "assets/logo-e0863bbd.png",
     "src": "resources/js/assets/images/logo.png"
-  },
-  "resources/js/assets/images/profile.jpg": {
-    "file": "assets/profile-82bc582c.jpg",
-    "src": "resources/js/assets/images/profile.jpg"
   },
   "resources/js/assets/images/profiles/profile1.png": {
     "file": "assets/profile1-0fd71ea0.png",

@@ -1,4 +1,6 @@
+import { Menu, Transition } from "@headlessui/react";
 import axios from "axios";
+import { ArrowCircleDown2 } from "iconsax-react";
 import moment from "moment";
 import { useEffect, useState } from "react";
 
@@ -6,8 +8,6 @@ import { Table } from "../../Components/Backend/table";
 
 import { ModelVisaApplication } from "@/types/models/visa-application";
 import Status from "@/Components/Backend/status";
-import { Menu, Transition } from "@headlessui/react";
-import { ArrowCircleDown2 } from "iconsax-react";
 
 export default function UserVisas() {
     const [visas, setVisas] = useState<ModelVisaApplication[]>([]);

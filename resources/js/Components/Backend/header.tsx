@@ -1,11 +1,15 @@
 import { Home, Menu } from "iconsax-react";
 
-import imgProfile from "../../assets/images/profile.jpg";
-
 import { useBackendContext } from "@/Layouts/backend/context";
+import { useAppSelector } from "@/hooks";
+import { selectAuth } from "@/features/auth/authSlice";
+import { useLocation } from "react-router-dom";
 
 export default function Header() {
     const { setMenuOpen } = useBackendContext();
+    const location = useLocation();
+
+    const auth = useAppSelector(selectAuth);
 
     return (
         <div className="header">
@@ -19,7 +23,18 @@ export default function Header() {
                     <div className="flex gap-2">
                         <Home className="size-6 flex-none text-[#5A657D]" />
                         <div className="title">
-                            <span>Home /</span> Dashboard
+                            <span>Home /</span>{" "}
+                            {
+                                {
+                                    "/admin": "Dashboard",
+                                    "/admin/": "Dashboard",
+                                    "/admin/visas": "Visa applications",
+                                    "/admin/tours": "Tours",
+                                    "/admin/car-rentals": "Car rentals",
+                                    "/admin/customer-file": "Customer file",
+                                    "/admin/settings": "Settings",
+                                }[location.pathname]
+                            }
                         </div>
                     </div>
                 </div>
@@ -144,8 +159,8 @@ export default function Header() {
                     <div className="separator" />
                     <div className="profile">
                         <div className="info !hidden md:!block">
-                            <div className="name">Easy Travelex LLC</div>
-                            <div className="email">demo34@gmail.com</div>
+                            <div className="name">{auth.data?.name}</div>
+                            <div className="email">{auth.data?.email}</div>
                         </div>
 
                         <div className="profile_pic">
@@ -195,7 +210,7 @@ export default function Header() {
                                     </defs>
                                 </svg>
 
-                                <img src={imgProfile} alt="" />
+                                <img src={auth.data?.photo} alt="" />
                             </div>
                         </div>
                     </div>

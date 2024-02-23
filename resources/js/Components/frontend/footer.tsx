@@ -100,7 +100,7 @@ function Footer() {
                             </a>
 
                             <a
-                                href="tel:+971506001298"
+                                href="tel:+971544895672"
                                 className="contact_item"
                             >
                                 <div className="ico">
@@ -119,7 +119,55 @@ function Footer() {
                                         />
                                     </svg>
                                 </div>
-                                <div className="value">+971 50 600 1298</div>
+                                <div className="value">+971 54 489 5672</div>
+                            </a>
+
+                            <a
+                                href="tel:+971553733678"
+                                className="contact_item"
+                            >
+                                <div className="ico">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width={20}
+                                        height={20}
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                    ></svg>
+                                </div>
+                                <div className="value">+971 55 373 3678</div>
+                            </a>
+
+                            <a
+                                href="tel:+971557617301"
+                                className="contact_item"
+                            >
+                                <div className="ico">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width={20}
+                                        height={20}
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                    ></svg>
+                                </div>
+                                <div className="value">+971 55 761 7301</div>
+                            </a>
+
+                            <a
+                                href="tel:+971556974097"
+                                className="contact_item"
+                            >
+                                <div className="ico">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width={20}
+                                        height={20}
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                    ></svg>
+                                </div>
+                                <div className="value">+971 55 697 4097</div>
                             </a>
                         </div>
                         <div className="margin_contain"></div>

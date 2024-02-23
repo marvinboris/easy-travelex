@@ -11,6 +11,8 @@ import {
 import { Bar } from "react-chartjs-2";
 
 import GeneralStats from "@/Components/Backend/general-stats";
+import { useMemo } from "react";
+import { useWindowSize } from "@/hooks";
 
 ChartJS.register(
     CategoryScale,
@@ -53,7 +55,12 @@ export const data = {
 };
 
 export default function UserDashboard() {
-    console.log("Height:", window.innerHeight);
+    const { width, height } = useWindowSize();
+
+    const chart = useMemo(
+        () => <Bar key={width + "-" + height} options={options} data={data} />,
+        [width, height]
+    );
 
     return (
         <>
@@ -174,7 +181,7 @@ export default function UserDashboard() {
                             </div>
                         </div>
 
-                        <div className="flex_container_chart flex-1 flex-col md:flex-row !items-stretch md:!items-center">
+                        <div className="flex_container_chart flex-1 flex-col gap-3 md:flex-row !items-stretch md:!items-center">
                             <div className="chart_resume">
                                 <div className="title">
                                     Total Completed visas
@@ -187,9 +194,7 @@ export default function UserDashboard() {
                                 </div>
                             </div>
 
-                            <div className="chart flex-1 !w-full md:!w-3/5">
-                                <Bar options={options} data={data} />
-                            </div>
+                            <div className="chart flex-1">{chart}</div>
                         </div>
                     </div>
                 </div>

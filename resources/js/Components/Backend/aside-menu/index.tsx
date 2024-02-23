@@ -2,8 +2,6 @@ import { Transition } from "@headlessui/react";
 import { useRef, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-import imgLogo from "../../../assets/images/logo.png";
-
 import CarRentals from "./nav-items/car-rentals";
 import CustomerFile from "./nav-items/customer-file";
 import Dashboard from "./nav-items/dashboard";
@@ -11,6 +9,7 @@ import Tours from "./nav-items/tours";
 import VisaApplications from "./nav-items/visa-applications";
 import WebSettings from "./nav-items/web-settings";
 
+import Logo from "@/Components/ui/logo";
 import { useWindowSize } from "@/hooks";
 import { useBackendContext } from "@/Layouts/backend/context";
 
@@ -69,10 +68,7 @@ export default function AsideMenu() {
 
             <aside className="aside_menu fixed z-30 md:static">
                 <div className="aside_menu__struct">
-                    <div className="logo">
-                        {" "}
-                        <img src={imgLogo} alt="" />
-                    </div>
+                    <Logo />
 
                     <div className="menu">
                         <Dashboard />
