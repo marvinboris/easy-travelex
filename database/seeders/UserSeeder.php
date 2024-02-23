@@ -27,9 +27,9 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Easy Travelex',
-                'email' => 'contact@easytravelexgroup.com',
-                'phone' => '237671717171',
-                'password' => Hash::make('12345'),
+                'email' => 'easytravelexgroup@gmail.com',
+                'phone' => '237671620528',
+                'password' => Hash::make('Easy@123'),
                 'role_id' => Role::first()->id,
                 // 'language_id' => 1,
             ],
