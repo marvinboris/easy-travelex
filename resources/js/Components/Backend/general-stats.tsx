@@ -46,7 +46,7 @@ export default function GeneralStats() {
                 customers: number;
                 expenses: number;
                 income: number;
-            }>("/api/dashboard")
+            }>("/api/user/dashboard")
             .then((res) => {
                 setStats(res.data);
                 setLoading(false);

@@ -53,7 +53,7 @@ const Welcome = () => {
             });
 
             gsap.from(
-                ".text_carousel h4 .word,.text_carousel h4,.text_carousel h1 .word,.text_carousel p,.text_carousel .tags_destinations *,.text_carousel .intro_actions .btn,.text_carousel .intro_actions .btn_video_contain,.text_carousel .contain_card, .contain_card .bar",
+                ".text_carousel h4 .word,.text_carousel h4,.text_carousel h1 .word,.text_carousel p,.text_carousel .tags_destinations *,.text_carousel .intro_actions ._btn,.text_carousel .intro_actions .btn_video_contain,.text_carousel .contain_card, .contain_card .bar",
                 {
                     opacity: 0,
                     y: 150,

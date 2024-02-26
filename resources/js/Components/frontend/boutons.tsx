@@ -12,7 +12,7 @@ const Boutons = ({
     isNice?: boolean;
 }) => {
     return (
-        <button className={`btn ${isNice ? "btn_nice" : ""}`}>
+        <button className={`_btn ${isNice ? "btn_nice" : ""}`}>
             <span>{text}</span>
             {isIcon ? <img src={arrowRight} alt={arrowRight} /> : ""}
             <div className={`hoverlay`}></div>

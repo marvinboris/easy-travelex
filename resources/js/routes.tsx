@@ -52,9 +52,14 @@ export default function AppRoutes() {
                     {/* <Route path="/admin/compose-tour" element={<ToursCustomBooking />} /> */}
                     <Route index path="/admin" element={<UserDashboard />} />
                 </Route>
-            ) : (
-                <Route path="/login" element={<AuthUserLoginPage />} />
-            )}
+            ) : null}
+
+            <Route
+                path="/login"
+                element={
+                    token ? <Navigate to="/admin" /> : <AuthUserLoginPage />
+                }
+            />
 
             <Route path="/" element={<FrontendLayout />}>
                 <Route path="/visas" element={<Visas />} />
