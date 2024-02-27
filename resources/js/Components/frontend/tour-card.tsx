@@ -84,8 +84,7 @@ function TourCard(props: ModelTour) {
                             <div className="text">
                                 <span className="t1">
                                     {" "}
-                                    {props.processing_period_start} -{" "}
-                                    {props.processing_period_end} Days
+                                    {props.processing_period_start} Hours
                                 </span>
                                 <span className="t2">Processing period</span>
                             </div>

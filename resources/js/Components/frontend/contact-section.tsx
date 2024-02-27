@@ -57,14 +57,14 @@ function ContactSection() {
                                                     WhatsApp
                                                 </div>
                                                 <div className="channel_text__value">
-                                                    +971 50 829 1203
+                                                    +971 54 489 5672
                                                 </div>
                                             </div>
                                         </div>
 
                                         <Link
                                             className="btn_channel"
-                                            to={"https://wa.me/+971508291203"}
+                                            to={"https://wa.me/+971544895672"}
                                         >
                                             Chat with us
                                         </Link>
@@ -112,7 +112,7 @@ function ContactSection() {
                                                     Call now
                                                 </div>
                                                 <div className="channel_text__value">
-                                                    +971 50 829 1203
+                                                    +971 56 558 6512
                                                 </div>
                                             </div>
                                         </div>
@@ -150,13 +150,13 @@ function ContactSection() {
                                                     Telegram
                                                 </div>
                                                 <div className="channel_text__value">
-                                                    +971 50 829 1203
+                                                    +971 54 489 5672
                                                 </div>
                                             </div>
                                         </div>
 
                                         <Link
-                                            to={"https://t.me/+971508291203"}
+                                            to={"https://t.me/+971544895672"}
                                             className="btn_channel"
                                         >
                                             Chat with us
@@ -198,13 +198,13 @@ function ContactSection() {
                                                     Skype
                                                 </div>
                                                 <div className="channel_text__value">
-                                                    easy.travelex22
+                                                    easytravelex.group
                                                 </div>
                                             </div>
                                         </div>
 
                                         <Link
-                                            to={"callto:+971508291203"}
+                                            to={"callto:+971544895672"}
                                             className="btn_channel"
                                         >
                                             Video Call

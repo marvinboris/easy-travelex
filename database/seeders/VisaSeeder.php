@@ -15,22 +15,22 @@ class VisaSeeder extends Seeder
     {
         $data = [
             [
-                'duration' => 14,
+                'duration' => 30,
                 'photo' => 'caroussel4.webp',
                 'country' => 'United Arab Emirates (‫الإمارات العربية المتحدة‬‎)',
-                'title' => '14 Days  visa + insurance to Dubai - UAE',
+                'title' => '30 Days  visa + insurance to Dubai - UAE',
                 'description' => 'This visa gives you 14 days access in the whole UAE. It comes with insurance. Enjoy your stay and leave before your visa expires.',
-                'amount' => 130,
+                'amount' => 140,
                 'processing_period_start' => 4,
                 'processing_period_end' => 5,
             ],
             [
-                'duration' => 30,
+                'duration' => 60,
                 'photo' => 'caroussel2.webp',
                 'country' => 'United Arab Emirates (‫الإمارات العربية المتحدة‬‎)',
-                'title' => '30 Days  visa + insurance to Dubai - UAE',
+                'title' => '60 Days  visa + insurance to Dubai - UAE',
                 'description' => 'This visa gives you 30 days access in the whole UAE. It comes with insurance. Enjoy your stay and leave before your visa expires.',
-                'amount' => 240,
+                'amount' => 250,
                 'processing_period_start' => 4,
                 'processing_period_end' => 7,
             ],

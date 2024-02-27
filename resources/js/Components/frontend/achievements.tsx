@@ -37,7 +37,7 @@ function Achievements() {
                             help businesses thrive in the digital age.
                         </p>
 
-                        <Link to={"/contacts"} className="space_btn">
+                        <Link to={"/contacts"} className="space_btn inline-block">
                             <Boutons
                                 text="Contact us"
                                 isNice={true}

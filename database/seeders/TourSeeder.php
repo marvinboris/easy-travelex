@@ -21,9 +21,9 @@ class TourSeeder extends Seeder
                 'photo' => 'caroussel4.webp',
                 'title' => 'Easy Travelex Basic',
                 'description' => 'If you are looking for a way to spend your time in the best of ways with a limited budget, this plan gives you access to what you need.',
-                'amount' => 1400,
-                'processing_period_start' => 4,
-                'processing_period_end' => 5,
+                'amount' => 600,
+                'processing_period_start' => 12,
+                'processing_period_end' => 12,
             ],
             [
                 'duration' => 5,
@@ -32,9 +32,9 @@ class TourSeeder extends Seeder
                 'photo' => 'caroussel2.webp',
                 'title' => 'Easy Travelex Plus',
                 'description' => 'If you are looking for a way to spend your time in the best of ways with a limited budget, this plan gives you access to what you need.',
-                'amount' => 2500,
-                'processing_period_start' => 4,
-                'processing_period_end' => 7,
+                'amount' => 1000,
+                'processing_period_start' => 12,
+                'processing_period_end' => 12,
             ],
             [
                 'duration' => 7,
@@ -43,9 +43,9 @@ class TourSeeder extends Seeder
                 'photo' => 'caroussel3.webp',
                 'title' => 'Easy Travelex Pro',
                 'description' => 'If you are looking for a way to spend your time in the best of ways with a limited budget, this plan gives you access to what you need.',
-                'amount' => 3500,
-                'processing_period_start' => 6,
-                'processing_period_end' => 10,
+                'amount' => 2000,
+                'processing_period_start' => 12,
+                'processing_period_end' => 12,
             ],
         ];
 

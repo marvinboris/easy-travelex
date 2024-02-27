@@ -1,6 +1,6 @@
 {
   "resources/js/app.css": {
-    "file": "assets/app-245179fb.css",
+    "file": "assets/app-bb76d3a7.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.tsx": {
@@ -63,9 +63,9 @@
       "assets/flags@2x-9bd00899.png"
     ],
     "css": [
-      "assets/app-245179fb.css"
+      "assets/app-bb76d3a7.css"
     ],
-    "file": "assets/app-971d3b7d.js",
+    "file": "assets/app-59542de7.js",
     "isEntry": true,
     "src": "resources/js/app.tsx"
   },

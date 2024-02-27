@@ -71,10 +71,10 @@ function Footer() {
                     </div>
 
                     <div className="footer_item footer_itel_margin">
-                        <div className="footer_item__title">Contacts us</div>
+                        <div className="footer_item__title">Contact us</div>
                         <div className="contacts">
                             <a
-                                href="mailto:contact@easytravelex.ae"
+                                href="mailto:easytravelexgroup@outlook.com"
                                 className="contact_item"
                             >
                                 <div className="ico">
@@ -95,7 +95,26 @@ function Footer() {
                                 </div>
                                 <div className="value">
                                     {" "}
-                                    contact@easytravelex.ae
+                                    easytravelexgroup@outlook.com
+                                </div>
+                            </a>
+
+                            <a
+                                href="mailto:contact@easytravelexgroup.com"
+                                className="contact_item"
+                            >
+                                <div className="ico">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width={20}
+                                        height={20}
+                                        viewBox="0 0 20 20"
+                                        fill="none"
+                                    ></svg>
+                                </div>
+                                <div className="value">
+                                    {" "}
+                                    contact@easytravelexgroup.com
                                 </div>
                             </a>
 
