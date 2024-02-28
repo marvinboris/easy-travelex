@@ -176,7 +176,7 @@ function RelocationSection() {
             <div className="relocation_loader_container">
                 <div className="container_item">
                     <div className="descr">
-                        Imagine arriving in Duabi, where you won't have to worry{" "}
+                        Imagine arriving in Dubai, where you won't have to worry{" "}
                         <strong>
                             about rend or any expenses except for food.
                         </strong>{" "}

@@ -25,6 +25,7 @@
       "assets/relocation1-c915c609.webp",
       "assets/relocation2-89c97a84.jpg",
       "assets/relocation3-df3d1430.jpg",
+      "assets/bigCircleArc-6d706c06.svg",
       "assets/documentimg-4bf7489e.svg",
       "assets/imgico-633a8bef.svg",
       "assets/caroussel2-5dd52451.webp",
@@ -39,7 +40,6 @@
       "assets/image_after-4865c2b8.svg",
       "assets/circle_arc-89d787d7.svg",
       "assets/Arrow-down-4a7a3ccf.svg",
-      "assets/bigCircleArc-6d706c06.svg",
       "assets/redCircle-97f39f8e.svg",
       "assets/tourMessage-2d3373b0.svg",
       "assets/redMap-ce1dc46c.svg",
@@ -65,7 +65,7 @@
     "css": [
       "assets/app-06b66e0c.css"
     ],
-    "file": "assets/app-2e5f9f5a.js",
+    "file": "assets/app-78cda16a.js",
     "isEntry": true,
     "src": "resources/js/app.tsx"
   },

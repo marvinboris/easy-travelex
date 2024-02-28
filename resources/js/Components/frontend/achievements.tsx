@@ -6,12 +6,13 @@ import imgCircleAchievement from "../../assets/images/svg/circleachievement.svg"
 
 import Boutons from "./boutons";
 
-function Achievements() {
+function Achievements({ comingSoon }: { comingSoon?: boolean }) {
     return (
         <section className="section achievements layer_section restSection">
             <div className="struct">
-                <h1 className="widthText ">Coming soon</h1>
-                {/* <h1 className="widthText ">Our achievements</h1> */}
+                <h1 className="widthText ">
+                    {comingSoon ? "Coming soon" : "Our achievements"}
+                </h1>
 
                 <div className="section_container section_container_achievements">
                     <div className="text_group_container">

@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Get Your Dream UAE Visa: Easy & Guaranteed</title>
+    <meta name="description" content="Seize your chance now! Get exclusive access to affordable UAE visas, ensuring your travel dreams come true swiftly.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
