@@ -12,9 +12,9 @@ import imgBtnDesign from "../../assets/images/svg/btnDesign.svg";
 function RelocationSection() {
     function Relocation() {
         const bundle = {
-            basic: "Basic",
-            plus: "Plus",
-            ultra: "Ultra",
+            basic: "Faith Package",
+            plus: "S Plus",
+            ultra: "S Ultra",
         };
 
         const previewRelocation = {
@@ -27,62 +27,68 @@ function RelocationSection() {
             <div className="relocation_loader_container ">
                 <div className="container_item">
                     <div className="descr">
-                        This is a stress free package, that gives you peace of
-                        mind such if you decide otherwise you can easily go back
-                        home.
+                        <strong>
+                            This option is for very serious and committed
+                            individuals
+                        </strong>{" "}
+                        who know they are coming to fight for their future.
+                        After 1 month upon arrival,{" "}
+                        <strong>$150 rent is required.</strong> This has been
+                        the default package since 2018. Many people choose this
+                        option as it is affordable and also because when you get
+                        a job you cannot{" "}
+                        <strong>get a refund of the return ticket.</strong>
                     </div>
 
-                    <ul className="list">
+                    <ul className="list mt-3">
+                        <li>
+                            {" "}
+                            <img src={imgCheckCircle} alt="" />{" "}
+                            <div className="text">One Way Ticket to UAE</div>
+                        </li>
                         <li>
                             {" "}
                             <img src={imgCheckCircle} alt="" />{" "}
                             <div className="text">
-                                Two way ticket with return to your country
+                                60 Days Visa (Extendable)
+                            </div>
+                        </li>
+                        <li>
+                            {" "}
+                            <img src={imgCheckCircle} alt="" />{" "}
+                            <div className="text">Insurance</div>
+                        </li>
+                        <li>
+                            {" "}
+                            <img src={imgCheckCircle} alt="" />{" "}
+                            <div className="text">
+                                Airport Pickup by 4 by 4 SUV Vehicle
                             </div>
                         </li>
                         <li>
                             {" "}
                             <img src={imgCheckCircle} alt="" />{" "}
                             <div className="text">
-                                60 days visa (Extendable)
+                                Loaded Metro and Bus card
                             </div>
                         </li>
                         <li>
                             {" "}
                             <img src={imgCheckCircle} alt="" />{" "}
-                            <div className="text">Insurance provided</div>
+                            <div className="text">1 Day City Tour</div>
                         </li>
                         <li>
                             {" "}
                             <img src={imgCheckCircle} alt="" />{" "}
                             <div className="text">
-                                Airport pick up by SUV 4x4
-                            </div>
-                        </li>
-                        <li>
-                            {" "}
-                            <img src={imgCheckCircle} alt="" />{" "}
-                            <div className="text">Loaded metro & bus card</div>
-                        </li>
-                        <li>
-                            {" "}
-                            <img src={imgCheckCircle} alt="" />{" "}
-                            <div className="text">
-                                One (01) full day of city tour
-                            </div>
-                        </li>
-                        <li>
-                            {" "}
-                            <img src={imgCheckCircle} alt="" />{" "}
-                            <div className="text">
-                                30 days shared accommodation
+                                1 Month shared accommodation
                             </div>
                         </li>
                     </ul>
 
                     <div className="price">
-                        <div className="text" data-after="$1,700 USD">
-                            $1,500 USD
+                        <div className="text" data-after="$1,380 USD">
+                            $1,280 USD
                         </div>
 
                         <div className="price_btn">
@@ -97,62 +103,64 @@ function RelocationSection() {
             <div className="relocation_loader_container">
                 <div className="container_item">
                     <div className="descr">
-                        This is a stress free package, that gives you peace of
-                        mind such if you decide otherwise you can easily go back
-                        home.
+                        <strong>
+                            Enjoy a worry-free experience with our package,
+                        </strong>{" "}
+                        offering you the flexibility to return home with ease{" "}
+                        <strong>if you change your mind</strong>
                     </div>
 
-                    <ul className="list">
+                    <ul className="list mt-3">
                         <li>
                             {" "}
                             <img src={imgCheckCircle} alt="" />{" "}
                             <div className="text">
-                                Two way ticket with return to your country
+                                Two Way Tickets (Return Home)
                             </div>
                         </li>
                         <li>
                             {" "}
                             <img src={imgCheckCircle} alt="" />{" "}
                             <div className="text">
-                                60 days visa (Extendable)
+                                60 Days Visa (Extendable)
                             </div>
                         </li>
                         <li>
                             {" "}
                             <img src={imgCheckCircle} alt="" />{" "}
-                            <div className="text">Insurance provided</div>
+                            <div className="text">Insurance</div>
                         </li>
                         <li>
                             {" "}
                             <img src={imgCheckCircle} alt="" />{" "}
                             <div className="text">
-                                Airport pick up by SUV 4x4
-                            </div>
-                        </li>
-                        <li>
-                            {" "}
-                            <img src={imgCheckCircle} alt="" />{" "}
-                            <div className="text">Loaded metro & bus card</div>
-                        </li>
-                        <li>
-                            {" "}
-                            <img src={imgCheckCircle} alt="" />{" "}
-                            <div className="text">
-                                One (01) full day of city tour
+                                Airport Pickup by 4 by 4 SUV Vehicle
                             </div>
                         </li>
                         <li>
                             {" "}
                             <img src={imgCheckCircle} alt="" />{" "}
                             <div className="text">
-                                30 days shared accommodation
+                                Loaded Metro and Bus Card
+                            </div>
+                        </li>
+                        <li>
+                            {" "}
+                            <img src={imgCheckCircle} alt="" />{" "}
+                            <div className="text">1 Day of City Tour</div>
+                        </li>
+                        <li>
+                            {" "}
+                            <img src={imgCheckCircle} alt="" />{" "}
+                            <div className="text">
+                                1 Month Shared Accommodation
                             </div>
                         </li>
                     </ul>
 
                     <div className="price">
-                        <div className="text" data-after="$5,750 USD">
-                            $5,300 USD
+                        <div className="text" data-after="$1,750 USD">
+                            $1,650 USD
                         </div>
 
                         <div className="price_btn">
@@ -168,62 +176,68 @@ function RelocationSection() {
             <div className="relocation_loader_container">
                 <div className="container_item">
                     <div className="descr">
-                        This is a stress free package, that gives you peace of
-                        mind such if you decide otherwise you can easily go back
-                        home.
+                        Imagine arriving in Duabi, where you won't have to worry{" "}
+                        <strong>
+                            about rend or any expenses except for food.
+                        </strong>{" "}
+                        This refreshing freedom relieves pressure and provides
+                        the perfect environment for pursuing{" "}
+                        <strong>
+                            job opportunities with absolute peace of mind.
+                        </strong>
                     </div>
 
-                    <ul className="list">
+                    <ul className="list mt-3">
                         <li>
                             {" "}
                             <img src={imgCheckCircle} alt="" />{" "}
                             <div className="text">
-                                Two way ticket with return to your country
+                                Two Ways Tickets (Return Home)
                             </div>
                         </li>
                         <li>
                             {" "}
                             <img src={imgCheckCircle} alt="" />{" "}
                             <div className="text">
-                                60 days visa (Extendable)
+                                60 Days Visa (Extendable)
                             </div>
                         </li>
                         <li>
                             {" "}
                             <img src={imgCheckCircle} alt="" />{" "}
-                            <div className="text">Insurance provided</div>
+                            <div className="text">Insurance</div>
                         </li>
                         <li>
                             {" "}
                             <img src={imgCheckCircle} alt="" />{" "}
                             <div className="text">
-                                Airport pick up by SUV 4x4
-                            </div>
-                        </li>
-                        <li>
-                            {" "}
-                            <img src={imgCheckCircle} alt="" />{" "}
-                            <div className="text">Loaded metro & bus card</div>
-                        </li>
-                        <li>
-                            {" "}
-                            <img src={imgCheckCircle} alt="" />{" "}
-                            <div className="text">
-                                One (01) full day of city tour
+                                Airport Pickup by 4 by 4 SUV Vehicle
                             </div>
                         </li>
                         <li>
                             {" "}
                             <img src={imgCheckCircle} alt="" />{" "}
                             <div className="text">
-                                30 days shared accommodation
+                                Loaded Metro and Bus Card
+                            </div>
+                        </li>
+                        <li>
+                            {" "}
+                            <img src={imgCheckCircle} alt="" />{" "}
+                            <div className="text">1 Day City Tour</div>
+                        </li>
+                        <li>
+                            {" "}
+                            <img src={imgCheckCircle} alt="" />{" "}
+                            <div className="text">
+                                2 Months Shared Accommodation
                             </div>
                         </li>
                     </ul>
 
                     <div className="price">
-                        <div className="text" data-after="$61,700 USD">
-                            $542,500 USD
+                        <div className="text" data-after="$1,850 USD">
+                            $1,750 USD
                         </div>
 
                         <div className="price_btn">
@@ -376,7 +390,7 @@ function RelocationSection() {
                                     : ""
                             }`}
                         >
-                            <span>Relocation</span> <span>Basic</span>
+                            <span>Relocation</span> <span>Faith Package</span>
                             <img src={imgBtnDesign} alt={imgBtnDesign} />
                         </div>
                         <div
@@ -386,7 +400,7 @@ function RelocationSection() {
                                 relocationBundle === bundle.plus ? "active" : ""
                             }`}
                         >
-                            <span>Relocation</span> <span>Plus</span>{" "}
+                            <span>Relocation</span> <span>S Plus</span>{" "}
                             <img src={imgBtnDesign} alt={imgBtnDesign} />
                         </div>
                         <div
@@ -398,7 +412,7 @@ function RelocationSection() {
                                     : ""
                             }`}
                         >
-                            <span>Relocation</span> <span>Ultra</span>{" "}
+                            <span>Relocation</span> <span>S Ultra</span>{" "}
                             <img src={imgBtnDesign} alt={imgBtnDesign} />
                         </div>
                     </div>
@@ -436,7 +450,7 @@ function RelocationSection() {
                     <div className="header_title_shadow ">Relocations</div>
                 </div>
 
-                <Relocation></Relocation>
+                <Relocation />
             </div>
         </div>
     );

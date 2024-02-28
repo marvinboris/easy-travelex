@@ -48,15 +48,15 @@ function Witness() {
                 <div className="witness_container">
                     <WitnessItem
                         image={imgProfile1}
-                        name={"Stephy James"}
-                        title={"Manager - USA"}
-                        description="If you are looking further, then you will miss something huge. Try Guide in Dubai please. "
+                        name={"Mcdy Pfendel"}
+                        title={"Happy customer"}
+                        description="Efficient and reliable agency. I highly recommend this one."
                     ></WitnessItem>
                     <WitnessItem
                         image={imgProfile2}
-                        name={"Jaenning Felicia"}
-                        title={"Founder - UAE"}
-                        description="If you are looking further, then you will miss something huge. Try Guide in Dubai please. "
+                        name={"Maranatha Jongwe"}
+                        title={"Happy customer"}
+                        description="Thumbs up to Easytravelex! The level of professionalism and efficiency is unparalleled. I got my visa before I exited Dubai... There are the best"
                     ></WitnessItem>
                     <WitnessItem
                         image={imgProfile3}

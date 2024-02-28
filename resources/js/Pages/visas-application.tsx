@@ -86,15 +86,15 @@ const VisasApplication = () => {
         selectorEl: string
     ) => {
         e.stopPropagation();
-        let picImg = document.querySelector(selectorEl) as HTMLImageElement;
+        const picImg = document.querySelector(selectorEl) as HTMLImageElement;
         if (picImg) {
-            let file = (
+            const file = (
                 e.target as
                     | (EventTarget & { files: FileList | null })
                     | undefined
             )?.files?.[0];
             if (file) {
-                let src = URL.createObjectURL(file);
+                const src = URL.createObjectURL(file);
                 picImg.src = src;
                 picImg.classList.add("active");
             }
@@ -106,10 +106,8 @@ const VisasApplication = () => {
         e: ChangeEvent<HTMLInputElement>,
         selectorEl: string
     ) => {
-        console.log("e,selectorEl", e, selectorEl);
         e.stopPropagation();
         const element = document.querySelector(selectorEl);
-        console.log("element----", element);
         if (element) {
             const file = (
                 e.target as
@@ -117,9 +115,8 @@ const VisasApplication = () => {
                     | undefined
             )?.files?.[0];
             if (file) {
-                const TempName = file.name;
-                console.log("TempName", TempName);
-                element.textContent = TempName;
+                const tempName = file.name;
+                element.textContent = tempName;
                 element.classList.add("active");
             }
             handleChange(e);
@@ -366,10 +363,10 @@ const VisasApplication = () => {
                                                     >
                                                         <option value=""></option>
                                                         <option value="Inside customer">
-                                                            I am 18+ years
+                                                            I am 18- years
                                                         </option>
                                                         <option value="Outside customer">
-                                                            I am 21+ years
+                                                            I am 18+ years
                                                         </option>
                                                     </select>
                                                 </div>
@@ -569,9 +566,11 @@ const VisasApplication = () => {
                                                         certificate
                                                     </div>
 
-                                                    <div className="doc_contain docContainName">
-                                                        Pljl
-                                                    </div>
+                                                    <img
+                                                        className="doc_previewImage previewImage"
+                                                        src=""
+                                                        alt=""
+                                                    />
                                                 </div>
                                             </button>
 
@@ -580,6 +579,7 @@ const VisasApplication = () => {
                                                 className="contain_pic_input"
                                                 id="passportImg"
                                                 name="passportImg"
+                                                accept="image/*"
                                                 onChange={(e) =>
                                                     handleChangeInputFileImage(
                                                         e,
@@ -592,6 +592,7 @@ const VisasApplication = () => {
                                                 className="contain_pic_input"
                                                 id="profileImg"
                                                 name="profileImg"
+                                                accept="image/*"
                                                 onChange={(e) =>
                                                     handleChangeInputFileImage(
                                                         e,
@@ -601,14 +602,15 @@ const VisasApplication = () => {
                                             />
                                             <input
                                                 type="file"
-                                                accept="pdf"
                                                 className="contain_pic_input"
                                                 id="doc"
                                                 name="doc"
+                                                accept="image/*"
                                                 onChange={(e) =>
-                                                    handleChangeInputFileDoc(
+                                                    // handleChangeInputFileDoc(
+                                                    handleChangeInputFileImage(
                                                         e,
-                                                        ".doc_contain"
+                                                        ".doc_previewImage"
                                                     )
                                                 }
                                             />

@@ -156,7 +156,7 @@ function ContactSection() {
                                         </div>
 
                                         <Link
-                                            to={"https://t.me/+971544895672"}
+                                            to={"https://t.me/Easytravelex_Dxb"}
                                             className="btn_channel"
                                         >
                                             Chat with us

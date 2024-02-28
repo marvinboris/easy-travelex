@@ -9,13 +9,13 @@ const Visas = () => {
         <>
             <Banner title="Apply for visa" />
             <VisaMenu />
-            <ApplyVisa
+            {/* <ApplyVisa
                 title="Get your visa now !"
                 description="EasyTravelex Agency offers the best and affordable 
 Visas to International Tourists. "
                 bigTitle=""
                 isSectionHeader={true}
-            />
+            /> */}
             <Achievements />
             <ContactSection />
         </>

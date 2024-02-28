@@ -10,7 +10,8 @@ function Achievements() {
     return (
         <section className="section achievements layer_section restSection">
             <div className="struct">
-                <h1 className="widthText ">Our achievements</h1>
+                <h1 className="widthText ">Coming soon</h1>
+                {/* <h1 className="widthText ">Our achievements</h1> */}
 
                 <div className="section_container section_container_achievements">
                     <div className="text_group_container">
@@ -29,15 +30,23 @@ function Achievements() {
                         </div>
 
                         <p className="normal_description">
-                            XYZ Company is a reliable and forward-thinking
-                            technology solutions provider that is committed to
-                            delivering exceptional products and services. With
-                            our vast experience, technical expertise, and
-                            customer-centric approach, we are well-equipped to
-                            help businesses thrive in the digital age.
+                            We excel in delivering exceptional services and
+                            creating tailor-made itineraries that perfectly
+                            align with your preferences. Whether you're seeking
+                            thrilling adventures in the desert, luxurious stays
+                            at iconic hotels, or immersive cultural explorations
+                            in the city, we offer a diverse range of options to
+                            meet your desires. With our team of knowledgeable
+                            guides, comfortable accommodations, and meticulous
+                            arrangements, we ensure that every moment of your
+                            journey is filled with joy and excitement, creating
+                            unforgettable memories along the way.
                         </p>
 
-                        <Link to={"/contacts"} className="space_btn inline-block">
+                        <Link
+                            to={"/contacts"}
+                            className="space_btn inline-block"
+                        >
                             <Boutons
                                 text="Contact us"
                                 isNice={true}

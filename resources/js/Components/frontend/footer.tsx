@@ -74,7 +74,7 @@ function Footer() {
                         <div className="footer_item__title">Contact us</div>
                         <div className="contacts">
                             <a
-                                href="mailto:easytravelexgroup@outlook.com"
+                                href="mailto:easytravelex@outlook.com"
                                 className="contact_item"
                             >
                                 <div className="ico">
@@ -95,7 +95,7 @@ function Footer() {
                                 </div>
                                 <div className="value">
                                     {" "}
-                                    easytravelexgroup@outlook.com
+                                    easytravelex@outlook.com
                                 </div>
                             </a>
 
@@ -279,55 +279,78 @@ function Footer() {
                         </div>
                         <div className="socials">
                             <div className="social">
-                                <svg
-                                    width={10}
-                                    height={16}
-                                    viewBox="0 0 10 16"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
+                                <a
+                                    href="https://www.facebook.com/easytravelex/"
+                                    target="_blank"
                                 >
-                                    <path
-                                        fillRule="evenodd"
-                                        clipRule="evenodd"
-                                        d="M8.96093 1H6.86093C5.93241 1 5.04248 1.37081 4.38635 2.02162C3.72944 2.68 3.36093 3.56919 3.36093 4.5V6.6H1.26093V9.4H3.36093V15H6.16093V9.4H8.96093V6.6H6.16093V4.5C6.16093 4.31081 6.23435 4.136 6.36603 4.00281C6.49693 3.87719 6.6755 3.8 6.86093 3.8H8.96093V1Z"
-                                        stroke="white"
-                                        strokeWidth="1.16667"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
+                                    <svg
+                                        width={10}
+                                        height={16}
+                                        viewBox="0 0 10 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            clipRule="evenodd"
+                                            d="M8.96093 1H6.86093C5.93241 1 5.04248 1.37081 4.38635 2.02162C3.72944 2.68 3.36093 3.56919 3.36093 4.5V6.6H1.26093V9.4H3.36093V15H6.16093V9.4H8.96093V6.6H6.16093V4.5C6.16093 4.31081 6.23435 4.136 6.36603 4.00281C6.49693 3.87719 6.6755 3.8 6.86093 3.8H8.96093V1Z"
+                                            stroke="white"
+                                            strokeWidth="1.16667"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                </a>
                             </div>
 
                             <div className="social">
-                                <svg
-                                    width={16}
-                                    height={16}
-                                    viewBox="0 0 16 16"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M4.83048 1H11.3908C13.6838 1 15.111 2.6187 15.111 4.90941V11.0906C15.111 13.3813 13.6838 15 11.3901 15H4.83048C2.53751 15 1.11102 13.3813 1.11102 11.0906V4.90941C1.11102 2.6187 2.54432 1 4.83048 1Z"
-                                        stroke="white"
-                                        strokeWidth="1.16667"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                    <path
-                                        d="M7.99013 5.53027C6.4857 5.53027 5.26581 6.75016 5.26581 8.25462C5.26581 9.759 6.4857 10.9789 7.99013 10.9789C9.49459 10.9789 10.7145 9.759 10.7145 8.25462C10.7145 6.75016 9.49459 5.53027 7.99013 5.53027Z"
-                                        stroke="white"
-                                        strokeWidth="1.16667"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                    <path
-                                        d="M11.8958 4.39554V4.44921M12.1151 4.40722C12.1151 4.52933 12.0163 4.6281 11.8942 4.6281C11.7721 4.6281 11.6725 4.52933 11.6725 4.40722C11.6725 4.28511 11.7721 4.18555 11.8942 4.18555C12.0163 4.18555 12.1151 4.28511 12.1151 4.40722Z"
-                                        stroke="white"
-                                        strokeWidth="1.16667"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                    />
-                                </svg>
+                                <a href="https://www.instagram.com/easytravelex/">
+                                    <svg
+                                        width={16}
+                                        height={16}
+                                        viewBox="0 0 16 16"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M4.83048 1H11.3908C13.6838 1 15.111 2.6187 15.111 4.90941V11.0906C15.111 13.3813 13.6838 15 11.3901 15H4.83048C2.53751 15 1.11102 13.3813 1.11102 11.0906V4.90941C1.11102 2.6187 2.54432 1 4.83048 1Z"
+                                            stroke="white"
+                                            strokeWidth="1.16667"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                        <path
+                                            d="M7.99013 5.53027C6.4857 5.53027 5.26581 6.75016 5.26581 8.25462C5.26581 9.759 6.4857 10.9789 7.99013 10.9789C9.49459 10.9789 10.7145 9.759 10.7145 8.25462C10.7145 6.75016 9.49459 5.53027 7.99013 5.53027Z"
+                                            stroke="white"
+                                            strokeWidth="1.16667"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                        <path
+                                            d="M11.8958 4.39554V4.44921M12.1151 4.40722C12.1151 4.52933 12.0163 4.6281 11.8942 4.6281C11.7721 4.6281 11.6725 4.52933 11.6725 4.40722C11.6725 4.28511 11.7721 4.18555 11.8942 4.18555C12.0163 4.18555 12.1151 4.28511 12.1151 4.40722Z"
+                                            stroke="white"
+                                            strokeWidth="1.16667"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        />
+                                    </svg>
+                                </a>
+                            </div>
+
+                            <div className="social text-white">
+                                <a href="https://www.linkedin.com/company/easytravelex">
+                                    <svg
+                                        stroke="currentColor"
+                                        fill="currentColor"
+                                        stroke-width="0"
+                                        viewBox="0 0 1024 1024"
+                                        height="1em"
+                                        width="1em"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path d="M847.7 112H176.3c-35.5 0-64.3 28.8-64.3 64.3v671.4c0 35.5 28.8 64.3 64.3 64.3h671.4c35.5 0 64.3-28.8 64.3-64.3V176.3c0-35.5-28.8-64.3-64.3-64.3zm0 736c-447.8-.1-671.7-.2-671.7-.3.1-447.8.2-671.7.3-671.7 447.8.1 671.7.2 671.7.3-.1 447.8-.2 671.7-.3 671.7zM230.6 411.9h118.7v381.8H230.6zm59.4-52.2c37.9 0 68.8-30.8 68.8-68.8a68.8 68.8 0 1 0-137.6 0c-.1 38 30.7 68.8 68.8 68.8zm252.3 245.1c0-49.8 9.5-98 71.2-98 60.8 0 61.7 56.9 61.7 101.2v185.7h118.6V584.3c0-102.8-22.2-181.9-142.3-181.9-57.7 0-96.4 31.7-112.3 61.7h-1.6v-52.2H423.7v381.8h118.6V604.8z" />
+                                    </svg>
+                                </a>
                             </div>
 
                             <div className="social">

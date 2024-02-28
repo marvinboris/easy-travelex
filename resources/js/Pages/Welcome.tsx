@@ -16,6 +16,7 @@ import Achievements from "../Components/frontend/achievements";
 import ContactSection from "../Components/frontend/contact-section";
 
 import { ModelTour, ModelVisa } from "@/types";
+import AboutUs from "@/Components/frontend/about-us";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -231,6 +232,7 @@ const Welcome = () => {
             />
             <ExploreDubai />
             <TourPackages />
+            <AboutUs />
             <Witness />
             <RelocationSection />
             <CarRental />

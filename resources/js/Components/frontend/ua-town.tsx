@@ -45,7 +45,7 @@ const UaTown = (props: {
             name="villes-emirats"
             onChange={props.onchange}
         >
-            <option value="">Sélectionnez une ville</option>
+            <option value="">Select a town</option>
             {villesEmirats
                 .filter((ville) => !props.townSelected.includes(ville))
                 .map((ville, index) => (
