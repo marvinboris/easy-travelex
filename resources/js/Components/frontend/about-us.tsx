@@ -27,11 +27,11 @@ function AboutUs() {
 
                     <div className="text_group_container">
                         <h1 className="title "> About Us</h1>
-                        <div className="space"></div>
+                        <div className="space" />
                         <div className="group_title">
                             <h4 className="h4">About us !</h4>
                             <p>What is EasyTravelex Agency ?</p>
-                            <div className="sub_bar"></div>
+                            <div className="sub_bar" />
                         </div>
 
                         <p className="normal_description">

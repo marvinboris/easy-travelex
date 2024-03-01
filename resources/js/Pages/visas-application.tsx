@@ -513,7 +513,7 @@ const VisasApplication = () => {
                                                         alt={imgUserCard}
                                                     />
 
-                                                    <div className="document_face_bar"></div>
+                                                    <div className="document_face_bar" />
                                                     <div className="title">
                                                         Upload <br /> passport /
                                                         ID
@@ -537,7 +537,7 @@ const VisasApplication = () => {
                                                         alt={imgIco}
                                                     />
 
-                                                    <div className="document_face_bar"></div>
+                                                    <div className="document_face_bar" />
                                                     <div className="title">
                                                         Upload <br /> clear pic
                                                     </div>
@@ -560,7 +560,7 @@ const VisasApplication = () => {
                                                         alt={imgDocument}
                                                     />
 
-                                                    <div className="document_face_bar"></div>
+                                                    <div className="document_face_bar" />
                                                     <div className="title">
                                                         Birth <br />
                                                         certificate

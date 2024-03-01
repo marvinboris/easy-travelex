@@ -1,9 +1,8 @@
-import React from "react";
-
 import imgStars from "../../assets/images/svg/stars.svg";
+import imgUserPicPlaceholder from "../../assets/images/user-pic-placeholder.png";
 
 function WitnessItem(props: {
-    image: string;
+    image?: string;
     name: string;
     title: string;
     description: string;
@@ -13,7 +12,10 @@ function WitnessItem(props: {
             <div className="witness_item__struct">
                 <div className="witness_item__header">
                     <div className="witness_item_pic">
-                        <img src={props.image} alt={props.image} />
+                        <img
+                            src={props.image || imgUserPicPlaceholder}
+                            alt={props.name}
+                        />
                     </div>
 
                     <div className="witness_item_info">

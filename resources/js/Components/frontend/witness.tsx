@@ -33,10 +33,12 @@ function Witness() {
             <img src={imgCircle} alt="" className="imgBigCircle" />
 
             <div className="struct">
-                {/* <div className="space_witness"></div> */}
+                {/* <div className="space_witness" /> */}
                 <div className="section_header">
                     <div className="titre_section fromTop">
-                        <h2 className="titre font-bold">What customers are saying</h2>
+                        <h2 className="titre font-bold">
+                            What customers are saying
+                        </h2>
                         <p className="p">
                             Experience today and give comment tomorrow
                         </p>
@@ -47,48 +49,48 @@ function Witness() {
 
                 <div className="witness_container">
                     <WitnessItem
-                        image={imgProfile1}
-                        name={"Mcdy Pfendel"}
-                        title={"Happy customer"}
-                        description="Efficient and reliable agency. I highly recommend this one."
-                    ></WitnessItem>
+                        // image={imgProfile5}
+                        name={"Linda Nomhle"}
+                        title={"2 months ago"}
+                        description="I love this agency!! Fast and efficient"
+                    />
                     <WitnessItem
-                        image={imgProfile2}
+                        // image={imgProfile4}
+                        name={"Lissa Irene Mashaka"}
+                        title={"3 months ago"}
+                        description="Very fast and Seamless service. Highly recommend this agent. Will definitely be using his services for more transactions to come"
+                    />
+                    <WitnessItem
+                        // image={imgProfile3}
+                        name={"Loraine Nyasha Ncube"}
+                        title={"4 months ago"}
+                        description="I had a wonderful experience with you guys…the fears of doing something for the very first time, in my mind I was like what if everything gonna happen the other way around, I was so scared you assured me that am not alone in this and surely it was a great experience going to Oman for my visa extension… thank you, guys… you just awesome"
+                    />
+                    <WitnessItem
+                        // image={imgProfile2}
                         name={"Maranatha Jongwe"}
-                        title={"Happy customer"}
+                        title={"4 months ago"}
                         description="Thumbs up to Easytravelex! The level of professionalism and efficiency is unparalleled. I got my visa before I exited Dubai... There are the best"
-                    ></WitnessItem>
+                    />
                     <WitnessItem
-                        image={imgProfile3}
-                        name={"Capo Paalo"}
-                        title={"Founder - Bruxells"}
-                        description="If you are looking further, then you will miss something huge. Try Guide in Dubai please. "
-                    ></WitnessItem>
-                    <WitnessItem
-                        image={imgProfile4}
-                        name={"Chenna Malone"}
-                        title={"Manager - Cameroon"}
-                        description="If you are looking further, then you will miss something huge. Try Guide in Dubai please. "
-                    ></WitnessItem>
+                        // image={imgProfile1}
+                        name={"Mcdy Pfendel"}
+                        title={"5 months ago"}
+                        description="Efficient and reliable agency. I highly recommend this one."
+                    />
                     {/* 3 last  */}
-                    <WitnessItem
-                        image={imgProfile5}
-                        name={"Maddy Mc Heina"}
-                        title={"Manager & Founder - CM"}
-                        description="If you are looking further, then you will miss something huge. Try Guide in Dubai please. "
-                    ></WitnessItem>
-                    <WitnessItem
+                    {/* <WitnessItem
                         image={imgProfile6}
                         name={"Brian Maverick"}
                         title={"Co-founder - Canada"}
                         description="If you are looking further, then you will miss something huge. Try Guide in Dubai please. "
-                    ></WitnessItem>
+                    />
                     <WitnessItem
                         image={imgProfile7}
                         name={"Opelina Mc Guire"}
                         title={"Founder -  Ghana"}
                         description="If you are looking further, then you will miss something huge. Try Guide in Dubai please. "
-                    ></WitnessItem>
+                    /> */}
                 </div>
             </div>
         </section>

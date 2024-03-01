@@ -15,7 +15,7 @@ const Boutons = ({
         <button className={`_btn ${isNice ? "btn_nice" : ""}`}>
             <span>{text}</span>
             {isIcon ? <img src={arrowRight} alt={arrowRight} /> : ""}
-            <div className={`hoverlay`}></div>
+            <div className={`hoverlay`} />
         </button>
     );
 };

@@ -30,11 +30,11 @@ function ExploreDubai() {
                         }}
                     >
                         <div className="text ">Explore Dubai</div>
-                        <div className="line"></div>
+                        <div className="line" />
                     </div>
                     <div className="section_header">
                         <div className="titre_section">
-                            <h2 className="titre titre_after">Explore Dubai</h2>
+                            <h2 className="titre titre_after font-bold">Explore Dubai</h2>
                             <p className="p">
                                 We strive for quality service. Find below are
                                 successfully completed clients projects
@@ -42,7 +42,7 @@ function ExploreDubai() {
                         </div>
 
                         <Link className="btn_mordern" to={"/compose-tour"}>
-                            <div className="left_bar"></div>
+                            <div className="left_bar" />
                             <div className="text">View more</div>
                             <svg
                                 width="38"

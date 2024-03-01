@@ -1,6 +1,6 @@
 {
   "resources/js/app.css": {
-    "file": "assets/app-06b66e0c.css",
+    "file": "assets/app-de132693.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.tsx": {
@@ -22,9 +22,10 @@
       "assets/circleachievement-bcb06784.svg",
       "assets/user-card-67bfb33c.svg",
       "assets/circlebooking-76ad8e37.svg",
-      "assets/relocation1-c915c609.webp",
-      "assets/relocation2-89c97a84.jpg",
-      "assets/relocation3-df3d1430.jpg",
+      "assets/photo_2024-03-01_09-35-19-3c9fe64a.jpg",
+      "assets/photo_2024-03-01_09-35-27-08e851f7.jpg",
+      "assets/photo_2024-03-01_09-35-32-e052d5b9.jpg",
+      "assets/photo_2024-03-01_09-35-37-254926e2.jpg",
       "assets/bigCircleArc-6d706c06.svg",
       "assets/documentimg-4bf7489e.svg",
       "assets/imgico-633a8bef.svg",
@@ -44,16 +45,13 @@
       "assets/tourMessage-2d3373b0.svg",
       "assets/redMap-ce1dc46c.svg",
       "assets/circle-06ae95c6.svg",
-      "assets/profile1-0fd71ea0.png",
-      "assets/profile2-1e9fdda6.png",
-      "assets/profile3-9bdae265.png",
-      "assets/profile4-f21efdd7.png",
-      "assets/profile5-7fa61692.png",
-      "assets/profile6-d74f7976.png",
-      "assets/profile7-6952d46d.png",
       "assets/stars-081a9c68.svg",
+      "assets/user-pic-placeholder-d52378a9.png",
       "assets/checkcircle-4bb0bcc5.svg",
       "assets/long-right-arrow-ad3d6e24.svg",
+      "assets/relocation1-c915c609.webp",
+      "assets/relocation2-89c97a84.jpg",
+      "assets/relocation3-df3d1430.jpg",
       "assets/circleRelocation-3980ffd4.svg",
       "assets/Gilroy-Regular-65aaefc7.woff",
       "assets/Gilroy-Semibold-75bd5a29.woff",
@@ -63,9 +61,9 @@
       "assets/flags@2x-9bd00899.png"
     ],
     "css": [
-      "assets/app-06b66e0c.css"
+      "assets/app-de132693.css"
     ],
-    "file": "assets/app-78cda16a.js",
+    "file": "assets/app-0df605b1.js",
     "isEntry": true,
     "src": "resources/js/app.tsx"
   },
@@ -125,6 +123,22 @@
     "file": "assets/contactUs-09edeb4c.png",
     "src": "resources/js/assets/images/contactUs.png"
   },
+  "resources/js/assets/images/explore/photo_2024-03-01_09-35-19.jpg": {
+    "file": "assets/photo_2024-03-01_09-35-19-3c9fe64a.jpg",
+    "src": "resources/js/assets/images/explore/photo_2024-03-01_09-35-19.jpg"
+  },
+  "resources/js/assets/images/explore/photo_2024-03-01_09-35-27.jpg": {
+    "file": "assets/photo_2024-03-01_09-35-27-08e851f7.jpg",
+    "src": "resources/js/assets/images/explore/photo_2024-03-01_09-35-27.jpg"
+  },
+  "resources/js/assets/images/explore/photo_2024-03-01_09-35-32.jpg": {
+    "file": "assets/photo_2024-03-01_09-35-32-e052d5b9.jpg",
+    "src": "resources/js/assets/images/explore/photo_2024-03-01_09-35-32.jpg"
+  },
+  "resources/js/assets/images/explore/photo_2024-03-01_09-35-37.jpg": {
+    "file": "assets/photo_2024-03-01_09-35-37-254926e2.jpg",
+    "src": "resources/js/assets/images/explore/photo_2024-03-01_09-35-37.jpg"
+  },
   "resources/js/assets/images/intl-tel-input/flags.png": {
     "file": "assets/flags-54dc5bc4.png",
     "src": "resources/js/assets/images/intl-tel-input/flags.png"
@@ -136,34 +150,6 @@
   "resources/js/assets/images/logo.png": {
     "file": "assets/logo-e0863bbd.png",
     "src": "resources/js/assets/images/logo.png"
-  },
-  "resources/js/assets/images/profiles/profile1.png": {
-    "file": "assets/profile1-0fd71ea0.png",
-    "src": "resources/js/assets/images/profiles/profile1.png"
-  },
-  "resources/js/assets/images/profiles/profile2.png": {
-    "file": "assets/profile2-1e9fdda6.png",
-    "src": "resources/js/assets/images/profiles/profile2.png"
-  },
-  "resources/js/assets/images/profiles/profile3.png": {
-    "file": "assets/profile3-9bdae265.png",
-    "src": "resources/js/assets/images/profiles/profile3.png"
-  },
-  "resources/js/assets/images/profiles/profile4.png": {
-    "file": "assets/profile4-f21efdd7.png",
-    "src": "resources/js/assets/images/profiles/profile4.png"
-  },
-  "resources/js/assets/images/profiles/profile5.png": {
-    "file": "assets/profile5-7fa61692.png",
-    "src": "resources/js/assets/images/profiles/profile5.png"
-  },
-  "resources/js/assets/images/profiles/profile6.png": {
-    "file": "assets/profile6-d74f7976.png",
-    "src": "resources/js/assets/images/profiles/profile6.png"
-  },
-  "resources/js/assets/images/profiles/profile7.png": {
-    "file": "assets/profile7-6952d46d.png",
-    "src": "resources/js/assets/images/profiles/profile7.png"
   },
   "resources/js/assets/images/relocation1.webp": {
     "file": "assets/relocation1-c915c609.webp",
@@ -288,6 +274,10 @@
   "resources/js/assets/images/svg/user-card.svg": {
     "file": "assets/user-card-67bfb33c.svg",
     "src": "resources/js/assets/images/svg/user-card.svg"
+  },
+  "resources/js/assets/images/user-pic-placeholder.png": {
+    "file": "assets/user-pic-placeholder-d52378a9.png",
+    "src": "resources/js/assets/images/user-pic-placeholder.png"
   },
   "resources/js/assets/images/wallet.png": {
     "file": "assets/wallet-918cafcd.png",

@@ -23,11 +23,11 @@ function CarRental() {
   
             <div className="text_group_container">
               <h1 className="title "> Car Rental</h1>
-              <div className="space"></div>
+              <div className="space" />
               <div className="group_title">
                 <h4 className="h4">Rent cars from us !</h4>
                 <p>Get a nice car for city ride</p>
-                <div className="sub_bar"></div>
+                <div className="sub_bar" />
               </div>
   
               <p className="normal_description">

@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 import imgCircleBooking from "../assets/images/svg/circlebooking.svg";
-import imgRelocation1 from "../assets/images/relocation1.webp";
-import imgRelocation2 from "../assets/images/relocation2.jpg";
-import imgRelocation3 from "../assets/images/relocation3.jpg";
+import imgExplore1 from "../assets/images/explore/photo_2024-03-01_09-35-19.jpg";
+import imgExplore2 from "../assets/images/explore/photo_2024-03-01_09-35-27.jpg";
+import imgExplore3 from "../assets/images/explore/photo_2024-03-01_09-35-32.jpg";
+import imgExplore4 from "../assets/images/explore/photo_2024-03-01_09-35-37.jpg";
 import UaTown from "../Components/frontend/ua-town";
 
 const CheckSquare = () => (
@@ -293,8 +294,8 @@ const ToursCustomBooking = () => {
                                 <div className="card_galerie">
                                     <div className="card_galerie__img">
                                         <img
-                                            src={imgRelocation1}
-                                            alt={imgRelocation1}
+                                            src={imgExplore1}
+                                            alt={imgExplore1}
                                         />
                                     </div>
                                     <div className="card_galerie__struct">
@@ -310,8 +311,8 @@ const ToursCustomBooking = () => {
 
                                         <div className="card_preview">
                                             <img
-                                                src={imgRelocation2}
-                                                alt={imgRelocation1}
+                                                src={imgExplore2}
+                                                alt={imgExplore1}
                                             />
                                         </div>
                                     </div>
@@ -319,8 +320,8 @@ const ToursCustomBooking = () => {
                                 <div className="card_galerie">
                                     <div className="card_galerie__img">
                                         <img
-                                            src={imgRelocation2}
-                                            alt={imgRelocation1}
+                                            src={imgExplore2}
+                                            alt={imgExplore1}
                                         />
                                     </div>
                                     <div className="card_galerie__struct">
@@ -336,8 +337,8 @@ const ToursCustomBooking = () => {
 
                                         <div className="card_preview">
                                             <img
-                                                src={imgRelocation3}
-                                                alt={imgRelocation1}
+                                                src={imgExplore3}
+                                                alt={imgExplore1}
                                             />
                                         </div>
                                     </div>
@@ -345,8 +346,8 @@ const ToursCustomBooking = () => {
                                 <div className="card_galerie">
                                     <div className="card_galerie__img">
                                         <img
-                                            src={imgRelocation3}
-                                            alt={imgRelocation1}
+                                            src={imgExplore3}
+                                            alt={imgExplore1}
                                         />
                                     </div>
                                     <div className="card_galerie__struct">
@@ -362,8 +363,34 @@ const ToursCustomBooking = () => {
 
                                         <div className="card_preview">
                                             <img
-                                                src={imgRelocation1}
-                                                alt={imgRelocation1}
+                                                src={imgExplore4}
+                                                alt={imgExplore1}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="card_galerie">
+                                    <div className="card_galerie__img">
+                                        <img
+                                            src={imgExplore4}
+                                            alt={imgExplore1}
+                                        />
+                                    </div>
+                                    <div className="card_galerie__struct">
+                                        <div className="text">
+                                            <div className="t1">
+                                                Burj Khalifa
+                                            </div>
+                                            <div className="t2">
+                                                Visit the tallest tour in the
+                                                world
+                                            </div>
+                                        </div>
+
+                                        <div className="card_preview">
+                                            <img
+                                                src={imgExplore1}
+                                                alt={imgExplore1}
                                             />
                                         </div>
                                     </div>
@@ -371,7 +398,36 @@ const ToursCustomBooking = () => {
                             </div>
 
                             <div className="card_actions">
-                                <button id="left-button" className="action">
+                                <button
+                                    id="left-button"
+                                    onClick={() => {
+                                        const container =
+                                            document.querySelector(
+                                                ".card_galerie_container"
+                                            ) as HTMLDivElement;
+                                        const items =
+                                            container.querySelectorAll(
+                                                ".card_galerie"
+                                            ) as NodeListOf<HTMLDivElement>;
+                                        const offsets = Array.from(items).map(
+                                            (item) => item.offsetLeft
+                                        );
+                                        const currentIndex = offsets.findIndex(
+                                            (offset) =>
+                                                Math.round(
+                                                    container.scrollLeft
+                                                ) === offset
+                                        );
+                                        container.scrollTo({
+                                            left: offsets[
+                                                (currentIndex === 0
+                                                    ? items.length
+                                                    : currentIndex) - 1
+                                            ],
+                                        });
+                                    }}
+                                    className="action"
+                                >
                                     <svg
                                         width={6}
                                         height={12}
@@ -385,7 +441,37 @@ const ToursCustomBooking = () => {
                                         />
                                     </svg>
                                 </button>
-                                <button id="right-button" className="action">
+                                <button
+                                    id="right-button"
+                                    onClick={() => {
+                                        const container =
+                                            document.querySelector(
+                                                ".card_galerie_container"
+                                            ) as HTMLDivElement;
+                                        const items =
+                                            container.querySelectorAll(
+                                                ".card_galerie"
+                                            ) as NodeListOf<HTMLDivElement>;
+                                        const offsets = Array.from(items).map(
+                                            (item) => item.offsetLeft
+                                        );
+                                        const currentIndex = offsets.findIndex(
+                                            (offset) =>
+                                                Math.round(
+                                                    container.scrollLeft
+                                                ) === offset
+                                        );
+                                        container.scrollTo({
+                                            left: offsets[
+                                                currentIndex ===
+                                                items.length - 1
+                                                    ? 0
+                                                    : currentIndex + 1
+                                            ],
+                                        });
+                                    }}
+                                    className="action"
+                                >
                                     <svg
                                         width={6}
                                         height={12}
@@ -432,7 +518,7 @@ const ToursCustomBooking = () => {
                         </div>
                     </div>
 
-                    <div className="separate_bar"></div>
+                    <div className="separate_bar" />
 
                     <div className="right">
                         <div className="form_container">

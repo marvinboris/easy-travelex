@@ -173,7 +173,7 @@ function Carousel() {
                             <h4 className="revelElm bold">
                                 Get your visa in few steps now !
                             </h4>
-                            <div className="bar bar_width"></div>
+                            <div className="bar bar_width" />
                             <p className="p_normal">
                                 We made it more easier for you in order to
                                 provide you with the best service, our system
@@ -205,13 +205,13 @@ function Carousel() {
                                         </svg>
                                     </div>
 
-                                    <div className="hoverlay"></div>
+                                    <div className="hoverlay" />
                                 </div>
                                 <div className="btn_card margin_btn">
                                     <div className="btn_text black">
                                         Get my tourist UAE Visa
                                     </div>
-                                    <div className="hoverlay"></div>
+                                    <div className="hoverlay" />
                                 </div>
                             </div>
                         </div>

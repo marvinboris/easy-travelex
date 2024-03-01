@@ -189,7 +189,7 @@ function Footer() {
                                 <div className="value">+971 55 697 4097</div>
                             </a>
                         </div>
-                        <div className="margin_contain"></div>
+                        <div className="margin_contain" />
                         <div className="footer_item__title title_margin_contain">
                             Get started today
                         </div>

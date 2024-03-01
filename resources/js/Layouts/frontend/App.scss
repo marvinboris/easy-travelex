@@ -1708,9 +1708,10 @@
 
     &__container {
       display: flex;
+      @apply overflow-x-auto lg:overflow-x-hidden snap-x snap-mandatory;
 
       .explore_item {
-        @apply w-full lg:w-1/4;
+        @apply flex-none w-full snap-start lg:flex-auto lg:w-1/4;
 
         display: block;
         height: 65vh;
@@ -1726,10 +1727,12 @@
           height: 100%;
 
           img {
+            @apply lg:scale-[2];
+
             // width: 100%;
             height: 100%;
             // object-fit: cover;
-            transform: scale(2);
+            // transform: scale(2);
             transition: 1s;
           }
         }
@@ -1768,11 +1771,10 @@
             }
 
             @media all and (max-width: 1000px) {
-              opacity: 0;
+              @apply lg:opacity-0 lg:scale-[.7];
               width: 170px;
               transition: 0.5s;
               font-size: 12px;
-              transform: scale(0.7);
             }
 
             .text1 {
@@ -1791,7 +1793,7 @@
         }
 
         &:hover {
-          width: 40%;
+          @apply lg:w-2/5;
           transition: 0.3s;
 
           .text_container {
@@ -1808,10 +1810,6 @@
           img {
             transform: scale(1);
             transition: 0.3s;
-          }
-
-          @media all and (max-width: 1000px) {
-            width: 200%;
           }
         }
 

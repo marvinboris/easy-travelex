@@ -30,7 +30,7 @@ const MobileNav = (props: {
                                     : item.label}
                             </span>
                             <span className="design">
-                                <div className="carret"></div>
+                                <div className="carret" />
                             </span>
                         </Link>
                     </li>

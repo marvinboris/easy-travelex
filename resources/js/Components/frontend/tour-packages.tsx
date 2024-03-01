@@ -28,7 +28,7 @@ function TourPackages() {
                     <div className="header_title_shadow ">Our tours</div>
 
                     <Link className="btn_mordern" to={"/tours"}>
-                        <div className="left_bar"></div>
+                        <div className="left_bar" />
                         <div className="text">View more</div>
                         <svg
                             width="38"

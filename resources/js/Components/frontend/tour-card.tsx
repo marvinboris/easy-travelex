@@ -75,7 +75,7 @@ function TourCard(props: ModelTour) {
                             </div>
                         </div>
 
-                        <div className="border_left"></div>
+                        <div className="border_left" />
 
                         <div className="info_container__item">
                             <div className="icon">

@@ -497,7 +497,7 @@ const ToursApplication = () => {
                                                         alt={imgUserCard}
                                                     />
 
-                                                    <div className="document_face_bar"></div>
+                                                    <div className="document_face_bar" />
                                                     <div className="title">
                                                         Upload <br /> passport /
                                                         ID

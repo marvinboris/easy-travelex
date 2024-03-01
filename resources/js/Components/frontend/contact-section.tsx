@@ -16,7 +16,7 @@ function ContactSection() {
 
                 <div className="section_container section_container_achievements">
                     <div className="text_group_container contact_group_container">
-                        <div className="space"></div>
+                        <div className="space" />
                         <div className="group_title">
                             <h4 className="h4">Contact us anytime</h4>
                             <p>Reach out href us via this channels</p>
