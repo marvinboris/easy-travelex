@@ -41,15 +41,27 @@ const MobileNav = (props: {
                 {/* <Boutons text="Apply now" isIcon={true}></Boutons> */}
 
                 <div className="social_link_container">
-                    <a href="https://www.facebook.com/easytravelex/" target="_blank">
-                        <img src={facebook} alt={facebook} />
-                    </a>
-                    <a href="" target="_blank">
-                        <img src={twitter} alt={twitter} />
-                    </a>
-                    <a href="https://www.linkedin.com/company/easytravelex" target="_blank">
-                        <img src={linkedin} alt={linkedin} />
-                    </a>
+                    <span>
+                        <a
+                            href="https://www.facebook.com/easytravelex/"
+                            target="_blank"
+                        >
+                            <img src={facebook} alt={facebook} />
+                        </a>
+                    </span>
+                    <span>
+                        <a href="" target="_blank">
+                            <img src={twitter} alt={twitter} />
+                        </a>
+                    </span>
+                    <span>
+                        <a
+                            href="https://www.linkedin.com/company/easytravelex"
+                            target="_blank"
+                        >
+                            <img src={linkedin} alt={linkedin} />
+                        </a>
+                    </span>
                 </div>
             </div>
         </nav>

@@ -1772,9 +1772,9 @@
 
             @media all and (max-width: 1000px) {
               @apply lg:opacity-0 lg:scale-[.7];
-              width: 170px;
+              // width: 170px;
               transition: 0.5s;
-              font-size: 12px;
+              // font-size: 12px;
             }
 
             .text1 {
