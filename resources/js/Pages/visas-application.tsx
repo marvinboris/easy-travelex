@@ -605,7 +605,7 @@ const VisasApplication = () => {
                                                 className="contain_pic_input"
                                                 id="doc"
                                                 name="doc"
-                                                accept="image/*"
+                                                accept="image/*,application/pdf"
                                                 onChange={(e) =>
                                                     // handleChangeInputFileDoc(
                                                     handleChangeInputFileImage(
