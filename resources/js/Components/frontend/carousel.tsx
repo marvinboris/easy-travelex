@@ -118,33 +118,37 @@ function Carousel() {
                     </div>
 
                     <div className="intro_actions">
-                        <Boutons text="Our services" isIcon></Boutons>
+                        <Boutons text="Apply for visa" isIcon></Boutons>
 
-                        <div className="btn_video_contain">
-                            <div className="bnt_video">
-                                <div className="layer layer1">
-                                    <div className="layer">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="25"
-                                            height="25"
-                                            viewBox="0 0 25 25"
-                                            fill="none"
-                                        >
-                                            <path
-                                                d="M4.07016 12.8589V9.29974C4.07016 4.88077 7.19943 3.0712 11.0285 5.28068L14.1178 7.06026L17.2071 8.83985C21.0362 11.0493 21.0362 14.6685 17.2071 16.878L14.1178 18.6575L11.0285 20.4371C7.19943 22.6466 4.07016 20.837 4.07016 16.4181V12.8589Z"
-                                                stroke="white"
-                                                strokeWidth="1.49965"
-                                                strokeMiterlimit="10"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                        </svg>
+                        <a href="https://www.tiktok.com/@easytravelex">
+                            <div className="btn_video_contain">
+                                <div className="bnt_video">
+                                    <div className="layer layer1">
+                                        <div className="layer">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="25"
+                                                height="25"
+                                                viewBox="0 0 25 25"
+                                                fill="none"
+                                            >
+                                                <path
+                                                    d="M4.07016 12.8589V9.29974C4.07016 4.88077 7.19943 3.0712 11.0285 5.28068L14.1178 7.06026L17.2071 8.83985C21.0362 11.0493 21.0362 14.6685 17.2071 16.878L14.1178 18.6575L11.0285 20.4371C7.19943 22.6466 4.07016 20.837 4.07016 16.4181V12.8589Z"
+                                                    stroke="white"
+                                                    strokeWidth="1.49965"
+                                                    strokeMiterlimit="10"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                />
+                                            </svg>
+                                        </div>
                                     </div>
                                 </div>
+                                <div className="text_btn_video">
+                                    Watch Video
+                                </div>
                             </div>
-                            <div className="text_btn_video">Watch Video</div>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
@@ -170,11 +174,11 @@ function Carousel() {
                     <img className="imgTrouSVG" src={imgTrouSVG} alt="svg" />
                     <div className="contain_card_text">
                         <div className="contain_card_text__struct">
-                            <h4 className="revelElm bold">
+                            <h4 className="revelElm !font-extrabold !text-[32px] leading-tight">
                                 Get your visa in few steps now !
                             </h4>
-                            <div className="bar bar_width" />
-                            <p className="p_normal">
+                            <div className="bar bar_width !mt-5" />
+                            <p className="p_normal !text-lg">
                                 We made it more easier for you in order to
                                 provide you with the best service, our system
                                 has been optimisez to make sure we give you
@@ -185,7 +189,7 @@ function Carousel() {
                             <div>
                                 <div className="btn_card cta">
                                     <div className="btn_text ">
-                                        Get my tourist UAE Visa
+                                        Apply for visa
                                     </div>
                                     <div className="btn_ico">
                                         <svg
@@ -209,7 +213,7 @@ function Carousel() {
                                 </div>
                                 <div className="btn_card margin_btn">
                                     <div className="btn_text black">
-                                        Get my tourist UAE Visa
+                                        Our tour packages
                                     </div>
                                     <div className="hoverlay" />
                                 </div>

@@ -44,6 +44,6 @@ class VisaApplication extends Model
 
     public function getDocAttribute($value)
     {
-        return $value ? $this->fileDirectory . $value : null;
+        return $value ? (str_ends_with($value, 'pdf') ? $this->fileDirectory : $this->imgDirectory) . $value : null;
     }
 }

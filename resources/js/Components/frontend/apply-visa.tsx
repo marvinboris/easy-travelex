@@ -16,7 +16,7 @@ function SectionHeader(props: {
     return (
         <div className="section_header">
             <div className="titre_section ">
-                <h2 className="titre font-bold">{props.title}</h2>
+                <h2 className="titre font-extrabold">{props.title}</h2>
                 <p className="p">{props.description}</p>
             </div>
 
@@ -60,7 +60,7 @@ function ApplyVisa(props: {
                         title={props.title}
                         description={props.description}
                         bigTitle={props.bigTitle}
-                    ></SectionHeader>
+                    />
                 )}
 
                 <div className="visa_type_contain">

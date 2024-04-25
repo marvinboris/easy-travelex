@@ -11,7 +11,7 @@ const navItems = [
     { path: "/", label: "Home" },
     { path: "/visas", label: "Visas" },
     { path: "/tours", label: "Tours Packages" },
-    { path: "/cars", label: "Car rental" },
+    // { path: "/cars", label: "Car rental" },
     { path: "/contacts", label: "Contact us" },
 ];
 
@@ -130,9 +130,9 @@ const Header = () => {
                         </ul>
                     </nav>
 
-                    <NavLink to={"/visas"} className="btn_marg">
+                    {/* <NavLink to={"/visas"} className="btn_marg">
                         <Boutons text="Apply visa" isIcon />
-                    </NavLink>
+                    </NavLink> */}
 
                     <div
                         id="btn_menu"

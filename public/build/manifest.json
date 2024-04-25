@@ -1,12 +1,11 @@
 {
   "resources/js/app.css": {
-    "file": "assets/app-ee378430.css",
+    "file": "assets/app-19b3576b.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.tsx": {
     "assets": [
       "assets/logo-e0863bbd.png",
-      "assets/arrow-right-6aaebe93.svg",
       "assets/facebook-cce453af.svg",
       "assets/linkedin-2abfd2cb.svg",
       "assets/twitter-27418591.svg",
@@ -14,6 +13,7 @@
       "assets/caroussel7-d4274152.webp",
       "assets/car-193db88c.png",
       "assets/circleCar-10d1fe13.svg",
+      "assets/arrow-right-6aaebe93.svg",
       "assets/contactUs-09edeb4c.png",
       "assets/banner-339eb996.png",
       "assets/wallet-918cafcd.png",
@@ -61,9 +61,9 @@
       "assets/flags@2x-9bd00899.png"
     ],
     "css": [
-      "assets/app-ee378430.css"
+      "assets/app-19b3576b.css"
     ],
-    "file": "assets/app-67d74281.js",
+    "file": "assets/app-2752f25f.js",
     "isEntry": true,
     "src": "resources/js/app.tsx"
   },

@@ -516,6 +516,7 @@ const ToursApplication = () => {
                                                 className="contain_pic_input"
                                                 id="passportImg"
                                                 name="passportImg"
+                                                accept="image/*"
                                                 onChange={(e) =>
                                                     handleChangeInputFileImage(
                                                         e,
