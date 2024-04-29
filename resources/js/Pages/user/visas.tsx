@@ -47,24 +47,34 @@ export default function UserVisas() {
                                 </Menu.Button>
 
                                 <Transition>
-                                    <Menu.Items>
-                                        <div className="bg-white z-10 w-20 p-1 border border-neutral-200 rounded-md shadow-sm divide-y divide-zinc-800 absolute top-full right-0">
-                                            <a className="block" download href={visa.passport}>
-                                                <div className="hover:bg-black/10">
-                                                    Passport
-                                                </div>
-                                            </a>
-                                            <a className="block" download href={visa.doc}>
-                                                <div className="hover:bg-black/10">
-                                                    Birth Cert
-                                                </div>
-                                            </a>
-                                            <a className="block" download href={visa.profile}>
-                                                <div className="hover:bg-black/10">
-                                                    Photo
-                                                </div>
-                                            </a>
-                                        </div>
+                                    <Menu.Items className="bg-white z-10 w-20 p-1 border border-neutral-200 rounded-md shadow-sm divide-y divide-zinc-800 absolute top-full right-0">
+                                        <a
+                                            className="block"
+                                            download
+                                            href={visa.passport}
+                                        >
+                                            <div className="hover:bg-black/10">
+                                                Passport
+                                            </div>
+                                        </a>
+                                        <a
+                                            className="block"
+                                            download
+                                            href={visa.doc}
+                                        >
+                                            <div className="hover:bg-black/10">
+                                                Birth Cert
+                                            </div>
+                                        </a>
+                                        <a
+                                            className="block"
+                                            download
+                                            href={visa.profile}
+                                        >
+                                            <div className="hover:bg-black/10">
+                                                Photo
+                                            </div>
+                                        </a>
                                     </Menu.Items>
                                 </Transition>
                             </Menu>

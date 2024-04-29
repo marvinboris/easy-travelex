@@ -34,12 +34,12 @@ class VisaApplication extends Model
 
     public function getPassportAttribute($value)
     {
-        return $value ? $this->imgDirectory . $value : null;
+        return $value ? (str_ends_with($value, 'pdf') ? $this->fileDirectory : $this->imgDirectory) . $value : null;
     }
 
     public function getProfileAttribute($value)
     {
-        return $value ? $this->imgDirectory . $value : null;
+        return $value ? (str_ends_with($value, 'pdf') ? $this->fileDirectory : $this->imgDirectory) . $value : null;
     }
 
     public function getDocAttribute($value)

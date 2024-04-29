@@ -107,20 +107,24 @@ const VisasApplication = () => {
         selectorEl: string
     ) => {
         e.stopPropagation();
-        const element = document.querySelector(selectorEl);
-        if (element) {
-            const file = (
-                e.target as
-                    | (EventTarget & { files: FileList | null })
-                    | undefined
-            )?.files?.[0];
-            if (file) {
+        const file = (
+            e.target as (EventTarget & { files: FileList | null }) | undefined
+        )?.files?.[0];
+        const isPdf = file?.name.toLowerCase().endsWith("pdf");
+        const element = document.querySelector(
+            selectorEl + "." + (isPdf ? "doc_contain" : "previewImage")
+        );
+        if (element && file) {
+            if (isPdf) {
                 const tempName = file.name;
                 element.textContent = tempName;
-                element.classList.add("active");
+            } else {
+                const src = URL.createObjectURL(file);
+                (element as HTMLImageElement).src = src;
             }
-            handleChange(e);
+            element.classList.add("active");
         }
+        handleChange(e);
     };
 
     const handleSubmit = (e: FormEvent) => {
@@ -520,10 +524,12 @@ const VisasApplication = () => {
                                                     </div>
 
                                                     <img
-                                                        className="passportIMG_previewImage previewImage"
+                                                        className="passportIMG_preview previewImage"
                                                         src=""
                                                         alt=""
                                                     />
+
+                                                    <div className="passportIMG_preview doc_contain" />
                                                 </div>
                                             </button>
                                             <button
@@ -543,10 +549,12 @@ const VisasApplication = () => {
                                                     </div>
 
                                                     <img
-                                                        className="profileIMG_previewImage previewImage"
+                                                        className="profileIMG_preview previewImage"
                                                         src=""
                                                         alt=""
                                                     />
+
+                                                    <div className="profileIMG_preview doc_contain" />
                                                 </div>
                                             </button>
                                             <button
@@ -567,10 +575,12 @@ const VisasApplication = () => {
                                                     </div>
 
                                                     <img
-                                                        className="doc_previewImage previewImage"
+                                                        className="doc_preview previewImage"
                                                         src=""
                                                         alt=""
                                                     />
+
+                                                    <div className="doc_preview doc_contain" />
                                                 </div>
                                             </button>
 
@@ -579,11 +589,12 @@ const VisasApplication = () => {
                                                 className="contain_pic_input"
                                                 id="passportImg"
                                                 name="passportImg"
-                                                accept="image/*"
+                                                accept="image/*,application/pdf"
                                                 onChange={(e) =>
-                                                    handleChangeInputFileImage(
+                                                    handleChangeInputFileDoc(
+                                                        // handleChangeInputFileImage(
                                                         e,
-                                                        ".passportIMG_previewImage"
+                                                        ".passportIMG_preview"
                                                     )
                                                 }
                                             />
@@ -592,11 +603,12 @@ const VisasApplication = () => {
                                                 className="contain_pic_input"
                                                 id="profileImg"
                                                 name="profileImg"
-                                                accept="image/*"
+                                                accept="image/*,application/pdf"
                                                 onChange={(e) =>
-                                                    handleChangeInputFileImage(
+                                                    handleChangeInputFileDoc(
+                                                        // handleChangeInputFileImage(
                                                         e,
-                                                        ".profileIMG_previewImage"
+                                                        ".profileIMG_preview"
                                                     )
                                                 }
                                             />
@@ -607,10 +619,10 @@ const VisasApplication = () => {
                                                 name="doc"
                                                 accept="image/*,application/pdf"
                                                 onChange={(e) =>
-                                                    // handleChangeInputFileDoc(
-                                                    handleChangeInputFileImage(
+                                                    handleChangeInputFileDoc(
+                                                        // handleChangeInputFileImage(
                                                         e,
-                                                        ".doc_previewImage"
+                                                        ".doc_preview"
                                                     )
                                                 }
                                             />

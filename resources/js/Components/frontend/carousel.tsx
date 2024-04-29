@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import caroussel1 from "../../assets/images/caroussels/caroussel1.webp";
 import caroussel2 from "../../assets/images/caroussels/caroussel2.webp";
@@ -29,6 +30,8 @@ const carousselImages = [
 ];
 
 function Carousel() {
+    const navigate = useNavigate();
+
     useEffect(() => {
         let images = document.querySelectorAll(".caroussel .images .img");
         let currentIndex = 0;
@@ -118,7 +121,11 @@ function Carousel() {
                     </div>
 
                     <div className="intro_actions">
-                        <Boutons text="Apply for visa" isIcon></Boutons>
+                        <Boutons
+                            onClick={() => navigate("/visas")}
+                            text="Apply for visa"
+                            isIcon
+                        ></Boutons>
 
                         <a href="https://www.tiktok.com/@easytravelex">
                             <div className="btn_video_contain">
@@ -187,7 +194,10 @@ function Carousel() {
                             </p>
 
                             <div>
-                                <div className="btn_card cta">
+                                <div
+                                    className="btn_card cta"
+                                    onClick={() => navigate("/visas")}
+                                >
                                     <div className="btn_text ">
                                         Apply for visa
                                     </div>
