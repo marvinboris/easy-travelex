@@ -11,7 +11,8 @@ class TourApplication extends Model
 
     protected $table = 'tour_applications';
 
-    protected $directory = '/images/tour-applications/';
+    protected $imgDirectory = '/images/tour-applications/';
+    protected $fileDirectory = '/files/tour-applications/';
 
     protected $fillable = [
         'tour_id',
@@ -32,6 +33,6 @@ class TourApplication extends Model
 
     public function getPassportAttribute($value)
     {
-        return $value ? $this->directory . $value : null;
+        return $value ? (str_ends_with($value, 'pdf') ? $this->fileDirectory : $this->imgDirectory) . $value : null;
     }
 }
