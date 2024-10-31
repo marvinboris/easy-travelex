@@ -267,15 +267,8 @@ function Footer() {
                 <div className="struct">
                     <div className="signSite_container">
                         <div className="text">
-                            Copyright 2023 |{" "}
-                            <a
-                                target="_blank"
-                                rel="noreferrer"
-                                href="http://easytravelex.com"
-                            >
-                                Easy Travelex
-                            </a>{" "}
-                            . All Rights Reserved
+                            Copyright 2024, By Briluce Web Services LTD. All
+                            Rights Reserved
                         </div>
                         <div className="socials">
                             <div className="social">
@@ -304,7 +297,10 @@ function Footer() {
                             </div>
 
                             <div className="social">
-                                <a target="_blank" href="https://www.instagram.com/easytravelex/">
+                                <a
+                                    target="_blank"
+                                    href="https://www.instagram.com/easytravelex/"
+                                >
                                     <svg
                                         width={16}
                                         height={16}
@@ -338,7 +334,10 @@ function Footer() {
                             </div>
 
                             <div className="social text-white">
-                                <a target="_blank" href="https://www.linkedin.com/company/easytravelex">
+                                <a
+                                    target="_blank"
+                                    href="https://www.linkedin.com/company/easytravelex"
+                                >
                                     <svg
                                         stroke="currentColor"
                                         fill="currentColor"
@@ -354,7 +353,10 @@ function Footer() {
                             </div>
 
                             <div className="social">
-                                <a target="_blank" href="https://www.tiktok.com/@easytravelex">
+                                <a
+                                    target="_blank"
+                                    href="https://www.tiktok.com/@easytravelex"
+                                >
                                     <svg
                                         width={14}
                                         height={16}
@@ -408,7 +410,10 @@ function Footer() {
                             </div>
 
                             <div className="social">
-                                <a target="_blank" href="https://whatsapp.com/channel/0029Va4Xbjx0VycBLCOlni0p">
+                                <a
+                                    target="_blank"
+                                    href="https://whatsapp.com/channel/0029Va4Xbjx0VycBLCOlni0p"
+                                >
                                     <svg
                                         width={16}
                                         height={16}
